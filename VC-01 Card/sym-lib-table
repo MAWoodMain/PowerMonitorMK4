@@ -1,0 +1,7 @@
+(sym_lib_table
+  (lib (name Project)(type Legacy)(uri ${KIPRJMOD}/../ProjectSymbols/Project.lib)(options "")(descr ""))
+  (lib (name PowerMonitorMK4-rescue)(type Legacy)(uri ${KIPRJMOD}/../ProjectSymbols/PowerMonitorMK4-rescue.lib)(options "")(descr ""))
+  (lib (name RFM-0505S)(type Legacy)(uri ${KIPRJMOD}/../ProjectSymbols/RFM-0505S.lib)(options "")(descr ""))
+  (lib (name ADUM3152BRSZ)(type Legacy)(uri ${KIPRJMOD}/../ProjectSymbols/ADUM3152BRSZ.lib)(options "")(descr ""))
+  (lib (name TPS7A8801RTJT)(type Legacy)(uri ${KIPRJMOD}/../ProjectSymbols/TPS7A8801RTJT.lib)(options "")(descr ""))
+)
