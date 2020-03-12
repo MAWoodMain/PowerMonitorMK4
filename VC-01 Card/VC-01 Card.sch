@@ -4,8 +4,8 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title "RPI Power Monitor MK4"
-Date "2020-02-04"
+Title "VC-01 AFE Card"
+Date "2020-03-12"
 Rev "DRAFT WIP"
 Comp ""
 Comment1 "Matt Wood"
