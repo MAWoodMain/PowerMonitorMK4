@@ -367,26 +367,16 @@ Wire Wire Line
 $Comp
 L Device:R_Small R1
 U 1 1 5E6E3D39
-P 2700 2750
-F 0 "R1" V 2700 2750 50  0000 C CNN
-F 1 "RB" V 2800 2750 50  0000 C CNN
-F 2 "Resistor_SMD:R_2512_6332Metric" H 2700 2750 50  0001 C CNN
-F 3 "~" H 2700 2750 50  0001 C CNN
-	1    2700 2750
-	-1   0    0    1   
+P 2650 2500
+F 0 "R1" V 2650 2500 50  0000 C CNN
+F 1 "RB" V 2750 2500 50  0000 C CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 2650 2500 50  0001 C CNN
+F 3 "~" H 2650 2500 50  0001 C CNN
+	1    2650 2500
+	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2600 2850 2700 2850
-Connection ~ 2700 2850
-Wire Wire Line
-	2700 2850 2850 2850
-Wire Wire Line
-	2600 2650 2700 2650
-Connection ~ 2700 2650
-Wire Wire Line
-	2700 2650 2850 2650
-Text Notes 2700 2550 2    50   ~ 0
-Optional Burden\nResistor\n |\n |\n v
+Text Notes 2450 2300 2    50   ~ 0
+Optional Burden\nResistor Link\n |\n |\n v
 Text Notes 6100 2750 0    50   ~ 0
 May require loading to \nimproved DCDC performance
 $Comp
@@ -1505,4 +1495,33 @@ U3_GNDA
 Wire Wire Line
 	2650 4750 2650 4700
 Connection ~ 2650 4700
+Text Notes 1050 3350 0    50   ~ 0
+100A(rms) 1:2000 = 50mA(rms)\n41V(rms) target requires 82 Ohms\n5.80 Vpk @ 100A
+$Comp
+L Connector:Conn_01x02_Male J3
+U 1 1 5E6D81CE
+P 2450 2300
+F 0 "J3" H 2558 2481 50  0000 C CNN
+F 1 "BRDN" H 2558 2390 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 2450 2300 50  0001 C CNN
+F 3 "~" H 2450 2300 50  0001 C CNN
+	1    2450 2300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2650 2300 2750 2300
+Wire Wire Line
+	2600 2650 2750 2650
+Wire Wire Line
+	2600 2850 2650 2850
+Wire Wire Line
+	2750 2300 2750 2650
+Connection ~ 2750 2650
+Wire Wire Line
+	2750 2650 2850 2650
+Wire Wire Line
+	2650 2600 2650 2850
+Connection ~ 2650 2850
+Wire Wire Line
+	2650 2850 2850 2850
 $EndSCHEMATC
