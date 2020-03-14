@@ -1,0 +1,2190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>C:\Users\Matthew Wood\Documents\PowerMonitorMK4\Hat\Hat.sch</source>
+    <date>14/03/2020 14:00:59</date>
+    <tool>Eeschema (5.1.5)-3</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>IsoCard AFE HAT</title>
+        <company/>
+        <rev>A</rev>
+        <date>2020-03-08</date>
+        <source>Hat.sch</source>
+        <comment number="1" value="Matt Wood"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="J1">
+      <value>Raspberry_Pi_2_3</value>
+      <footprint>ProjectLib:RASPBERRY_PI_B+</footprint>
+      <datasheet>https://www.raspberrypi.org/documentation/hardware/raspberrypi/schematics/rpi_SCH_3bplus_1p0_reduced.pdf</datasheet>
+      <libsource lib="Connector" part="Raspberry_Pi_2_3" description="expansion header for Raspberry Pi 2 &amp; 3"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E74BB50</tstamp>
+    </comp>
+    <comp ref="CRD3">
+      <value>AFE_Card_Interface</value>
+      <footprint>ProjectLib:PCIE-036-02-X-D-TH</footprint>
+      <fields>
+        <field name="Supplier 1">Toby</field>
+        <field name="Supplier 1 PN">PCIE-036-02-F-D-TH</field>
+        <field name="Supplier 1 Price">£0.79</field>
+        <field name="Supplier 2">Mouser</field>
+        <field name="Supplier 2 PN">200-PCIE03602FDTH</field>
+        <field name="Supplier 2 Price">£1.51</field>
+        <field name="Supplier 3">Farnell</field>
+        <field name="Supplier 3 PN">1753906</field>
+        <field name="Supplier 3 Price">£1.51</field>
+      </fields>
+      <libsource lib="Project" part="AFE_Card_Interface" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E648C68</tstamp>
+    </comp>
+    <comp ref="PS3">
+      <value>SFTN02L-12</value>
+      <footprint>ProjectLib:SFTN02</footprint>
+      <datasheet>https://www.meanwell.com/webapp/product/search.aspx?prod=SFTN02#1</datasheet>
+      <fields>
+        <field name="Supplier 1">Mouser</field>
+        <field name="Supplier 1 PN">709-SFTN02L-12</field>
+        <field name="Supplier 1 Price">£3.62</field>
+        <field name="Supplier 2">DigiKey</field>
+        <field name="Supplier 2 PN">1866-SFTN02L-12-ND</field>
+        <field name="Supplier 2 Price">£3.81</field>
+      </fields>
+      <libsource lib="Project" part="SFTN02L-12" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E6552C1</tstamp>
+    </comp>
+    <comp ref="U3">
+      <value>ADUM3154</value>
+      <footprint>ProjectLib:SOP65P780X200-20N</footprint>
+      <datasheet>B</datasheet>
+      <fields>
+        <field name="Field4">ANALOG DEVICES</field>
+        <field name="Field5">IPC 7351B</field>
+        <field name="Supplier 1">Mouser</field>
+        <field name="Supplier 1 PN">584-ADUM3154ARSZ</field>
+        <field name="Supplier 1 Price">£4.22</field>
+        <field name="Supplier 2">DigiKey</field>
+        <field name="Supplier 2 PN">ADUM3154ARSZ-RL7TR-ND</field>
+        <field name="Supplier 2 Price">£2.6784</field>
+        <field name="Supplier 3">Farnell</field>
+        <field name="Supplier 3 PN">2451486</field>
+        <field name="Supplier 3 Price">£4.76</field>
+      </fields>
+      <libsource lib="ADUM3152BRSZ" part="ADUM3154" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E656BE3</tstamp>
+    </comp>
+    <comp ref="CRD1">
+      <value>AFE_Card_Interface</value>
+      <footprint>ProjectLib:PCIE-036-02-X-D-TH</footprint>
+      <fields>
+        <field name="Supplier 1">Toby</field>
+        <field name="Supplier 1 PN">PCIE-036-02-F-D-TH</field>
+        <field name="Supplier 1 Price">£0.79</field>
+        <field name="Supplier 2">Mouser</field>
+        <field name="Supplier 2 PN">200-PCIE03602FDTH</field>
+        <field name="Supplier 2 Price">£1.51</field>
+        <field name="Supplier 3">Farnell</field>
+        <field name="Supplier 3 PN">1753906</field>
+        <field name="Supplier 3 Price">£1.51</field>
+      </fields>
+      <libsource lib="Project" part="AFE_Card_Interface" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E6855DE</tstamp>
+    </comp>
+    <comp ref="PS1">
+      <value>SFTN02L-12</value>
+      <footprint>ProjectLib:SFTN02</footprint>
+      <datasheet>https://www.meanwell.com/webapp/product/search.aspx?prod=SFTN02#1</datasheet>
+      <fields>
+        <field name="Supplier 1">Mouser</field>
+        <field name="Supplier 1 PN">709-SFTN02L-12</field>
+        <field name="Supplier 1 Price">£3.62</field>
+        <field name="Supplier 2">DigiKey</field>
+        <field name="Supplier 2 PN">1866-SFTN02L-12-ND</field>
+        <field name="Supplier 2 Price">£3.81</field>
+      </fields>
+      <libsource lib="Project" part="SFTN02L-12" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E6855E4</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>ADUM3154</value>
+      <footprint>ProjectLib:SOP65P780X200-20N</footprint>
+      <datasheet>B</datasheet>
+      <fields>
+        <field name="Field4">ANALOG DEVICES</field>
+        <field name="Field5">IPC 7351B</field>
+        <field name="Supplier 1">Mouser</field>
+        <field name="Supplier 1 PN">584-ADUM3154ARSZ</field>
+        <field name="Supplier 1 Price">£4.22</field>
+        <field name="Supplier 2">DigiKey</field>
+        <field name="Supplier 2 PN">ADUM3154ARSZ-RL7TR-ND</field>
+        <field name="Supplier 2 Price">£2.6784</field>
+        <field name="Supplier 3">Farnell</field>
+        <field name="Supplier 3 PN">2451486</field>
+        <field name="Supplier 3 Price">£4.76</field>
+      </fields>
+      <libsource lib="ADUM3152BRSZ" part="ADUM3154" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E6855EC</tstamp>
+    </comp>
+    <comp ref="CRD2">
+      <value>AFE_Card_Interface</value>
+      <footprint>ProjectLib:PCIE-036-02-X-D-TH</footprint>
+      <fields>
+        <field name="Supplier 1">Toby</field>
+        <field name="Supplier 1 PN">PCIE-036-02-F-D-TH</field>
+        <field name="Supplier 1 Price">£0.79</field>
+        <field name="Supplier 2">Mouser</field>
+        <field name="Supplier 2 PN">200-PCIE03602FDTH</field>
+        <field name="Supplier 2 Price">£1.51</field>
+        <field name="Supplier 3">Farnell</field>
+        <field name="Supplier 3 PN">1753906</field>
+        <field name="Supplier 3 Price">£1.51</field>
+      </fields>
+      <libsource lib="Project" part="AFE_Card_Interface" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E68C20A</tstamp>
+    </comp>
+    <comp ref="PS2">
+      <value>SFTN02L-12</value>
+      <footprint>ProjectLib:SFTN02</footprint>
+      <datasheet>https://www.meanwell.com/webapp/product/search.aspx?prod=SFTN02#1</datasheet>
+      <fields>
+        <field name="Supplier 1">Mouser</field>
+        <field name="Supplier 1 PN">709-SFTN02L-12</field>
+        <field name="Supplier 1 Price">£3.62</field>
+        <field name="Supplier 2">DigiKey</field>
+        <field name="Supplier 2 PN">1866-SFTN02L-12-ND</field>
+        <field name="Supplier 2 Price">£3.81</field>
+      </fields>
+      <libsource lib="Project" part="SFTN02L-12" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E68C210</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>ADUM3154</value>
+      <footprint>ProjectLib:SOP65P780X200-20N</footprint>
+      <datasheet>B</datasheet>
+      <fields>
+        <field name="Field4">ANALOG DEVICES</field>
+        <field name="Field5">IPC 7351B</field>
+        <field name="Supplier 1">Mouser</field>
+        <field name="Supplier 1 PN">584-ADUM3154ARSZ</field>
+        <field name="Supplier 1 Price">£4.22</field>
+        <field name="Supplier 2">DigiKey</field>
+        <field name="Supplier 2 PN">ADUM3154ARSZ-RL7TR-ND</field>
+        <field name="Supplier 2 Price">£2.6784</field>
+        <field name="Supplier 3">Farnell</field>
+        <field name="Supplier 3 PN">2451486</field>
+        <field name="Supplier 3 Price">£4.76</field>
+      </fields>
+      <libsource lib="ADUM3152BRSZ" part="ADUM3154" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E68C218</tstamp>
+    </comp>
+    <comp ref="CRD4">
+      <value>AFE_Card_Interface</value>
+      <footprint>ProjectLib:PCIE-036-02-X-D-TH</footprint>
+      <fields>
+        <field name="Supplier 1">Toby</field>
+        <field name="Supplier 1 PN">PCIE-036-02-F-D-TH</field>
+        <field name="Supplier 1 Price">£0.79</field>
+        <field name="Supplier 2">Mouser</field>
+        <field name="Supplier 2 PN">200-PCIE03602FDTH</field>
+        <field name="Supplier 2 Price">£1.51</field>
+        <field name="Supplier 3">Farnell</field>
+        <field name="Supplier 3 PN">1753906</field>
+        <field name="Supplier 3 Price">£1.51</field>
+      </fields>
+      <libsource lib="Project" part="AFE_Card_Interface" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E695E20</tstamp>
+    </comp>
+    <comp ref="PS4">
+      <value>SFTN02L-12</value>
+      <footprint>ProjectLib:SFTN02</footprint>
+      <datasheet>https://www.meanwell.com/webapp/product/search.aspx?prod=SFTN02#1</datasheet>
+      <fields>
+        <field name="Supplier 1">Mouser</field>
+        <field name="Supplier 1 PN">709-SFTN02L-12</field>
+        <field name="Supplier 1 Price">£3.62</field>
+        <field name="Supplier 2">DigiKey</field>
+        <field name="Supplier 2 PN">1866-SFTN02L-12-ND</field>
+        <field name="Supplier 2 Price">£3.81</field>
+      </fields>
+      <libsource lib="Project" part="SFTN02L-12" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E695E26</tstamp>
+    </comp>
+    <comp ref="U4">
+      <value>ADUM3154</value>
+      <footprint>ProjectLib:SOP65P780X200-20N</footprint>
+      <datasheet>B</datasheet>
+      <fields>
+        <field name="Field4">ANALOG DEVICES</field>
+        <field name="Field5">IPC 7351B</field>
+        <field name="Supplier 1">Mouser</field>
+        <field name="Supplier 1 PN">584-ADUM3154ARSZ</field>
+        <field name="Supplier 1 Price">£4.22</field>
+        <field name="Supplier 2">DigiKey</field>
+        <field name="Supplier 2 PN">ADUM3154ARSZ-RL7TR-ND</field>
+        <field name="Supplier 2 Price">£2.6784</field>
+        <field name="Supplier 3">Farnell</field>
+        <field name="Supplier 3 PN">2451486</field>
+        <field name="Supplier 3 Price">£4.76</field>
+      </fields>
+      <libsource lib="ADUM3152BRSZ" part="ADUM3154" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E695E2E</tstamp>
+    </comp>
+    <comp ref="U5">
+      <value>STM32F411VETx</value>
+      <footprint>Package_QFP:LQFP-100_14x14mm_P0.5mm</footprint>
+      <datasheet>http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00115249.pdf</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C382005</field>
+        <field name="Supplier 1 Price">£3.1517</field>
+        <field name="Supplier 2">Mouser</field>
+        <field name="Supplier 2 PN">511-STM32F411VET6</field>
+        <field name="Supplier 2 Price">£6.30</field>
+        <field name="Supplier 3">DigiKey</field>
+        <field name="Supplier 3 PN">497-17444-ND</field>
+        <field name="Supplier 3 Price">£5.02</field>
+      </fields>
+      <libsource lib="MCU_ST_STM32F4" part="STM32F411VETx" description="ARM Cortex-M4 MCU, 512KB flash, 128KB RAM, 100MHz, 1.7-3.6V, 81 GPIO, LQFP-100"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E6DDCE7</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>4.7uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C19666</field>
+        <field name="Supplier 1 Price">£0.014611</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E8A134A</tstamp>
+    </comp>
+    <comp ref="C2">
+      <value>4.7uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C19666</field>
+        <field name="Supplier 1 Price">£0.014611</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E8C1BF4</tstamp>
+    </comp>
+    <comp ref="C3">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C1525</field>
+        <field name="Supplier 1 Price">£0.003408</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E8C425F</tstamp>
+    </comp>
+    <comp ref="C4">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C1525</field>
+        <field name="Supplier 1 Price">£0.003408</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E8F5F99</tstamp>
+    </comp>
+    <comp ref="C5">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C1525</field>
+        <field name="Supplier 1 Price">£0.003408</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E9054A3</tstamp>
+    </comp>
+    <comp ref="C6">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C1525</field>
+        <field name="Supplier 1 Price">£0.003408</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E91405C</tstamp>
+    </comp>
+    <comp ref="C7">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C1525</field>
+        <field name="Supplier 1 Price">£0.003408</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E92275D</tstamp>
+    </comp>
+    <comp ref="C8">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C1525</field>
+        <field name="Supplier 1 Price">£0.003408</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E931177</tstamp>
+    </comp>
+    <comp ref="C10">
+      <value>12pF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C26406</field>
+        <field name="Supplier 1 Price">£0.004686</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E941974</tstamp>
+    </comp>
+    <comp ref="C9">
+      <value>12pF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C26406</field>
+        <field name="Supplier 1 Price">£0.004686</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E94273A</tstamp>
+    </comp>
+    <comp ref="Y1">
+      <value>8MHz</value>
+      <footprint>Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C389817</field>
+        <field name="Supplier 1 Price">£0.137827</field>
+        <field name="Supplier 2">Mouser</field>
+        <field name="Supplier 2 PN">815-M8AIG-8-1ZT</field>
+        <field name="Supplier 2 Price">£0.565</field>
+        <field name="Supplier 3">DigiKey</field>
+        <field name="Supplier 3 PN">2151-RH100-8.000-10-1010-EXT-TRCT-ND</field>
+        <field name="Supplier 3 Price">£0.53</field>
+      </fields>
+      <libsource lib="Device" part="Crystal_GND24" description="Four pin crystal, GND on pins 2 and 4"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E963719</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>10K</value>
+      <footprint>ProjectLib:R_0402_SILK_VAL</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C140214</field>
+        <field name="Supplier 1 Price">£0.000569</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E969F8A</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>10K</value>
+      <footprint>ProjectLib:R_0402_SILK_VAL</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C140214</field>
+        <field name="Supplier 1 Price">£0.000569</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E96A8B9</tstamp>
+    </comp>
+    <comp ref="JP2">
+      <value>Boot</value>
+      <footprint>Jumper:SolderJumper-3_P1.3mm_Bridged12_RoundedPad1.0x1.5mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Jumper" part="Jumper_3_Bridged12" description="Jumper, 3-pole, pins 1+2 closed/bridged"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E97C48C</tstamp>
+    </comp>
+    <comp ref="JP1">
+      <value>Reset</value>
+      <footprint>Jumper:SolderJumper-3_P1.3mm_Bridged12_RoundedPad1.0x1.5mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Jumper" part="Jumper_3_Bridged12" description="Jumper, 3-pole, pins 1+2 closed/bridged"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E98DA7D</tstamp>
+    </comp>
+    <comp ref="R11">
+      <value>100R</value>
+      <footprint>ProjectLib:R_0402_SILK_VAL</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C100194</field>
+        <field name="Supplier 1 Price">£0.001084</field>
+      </fields>
+      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EA2D97B</tstamp>
+    </comp>
+    <comp ref="R7">
+      <value>62R</value>
+      <footprint>ProjectLib:R_0402_SILK_VAL</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C4962</field>
+        <field name="Supplier 1 Price">£0.000372</field>
+      </fields>
+      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EA7F7CF</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>91R</value>
+      <footprint>ProjectLib:R_0402_SILK_VAL</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C270574</field>
+        <field name="Supplier 1 Price">£0.000394</field>
+      </fields>
+      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EAB33E6</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>91R</value>
+      <footprint>ProjectLib:R_0402_SILK_VAL</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C270574</field>
+        <field name="Supplier 1 Price">£0.000394</field>
+      </fields>
+      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EAB33ED</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>91R</value>
+      <footprint>ProjectLib:R_0402_SILK_VAL</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C270574</field>
+        <field name="Supplier 1 Price">£0.000394</field>
+      </fields>
+      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EAB33F4</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>91R</value>
+      <footprint>ProjectLib:R_0402_SILK_VAL</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C270574</field>
+        <field name="Supplier 1 Price">£0.000394</field>
+      </fields>
+      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EAB33FB</tstamp>
+    </comp>
+    <comp ref="R8">
+      <value>62R</value>
+      <footprint>ProjectLib:R_0402_SILK_VAL</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C4962</field>
+        <field name="Supplier 1 Price">£0.000372</field>
+      </fields>
+      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EAC1CF8</tstamp>
+    </comp>
+    <comp ref="R9">
+      <value>62R</value>
+      <footprint>ProjectLib:R_0402_SILK_VAL</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C4962</field>
+        <field name="Supplier 1 Price">£0.000372</field>
+      </fields>
+      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EAC1EB0</tstamp>
+    </comp>
+    <comp ref="R10">
+      <value>62R</value>
+      <footprint>ProjectLib:R_0402_SILK_VAL</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C4962</field>
+        <field name="Supplier 1 Price">£0.000372</field>
+      </fields>
+      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EAC20B6</tstamp>
+    </comp>
+    <comp ref="R12">
+      <value>100R</value>
+      <footprint>ProjectLib:R_0402_SILK_VAL</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C100194</field>
+        <field name="Supplier 1 Price">£0.001084</field>
+      </fields>
+      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EAC232F</tstamp>
+    </comp>
+    <comp ref="R13">
+      <value>100R</value>
+      <footprint>ProjectLib:R_0402_SILK_VAL</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C100194</field>
+        <field name="Supplier 1 Price">£0.001084</field>
+      </fields>
+      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EAC24B8</tstamp>
+    </comp>
+    <comp ref="R14">
+      <value>100R</value>
+      <footprint>ProjectLib:R_0402_SILK_VAL</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C100194</field>
+        <field name="Supplier 1 Price">£0.001084</field>
+      </fields>
+      <libsource lib="Device" part="R_Small" description="Resistor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EAC268F</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>LED_RBAG</value>
+      <footprint>LED_SMD:LED_Cree-PLCC4_2x2mm_CW</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C108793</field>
+        <field name="Supplier 1 Price">£0.020807</field>
+      </fields>
+      <libsource lib="Project" part="LED_RBAG" description="RGB LED, anode/blue/red/green"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EB10BC7</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>LED_RBAG</value>
+      <footprint>LED_SMD:LED_Cree-PLCC4_2x2mm_CW</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C108793</field>
+        <field name="Supplier 1 Price">£0.020807</field>
+      </fields>
+      <libsource lib="Project" part="LED_RBAG" description="RGB LED, anode/blue/red/green"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EB13C60</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>LED_RBAG</value>
+      <footprint>LED_SMD:LED_Cree-PLCC4_2x2mm_CW</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C108793</field>
+        <field name="Supplier 1 Price">£0.020807</field>
+      </fields>
+      <libsource lib="Project" part="LED_RBAG" description="RGB LED, anode/blue/red/green"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EB155DD</tstamp>
+    </comp>
+    <comp ref="D4">
+      <value>LED_RBAG</value>
+      <footprint>LED_SMD:LED_Cree-PLCC4_2x2mm_CW</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C108793</field>
+        <field name="Supplier 1 Price">£0.020807</field>
+      </fields>
+      <libsource lib="Project" part="LED_RBAG" description="RGB LED, anode/blue/red/green"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EB1603D</tstamp>
+    </comp>
+    <comp ref="C12">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C1525</field>
+        <field name="Supplier 1 Price">£0.003408</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E7446E7</tstamp>
+    </comp>
+    <comp ref="C11">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C1525</field>
+        <field name="Supplier 1 Price">£0.003408</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E754B69</tstamp>
+    </comp>
+    <comp ref="C13">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C1525</field>
+        <field name="Supplier 1 Price">£0.003408</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E763877</tstamp>
+    </comp>
+    <comp ref="C14">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C1525</field>
+        <field name="Supplier 1 Price">£0.003408</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E772798</tstamp>
+    </comp>
+    <comp ref="C16">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C1525</field>
+        <field name="Supplier 1 Price">£0.003408</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E79601E</tstamp>
+    </comp>
+    <comp ref="C18">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C1525</field>
+        <field name="Supplier 1 Price">£0.003408</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E796CA2</tstamp>
+    </comp>
+    <comp ref="C15">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C1525</field>
+        <field name="Supplier 1 Price">£0.003408</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E797C61</tstamp>
+    </comp>
+    <comp ref="C17">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C1525</field>
+        <field name="Supplier 1 Price">£0.003408</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E798B55</tstamp>
+    </comp>
+    <comp ref="J2">
+      <value>SWD</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">Toby</field>
+        <field name="Supplier 1 PN">THS-05-R</field>
+        <field name="Supplier 1 Price">£0.05</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_01x05_Male" description="Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EA89E02</tstamp>
+    </comp>
+    <comp ref="C19">
+      <value>47uF</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C403725</field>
+        <field name="Supplier 1 Price">£0.348134</field>
+        <field name="Voltage">25V</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EB007A1</tstamp>
+    </comp>
+    <comp ref="C20">
+      <value>47uF</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C403725</field>
+        <field name="Supplier 1 Price">£0.348134</field>
+        <field name="Voltage">25V</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EB050A2</tstamp>
+    </comp>
+    <comp ref="C22">
+      <value>47uF</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C403725</field>
+        <field name="Supplier 1 Price">£0.348134</field>
+        <field name="Voltage">25V</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EB06954</tstamp>
+    </comp>
+    <comp ref="C21">
+      <value>47uF</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C403725</field>
+        <field name="Supplier 1 Price">£0.348134</field>
+        <field name="Voltage">25V</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EB074ED</tstamp>
+    </comp>
+    <comp ref="U6">
+      <value>AMS1117-3.3</value>
+      <footprint>Package_TO_SOT_SMD:SOT-223-3_TabPin2</footprint>
+      <datasheet>http://www.advanced-monolithic.com/pdf/ds1117.pdf</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C6186</field>
+        <field name="Supplier 1 Price">£0.065434</field>
+        <field name="Supplier 2">Mouser</field>
+        <field name="Supplier 2 PN">926-LM1117MPX3.3NOPB</field>
+        <field name="Supplier 2 Price">£0.851</field>
+        <field name="Supplier 3">Farnell</field>
+        <field name="Supplier 3 PN">3007498</field>
+        <field name="Supplier 3 Price">£0.832</field>
+      </fields>
+      <libsource lib="Regulator_Linear" part="AMS1117-3.3" description="1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E70E255</tstamp>
+    </comp>
+    <comp ref="C23">
+      <value>47uF</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C403725</field>
+        <field name="Supplier 1 Price">£0.348134</field>
+        <field name="Voltage">25V</field>
+      </fields>
+      <libsource lib="Device" part="C_Small" description="Unpolarized capacitor, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E71020D</tstamp>
+    </comp>
+    <comp ref="JP3">
+      <value>3V3 SEL</value>
+      <footprint>Jumper:SolderJumper-3_P1.3mm_Bridged12_RoundedPad1.0x1.5mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Jumper" part="Jumper_3_Bridged12" description="Jumper, 3-pole, pins 1+2 closed/bridged"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E784706</tstamp>
+    </comp>
+    <comp ref="R15">
+      <value>10K</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C346559</field>
+        <field name="Supplier 1 Price">£0.05766</field>
+        <field name="Tolerance">0.1%</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E71530A</tstamp>
+    </comp>
+    <comp ref="TH1">
+      <value>10K</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <fields>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C209959</field>
+        <field name="Supplier 1 Price">£0.010253</field>
+      </fields>
+      <libsource lib="Device" part="Thermistor" description="Temperature dependent resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E744090</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="ADUM3152BRSZ" part="ADUM3154">
+      <docs>B</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ADUM3154</field>
+        <field name="Footprint">SOP65P780X200-20N</field>
+        <field name="Field4">ANALOG DEVICES</field>
+        <field name="Field5">IPC 7351B</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD1" type="power_in"/>
+        <pin num="2" name="GND1" type="power_in"/>
+        <pin num="3" name="MCLK" type="input"/>
+        <pin num="4" name="MO" type="input"/>
+        <pin num="5" name="MI" type="output"/>
+        <pin num="6" name="~MSS~" type="input"/>
+        <pin num="7" name="SSA0" type="input"/>
+        <pin num="8" name="SSA1" type="input"/>
+        <pin num="9" name="NIC1" type="NotConnected"/>
+        <pin num="10" name="GND1" type="power_in"/>
+        <pin num="11" name="GND2" type="power_in"/>
+        <pin num="12" name="SS3" type="output"/>
+        <pin num="13" name="SS2" type="output"/>
+        <pin num="14" name="SS1" type="output"/>
+        <pin num="15" name="SS0" type="output"/>
+        <pin num="16" name="SO" type="input"/>
+        <pin num="17" name="SI" type="output"/>
+        <pin num="18" name="SCLK" type="output"/>
+        <pin num="19" name="GND2" type="power_in"/>
+        <pin num="20" name="VDD2" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Conn_01x05_Male">
+      <description>Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x05_Male</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Raspberry_Pi_2_3">
+      <description>expansion header for Raspberry Pi 2 &amp; 3</description>
+      <docs>https://www.raspberrypi.org/documentation/hardware/raspberrypi/schematics/rpi_SCH_3bplus_1p0_reduced.pdf</docs>
+      <footprints>
+        <fp>PinHeader*2x20*P2.54mm*Vertical*</fp>
+        <fp>PinSocket*2x20*P2.54mm*Vertical*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Raspberry_Pi_2_3</field>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3" type="power_in"/>
+        <pin num="2" name="5V" type="power_in"/>
+        <pin num="3" name="SDA/GPIO2" type="BiDi"/>
+        <pin num="4" name="5V" type="power_in"/>
+        <pin num="5" name="SCL/GPIO3" type="BiDi"/>
+        <pin num="6" name="GND" type="power_in"/>
+        <pin num="7" name="GCLK0/GPIO4" type="BiDi"/>
+        <pin num="8" name="GPIO14/TXD" type="BiDi"/>
+        <pin num="9" name="GND" type="power_in"/>
+        <pin num="10" name="GPIO15/RXD" type="BiDi"/>
+        <pin num="11" name="GPIO17" type="BiDi"/>
+        <pin num="12" name="GPIO18/PWM0" type="BiDi"/>
+        <pin num="13" name="GPIO27" type="BiDi"/>
+        <pin num="14" name="GND" type="power_in"/>
+        <pin num="15" name="GPIO22" type="BiDi"/>
+        <pin num="16" name="GPIO23" type="BiDi"/>
+        <pin num="17" name="3V3" type="power_in"/>
+        <pin num="18" name="GPIO24" type="BiDi"/>
+        <pin num="19" name="MOSI0/GPIO10" type="BiDi"/>
+        <pin num="20" name="GND" type="power_in"/>
+        <pin num="21" name="MISO0/GPIO9" type="BiDi"/>
+        <pin num="22" name="GPIO25" type="BiDi"/>
+        <pin num="23" name="SCLK0/GPIO11" type="BiDi"/>
+        <pin num="24" name="~CE0~/GPIO8" type="BiDi"/>
+        <pin num="25" name="GND" type="power_in"/>
+        <pin num="26" name="~CE1~/GPIO7" type="BiDi"/>
+        <pin num="27" name="ID_SD/GPIO0" type="BiDi"/>
+        <pin num="28" name="ID_SC/GPIO1" type="BiDi"/>
+        <pin num="29" name="GCLK1/GPIO5" type="BiDi"/>
+        <pin num="30" name="GND" type="power_in"/>
+        <pin num="31" name="GCLK2/GPIO6" type="BiDi"/>
+        <pin num="32" name="PWM0/GPIO12" type="BiDi"/>
+        <pin num="33" name="PWM1/GPIO13" type="BiDi"/>
+        <pin num="34" name="GND" type="power_in"/>
+        <pin num="35" name="GPIO19/MISO1" type="BiDi"/>
+        <pin num="36" name="GPIO16" type="BiDi"/>
+        <pin num="37" name="GPIO26" type="BiDi"/>
+        <pin num="38" name="GPIO20/MOSI1" type="BiDi"/>
+        <pin num="39" name="GND" type="power_in"/>
+        <pin num="40" name="GPIO21/SCLK1" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C_Small">
+      <description>Unpolarized capacitor, small symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Crystal_GND24">
+      <description>Four pin crystal, GND on pins 2 and 4</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Crystal*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Y</field>
+        <field name="Value">Crystal_GND24</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R_Small">
+      <description>Resistor, small symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Thermistor">
+      <description>Temperature dependent resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">TH</field>
+        <field name="Value">Thermistor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Jumper" part="Jumper_3_Bridged12">
+      <description>Jumper, 3-pole, pins 1+2 closed/bridged</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>SolderJumper*Bridged12*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">JP</field>
+        <field name="Value">Jumper_3_Bridged12</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="C" type="input"/>
+        <pin num="3" name="B" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="MCU_ST_STM32F4" part="STM32F411VCTx">
+      <aliases>
+        <alias>STM32F411VETx</alias>
+      </aliases>
+      <description>ARM Cortex-M4 MCU, 256KB flash, 128KB RAM, 100MHz, 1.7-3.6V, 81 GPIO, LQFP-100</description>
+      <docs>http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00115249.pdf</docs>
+      <footprints>
+        <fp>LQFP*14x14mm*P0.5mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">STM32F411VCTx</field>
+        <field name="Footprint">Package_QFP:LQFP-100_14x14mm_P0.5mm</field>
+      </fields>
+      <pins>
+        <pin num="1" name="PE2" type="BiDi"/>
+        <pin num="2" name="PE3" type="BiDi"/>
+        <pin num="3" name="PE4" type="BiDi"/>
+        <pin num="4" name="PE5" type="BiDi"/>
+        <pin num="5" name="PE6" type="BiDi"/>
+        <pin num="6" name="VBAT" type="power_in"/>
+        <pin num="7" name="PC13" type="BiDi"/>
+        <pin num="8" name="PC14" type="BiDi"/>
+        <pin num="9" name="PC15" type="BiDi"/>
+        <pin num="10" name="VSS" type="power_in"/>
+        <pin num="11" name="VDD" type="power_in"/>
+        <pin num="12" name="PH0" type="input"/>
+        <pin num="13" name="PH1" type="input"/>
+        <pin num="14" name="NRST" type="input"/>
+        <pin num="15" name="PC0" type="BiDi"/>
+        <pin num="16" name="PC1" type="BiDi"/>
+        <pin num="17" name="PC2" type="BiDi"/>
+        <pin num="18" name="PC3" type="BiDi"/>
+        <pin num="19" name="VDD" type="power_in"/>
+        <pin num="20" name="VSSA" type="power_in"/>
+        <pin num="21" name="VREF+" type="power_in"/>
+        <pin num="22" name="VDDA" type="power_in"/>
+        <pin num="23" name="PA0" type="BiDi"/>
+        <pin num="24" name="PA1" type="BiDi"/>
+        <pin num="25" name="PA2" type="BiDi"/>
+        <pin num="26" name="PA3" type="BiDi"/>
+        <pin num="27" name="VSS" type="power_in"/>
+        <pin num="28" name="VDD" type="power_in"/>
+        <pin num="29" name="PA4" type="BiDi"/>
+        <pin num="30" name="PA5" type="BiDi"/>
+        <pin num="31" name="PA6" type="BiDi"/>
+        <pin num="32" name="PA7" type="BiDi"/>
+        <pin num="33" name="PC4" type="BiDi"/>
+        <pin num="34" name="PC5" type="BiDi"/>
+        <pin num="35" name="PB0" type="BiDi"/>
+        <pin num="36" name="PB1" type="BiDi"/>
+        <pin num="37" name="PB2" type="BiDi"/>
+        <pin num="38" name="PE7" type="BiDi"/>
+        <pin num="39" name="PE8" type="BiDi"/>
+        <pin num="40" name="PE9" type="BiDi"/>
+        <pin num="41" name="PE10" type="BiDi"/>
+        <pin num="42" name="PE11" type="BiDi"/>
+        <pin num="43" name="PE12" type="BiDi"/>
+        <pin num="44" name="PE13" type="BiDi"/>
+        <pin num="45" name="PE14" type="BiDi"/>
+        <pin num="46" name="PE15" type="BiDi"/>
+        <pin num="47" name="PB10" type="BiDi"/>
+        <pin num="48" name="VCAP1" type="power_in"/>
+        <pin num="49" name="VSS" type="power_in"/>
+        <pin num="50" name="VDD" type="power_in"/>
+        <pin num="51" name="PB12" type="BiDi"/>
+        <pin num="52" name="PB13" type="BiDi"/>
+        <pin num="53" name="PB14" type="BiDi"/>
+        <pin num="54" name="PB15" type="BiDi"/>
+        <pin num="55" name="PD8" type="BiDi"/>
+        <pin num="56" name="PD9" type="BiDi"/>
+        <pin num="57" name="PD10" type="BiDi"/>
+        <pin num="58" name="PD11" type="BiDi"/>
+        <pin num="59" name="PD12" type="BiDi"/>
+        <pin num="60" name="PD13" type="BiDi"/>
+        <pin num="61" name="PD14" type="BiDi"/>
+        <pin num="62" name="PD15" type="BiDi"/>
+        <pin num="63" name="PC6" type="BiDi"/>
+        <pin num="64" name="PC7" type="BiDi"/>
+        <pin num="65" name="PC8" type="BiDi"/>
+        <pin num="66" name="PC9" type="BiDi"/>
+        <pin num="67" name="PA8" type="BiDi"/>
+        <pin num="68" name="PA9" type="BiDi"/>
+        <pin num="69" name="PA10" type="BiDi"/>
+        <pin num="70" name="PA11" type="BiDi"/>
+        <pin num="71" name="PA12" type="BiDi"/>
+        <pin num="72" name="PA13" type="BiDi"/>
+        <pin num="73" name="VCAP2" type="power_in"/>
+        <pin num="74" name="VSS" type="power_in"/>
+        <pin num="75" name="VDD" type="power_in"/>
+        <pin num="76" name="PA14" type="BiDi"/>
+        <pin num="77" name="PA15" type="BiDi"/>
+        <pin num="78" name="PC10" type="BiDi"/>
+        <pin num="79" name="PC11" type="BiDi"/>
+        <pin num="80" name="PC12" type="BiDi"/>
+        <pin num="81" name="PD0" type="BiDi"/>
+        <pin num="82" name="PD1" type="BiDi"/>
+        <pin num="83" name="PD2" type="BiDi"/>
+        <pin num="84" name="PD3" type="BiDi"/>
+        <pin num="85" name="PD4" type="BiDi"/>
+        <pin num="86" name="PD5" type="BiDi"/>
+        <pin num="87" name="PD6" type="BiDi"/>
+        <pin num="88" name="PD7" type="BiDi"/>
+        <pin num="89" name="PB3" type="BiDi"/>
+        <pin num="90" name="PB4" type="BiDi"/>
+        <pin num="91" name="PB5" type="BiDi"/>
+        <pin num="92" name="PB6" type="BiDi"/>
+        <pin num="93" name="PB7" type="BiDi"/>
+        <pin num="94" name="BOOT0" type="input"/>
+        <pin num="95" name="PB8" type="BiDi"/>
+        <pin num="96" name="PB9" type="BiDi"/>
+        <pin num="97" name="PE0" type="BiDi"/>
+        <pin num="98" name="PE1" type="BiDi"/>
+        <pin num="99" name="VSS" type="power_in"/>
+        <pin num="100" name="VDD" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Project" part="AFE_Card_Interface">
+      <fields>
+        <field name="Reference">CRD</field>
+        <field name="Value">AFE_Card_Interface</field>
+      </fields>
+      <pins>
+        <pin num="A4" name="~CS3/RST" type="output"/>
+        <pin num="A5" name="~CS2" type="output"/>
+        <pin num="A6" name="~CS1" type="output"/>
+        <pin num="A7" name="~CS0" type="output"/>
+        <pin num="A8" name="MISO" type="input"/>
+        <pin num="A9" name="MOSI" type="output"/>
+        <pin num="A10" name="SCLK" type="output"/>
+        <pin num="A11" name="Vio" type="input"/>
+        <pin num="A12" name="+12V" type="power_in"/>
+        <pin num="A13" name="+12V" type="power_in"/>
+        <pin num="A14" name="+12V" type="power_in"/>
+        <pin num="A15" name="0V" type="power_in"/>
+        <pin num="A16" name="0V" type="power_in"/>
+        <pin num="A17" name="0V" type="power_in"/>
+        <pin num="A18" name="0V" type="power_in"/>
+        <pin num="B4" name="~CS3/RST" type="output"/>
+        <pin num="B5" name="~CS2" type="output"/>
+        <pin num="B6" name="~CS1" type="output"/>
+        <pin num="B7" name="~CS0" type="output"/>
+        <pin num="B8" name="MISO" type="input"/>
+        <pin num="B9" name="MOSI" type="output"/>
+        <pin num="B10" name="SCLK" type="output"/>
+        <pin num="B11" name="Vio" type="input"/>
+        <pin num="B12" name="+12V" type="power_in"/>
+        <pin num="B13" name="+12V" type="power_in"/>
+        <pin num="B14" name="+12V" type="power_in"/>
+        <pin num="B15" name="0V" type="power_in"/>
+        <pin num="B16" name="0V" type="power_in"/>
+        <pin num="B17" name="0V" type="power_in"/>
+        <pin num="B18" name="0V" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Project" part="LED_RBAG">
+      <description>RGB LED, anode/blue/red/green</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED_RBAG</field>
+      </fields>
+      <pins>
+        <pin num="1" name="RK" type="passive"/>
+        <pin num="2" name="BK" type="passive"/>
+        <pin num="3" name="A" type="passive"/>
+        <pin num="4" name="GK" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Project" part="SFTN02L-12">
+      <fields>
+        <field name="Reference">PS</field>
+        <field name="Value">SFTN02L-12</field>
+      </fields>
+      <pins>
+        <pin num="1" name="-Vin" type="power_in"/>
+        <pin num="2" name="+Vin" type="power_in"/>
+        <pin num="5" name="-Vout" type="power_out"/>
+        <pin num="8" name="+Vout" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="Regulator_Linear" part="AP1117-15">
+      <aliases>
+        <alias>AP1117-18</alias>
+        <alias>AP1117-25</alias>
+        <alias>AP1117-33</alias>
+        <alias>AP1117-50</alias>
+        <alias>LD1117S33TR_SOT223</alias>
+        <alias>LD1117S12TR_SOT223</alias>
+        <alias>LD1117S18TR_SOT223</alias>
+        <alias>LD1117S25TR_SOT223</alias>
+        <alias>LD1117S50TR_SOT223</alias>
+        <alias>NCP1117-12_SOT223</alias>
+        <alias>NCP1117-1.5_SOT223</alias>
+        <alias>NCP1117-1.8_SOT223</alias>
+        <alias>NCP1117-2.0_SOT223</alias>
+        <alias>NCP1117-2.5_SOT223</alias>
+        <alias>NCP1117-2.85_SOT223</alias>
+        <alias>NCP1117-3.3_SOT223</alias>
+        <alias>NCP1117-5.0_SOT223</alias>
+        <alias>AMS1117-1.5</alias>
+        <alias>AMS1117-1.8</alias>
+        <alias>AMS1117-2.5</alias>
+        <alias>AMS1117-2.85</alias>
+        <alias>AMS1117-3.3</alias>
+        <alias>AMS1117-5.0</alias>
+      </aliases>
+      <description>1A Low Dropout regulator, positive, 1.5V fixed output, SOT-223</description>
+      <docs>http://www.diodes.com/datasheets/AP1117.pdf</docs>
+      <footprints>
+        <fp>SOT?223*TabPin2*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">AP1117-15</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-223-3_TabPin2</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="VO" type="power_out"/>
+        <pin num="3" name="VI" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="ADUM3152BRSZ">
+      <uri>C:\Users\Matthew Wood\Documents\PowerMonitorMK4\Hat/../ProjectSymbols/ADUM3152BRSZ.lib</uri>
+    </library>
+    <library logical="Connector">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Connector.lib</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Device.lib</uri>
+    </library>
+    <library logical="Jumper">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Jumper.lib</uri>
+    </library>
+    <library logical="MCU_ST_STM32F4">
+      <uri>C:\Program Files\KiCad\share\kicad\library/MCU_ST_STM32F4.lib</uri>
+    </library>
+    <library logical="Project">
+      <uri>C:\Users\Matthew Wood\Documents\PowerMonitorMK4\Hat/../ProjectSymbols/Project.lib</uri>
+    </library>
+    <library logical="Regulator_Linear">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Regulator_Linear.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="+3V3">
+      <node ref="U5" pin="11"/>
+      <node ref="C13" pin="1"/>
+      <node ref="C11" pin="1"/>
+      <node ref="U5" pin="19"/>
+      <node ref="U5" pin="6"/>
+      <node ref="U5" pin="100"/>
+      <node ref="U5" pin="28"/>
+      <node ref="U5" pin="50"/>
+      <node ref="U5" pin="75"/>
+      <node ref="U5" pin="22"/>
+      <node ref="U5" pin="21"/>
+      <node ref="D1" pin="3"/>
+      <node ref="U1" pin="1"/>
+      <node ref="U3" pin="1"/>
+      <node ref="D4" pin="3"/>
+      <node ref="D2" pin="3"/>
+      <node ref="D3" pin="3"/>
+      <node ref="C14" pin="1"/>
+      <node ref="C12" pin="1"/>
+      <node ref="J2" pin="1"/>
+      <node ref="U4" pin="1"/>
+      <node ref="TH1" pin="1"/>
+      <node ref="JP3" pin="1"/>
+      <node ref="C3" pin="1"/>
+      <node ref="C8" pin="1"/>
+      <node ref="U2" pin="1"/>
+      <node ref="C7" pin="1"/>
+      <node ref="C2" pin="1"/>
+      <node ref="C4" pin="1"/>
+      <node ref="C5" pin="1"/>
+      <node ref="JP1" pin="1"/>
+      <node ref="JP2" pin="3"/>
+      <node ref="C6" pin="1"/>
+    </net>
+    <net code="2" name="GND">
+      <node ref="C6" pin="2"/>
+      <node ref="C7" pin="2"/>
+      <node ref="C23" pin="2"/>
+      <node ref="U6" pin="1"/>
+      <node ref="C5" pin="2"/>
+      <node ref="C1" pin="2"/>
+      <node ref="C4" pin="2"/>
+      <node ref="U4" pin="10"/>
+      <node ref="PS4" pin="1"/>
+      <node ref="J2" pin="3"/>
+      <node ref="R15" pin="2"/>
+      <node ref="C3" pin="2"/>
+      <node ref="JP1" pin="3"/>
+      <node ref="U4" pin="2"/>
+      <node ref="Y1" pin="2"/>
+      <node ref="Y1" pin="4"/>
+      <node ref="J1" pin="6"/>
+      <node ref="U2" pin="10"/>
+      <node ref="U1" pin="2"/>
+      <node ref="J1" pin="20"/>
+      <node ref="J1" pin="25"/>
+      <node ref="J1" pin="14"/>
+      <node ref="JP2" pin="1"/>
+      <node ref="J1" pin="30"/>
+      <node ref="J1" pin="34"/>
+      <node ref="PS3" pin="1"/>
+      <node ref="J1" pin="39"/>
+      <node ref="C10" pin="2"/>
+      <node ref="U3" pin="10"/>
+      <node ref="C9" pin="2"/>
+      <node ref="U2" pin="2"/>
+      <node ref="U3" pin="2"/>
+      <node ref="U1" pin="10"/>
+      <node ref="J1" pin="9"/>
+      <node ref="U5" pin="10"/>
+      <node ref="PS2" pin="1"/>
+      <node ref="C8" pin="2"/>
+      <node ref="U5" pin="27"/>
+      <node ref="U5" pin="49"/>
+      <node ref="U5" pin="74"/>
+      <node ref="U5" pin="99"/>
+      <node ref="U5" pin="20"/>
+      <node ref="PS1" pin="1"/>
+      <node ref="C14" pin="2"/>
+      <node ref="C13" pin="2"/>
+      <node ref="C2" pin="2"/>
+      <node ref="C11" pin="2"/>
+      <node ref="C12" pin="2"/>
+    </net>
+    <net code="3" name="Net-(C1-Pad1)">
+      <node ref="U5" pin="73"/>
+      <node ref="U5" pin="48"/>
+      <node ref="C1" pin="1"/>
+    </net>
+    <net code="4" name="/ST_BOOT0">
+      <node ref="R2" pin="2"/>
+      <node ref="J1" pin="31"/>
+      <node ref="U5" pin="94"/>
+    </net>
+    <net code="5" name="/ST_RST">
+      <node ref="J2" pin="5"/>
+      <node ref="J1" pin="29"/>
+      <node ref="U5" pin="14"/>
+      <node ref="R1" pin="2"/>
+    </net>
+    <net code="6" name="/SWDIO">
+      <node ref="J2" pin="4"/>
+      <node ref="U5" pin="72"/>
+    </net>
+    <net code="7" name="/SWCLK">
+      <node ref="J2" pin="2"/>
+      <node ref="U5" pin="76"/>
+    </net>
+    <net code="8" name="Net-(JP1-Pad2)">
+      <node ref="R1" pin="1"/>
+      <node ref="JP1" pin="2"/>
+    </net>
+    <net code="9" name="Net-(JP2-Pad2)">
+      <node ref="JP2" pin="2"/>
+      <node ref="R2" pin="1"/>
+    </net>
+    <net code="10" name="/SPI4_MISO">
+      <node ref="U4" pin="5"/>
+      <node ref="U5" pin="4"/>
+    </net>
+    <net code="11" name="/SPI1_MOSI">
+      <node ref="U5" pin="32"/>
+      <node ref="U1" pin="4"/>
+    </net>
+    <net code="12" name="/SPI2_SCK">
+      <node ref="U2" pin="3"/>
+      <node ref="U5" pin="47"/>
+    </net>
+    <net code="13" name="/SPI2_MISO">
+      <node ref="U2" pin="5"/>
+      <node ref="U5" pin="17"/>
+    </net>
+    <net code="14" name="/SPI2_MOSI">
+      <node ref="U5" pin="18"/>
+      <node ref="U2" pin="4"/>
+    </net>
+    <net code="15" name="/SPI3_SCK">
+      <node ref="U5" pin="51"/>
+      <node ref="U3" pin="3"/>
+    </net>
+    <net code="16" name="/SPI3_MISO">
+      <node ref="U3" pin="5"/>
+      <node ref="U5" pin="79"/>
+    </net>
+    <net code="17" name="/SPI3_MOSI">
+      <node ref="U3" pin="4"/>
+      <node ref="U5" pin="80"/>
+    </net>
+    <net code="18" name="/SPI4_SCK">
+      <node ref="U4" pin="3"/>
+      <node ref="U5" pin="1"/>
+    </net>
+    <net code="19" name="/SPI1_MISO">
+      <node ref="U5" pin="31"/>
+      <node ref="U1" pin="5"/>
+    </net>
+    <net code="20" name="/SPI4_MOSI">
+      <node ref="U5" pin="5"/>
+      <node ref="U4" pin="4"/>
+    </net>
+    <net code="21" name="/USART1_RX">
+      <node ref="U5" pin="69"/>
+      <node ref="J1" pin="8"/>
+    </net>
+    <net code="22" name="/USART1_TX">
+      <node ref="U5" pin="68"/>
+      <node ref="J1" pin="10"/>
+    </net>
+    <net code="23" name="Net-(U5-Pad2)">
+      <node ref="U5" pin="2"/>
+    </net>
+    <net code="24" name="Net-(U5-Pad3)">
+      <node ref="U5" pin="3"/>
+    </net>
+    <net code="25" name="Net-(U5-Pad39)">
+      <node ref="U5" pin="39"/>
+    </net>
+    <net code="26" name="Net-(U5-Pad40)">
+      <node ref="U5" pin="40"/>
+    </net>
+    <net code="27" name="/XTAL_IN">
+      <node ref="Y1" pin="1"/>
+      <node ref="U5" pin="12"/>
+      <node ref="C9" pin="1"/>
+    </net>
+    <net code="28" name="/XTAL_OUT">
+      <node ref="U5" pin="13"/>
+      <node ref="Y1" pin="3"/>
+      <node ref="C10" pin="1"/>
+    </net>
+    <net code="29" name="/SSC4">
+      <node ref="U5" pin="9"/>
+      <node ref="U4" pin="8"/>
+    </net>
+    <net code="30" name="/SSB4">
+      <node ref="U4" pin="7"/>
+      <node ref="U5" pin="8"/>
+    </net>
+    <net code="31" name="/SSA4">
+      <node ref="U5" pin="7"/>
+      <node ref="U4" pin="6"/>
+    </net>
+    <net code="32" name="Net-(C19-Pad1)">
+      <node ref="CRD1" pin="A12"/>
+      <node ref="CRD1" pin="B13"/>
+      <node ref="CRD1" pin="A13"/>
+      <node ref="CRD1" pin="A14"/>
+      <node ref="PS1" pin="8"/>
+      <node ref="CRD1" pin="B14"/>
+      <node ref="CRD1" pin="B12"/>
+      <node ref="C19" pin="1"/>
+    </net>
+    <net code="33" name="/SSA3">
+      <node ref="U5" pin="52"/>
+      <node ref="U3" pin="6"/>
+    </net>
+    <net code="34" name="/SSB3">
+      <node ref="U5" pin="53"/>
+      <node ref="U3" pin="7"/>
+    </net>
+    <net code="35" name="/SSC3">
+      <node ref="U3" pin="8"/>
+      <node ref="U5" pin="54"/>
+    </net>
+    <net code="36" name="+3.3VP">
+      <node ref="JP3" pin="3"/>
+      <node ref="J1" pin="1"/>
+      <node ref="J1" pin="17"/>
+    </net>
+    <net code="37" name="+5V">
+      <node ref="PS3" pin="2"/>
+      <node ref="PS2" pin="2"/>
+      <node ref="U6" pin="3"/>
+      <node ref="J1" pin="4"/>
+      <node ref="PS4" pin="2"/>
+      <node ref="PS1" pin="2"/>
+      <node ref="J1" pin="2"/>
+    </net>
+    <net code="38" name="Net-(C23-Pad1)">
+      <node ref="U6" pin="2"/>
+      <node ref="JP3" pin="2"/>
+      <node ref="C23" pin="1"/>
+    </net>
+    <net code="39" name="/Board_Temp">
+      <node ref="TH1" pin="2"/>
+      <node ref="R15" pin="1"/>
+      <node ref="U5" pin="25"/>
+    </net>
+    <net code="40" name="/R3">
+      <node ref="D3" pin="1"/>
+      <node ref="R5" pin="1"/>
+    </net>
+    <net code="41" name="/R4">
+      <node ref="D4" pin="1"/>
+      <node ref="R6" pin="1"/>
+    </net>
+    <net code="42" name="/R1">
+      <node ref="D1" pin="1"/>
+      <node ref="R3" pin="1"/>
+    </net>
+    <net code="43" name="/B1">
+      <node ref="R11" pin="1"/>
+      <node ref="D1" pin="2"/>
+    </net>
+    <net code="44" name="/G1">
+      <node ref="D1" pin="4"/>
+      <node ref="R7" pin="1"/>
+    </net>
+    <net code="45" name="/B3">
+      <node ref="D3" pin="2"/>
+      <node ref="R13" pin="1"/>
+    </net>
+    <net code="46" name="/G3">
+      <node ref="R9" pin="1"/>
+      <node ref="D3" pin="4"/>
+    </net>
+    <net code="47" name="/R2">
+      <node ref="R4" pin="1"/>
+      <node ref="D2" pin="1"/>
+    </net>
+    <net code="48" name="/B2">
+      <node ref="R12" pin="1"/>
+      <node ref="D2" pin="2"/>
+    </net>
+    <net code="49" name="/G2">
+      <node ref="R8" pin="1"/>
+      <node ref="D2" pin="4"/>
+    </net>
+    <net code="50" name="/B4">
+      <node ref="R14" pin="1"/>
+      <node ref="D4" pin="2"/>
+    </net>
+    <net code="51" name="/G4">
+      <node ref="R10" pin="1"/>
+      <node ref="D4" pin="4"/>
+    </net>
+    <net code="52" name="Net-(U5-Pad46)">
+      <node ref="U5" pin="46"/>
+    </net>
+    <net code="53" name="/SSA1">
+      <node ref="U5" pin="33"/>
+      <node ref="U1" pin="6"/>
+    </net>
+    <net code="54" name="Net-(CRD1-PadA4)">
+      <node ref="CRD1" pin="A4"/>
+      <node ref="U1" pin="12"/>
+      <node ref="CRD1" pin="B4"/>
+    </net>
+    <net code="55" name="Net-(CRD1-PadA5)">
+      <node ref="CRD1" pin="B5"/>
+      <node ref="CRD1" pin="A5"/>
+      <node ref="U1" pin="13"/>
+    </net>
+    <net code="56" name="Net-(CRD1-PadA6)">
+      <node ref="CRD1" pin="B6"/>
+      <node ref="CRD1" pin="A6"/>
+      <node ref="U1" pin="14"/>
+    </net>
+    <net code="57" name="Net-(CRD1-PadA7)">
+      <node ref="CRD1" pin="A7"/>
+      <node ref="CRD1" pin="B7"/>
+      <node ref="U1" pin="15"/>
+    </net>
+    <net code="58" name="Net-(CRD1-PadA9)">
+      <node ref="U1" pin="17"/>
+      <node ref="CRD1" pin="A9"/>
+      <node ref="CRD1" pin="B9"/>
+    </net>
+    <net code="59" name="Net-(CRD1-PadA10)">
+      <node ref="CRD1" pin="B10"/>
+      <node ref="CRD1" pin="A10"/>
+      <node ref="U1" pin="18"/>
+    </net>
+    <net code="60" name="Net-(C15-Pad1)">
+      <node ref="U1" pin="11"/>
+      <node ref="U1" pin="19"/>
+      <node ref="CRD1" pin="A18"/>
+      <node ref="CRD1" pin="B16"/>
+      <node ref="CRD1" pin="A17"/>
+      <node ref="C15" pin="1"/>
+      <node ref="PS1" pin="5"/>
+      <node ref="C19" pin="2"/>
+      <node ref="CRD1" pin="B15"/>
+      <node ref="CRD1" pin="A16"/>
+      <node ref="CRD1" pin="A15"/>
+      <node ref="CRD1" pin="B17"/>
+      <node ref="CRD1" pin="B18"/>
+    </net>
+    <net code="61" name="Net-(C15-Pad2)">
+      <node ref="U1" pin="20"/>
+      <node ref="C15" pin="2"/>
+      <node ref="CRD1" pin="B11"/>
+      <node ref="CRD1" pin="A11"/>
+    </net>
+    <net code="62" name="/SPI1_SCK">
+      <node ref="U1" pin="3"/>
+      <node ref="U5" pin="30"/>
+    </net>
+    <net code="63" name="/SSB1">
+      <node ref="U5" pin="34"/>
+      <node ref="U1" pin="7"/>
+    </net>
+    <net code="64" name="/SSC1">
+      <node ref="U1" pin="8"/>
+      <node ref="U5" pin="35"/>
+    </net>
+    <net code="65" name="Net-(U1-Pad9)">
+      <node ref="U1" pin="9"/>
+    </net>
+    <net code="66" name="Net-(CRD1-PadA8)">
+      <node ref="CRD1" pin="A8"/>
+      <node ref="U1" pin="16"/>
+      <node ref="CRD1" pin="B8"/>
+    </net>
+    <net code="67" name="Net-(CRD2-PadA4)">
+      <node ref="CRD2" pin="B4"/>
+      <node ref="U2" pin="12"/>
+      <node ref="CRD2" pin="A4"/>
+    </net>
+    <net code="68" name="Net-(C20-Pad1)">
+      <node ref="C20" pin="1"/>
+      <node ref="PS2" pin="8"/>
+      <node ref="CRD2" pin="A12"/>
+      <node ref="CRD2" pin="A13"/>
+      <node ref="CRD2" pin="B14"/>
+      <node ref="CRD2" pin="B13"/>
+      <node ref="CRD2" pin="A14"/>
+      <node ref="CRD2" pin="B12"/>
+    </net>
+    <net code="69" name="Net-(CRD2-PadA5)">
+      <node ref="U2" pin="13"/>
+      <node ref="CRD2" pin="A5"/>
+      <node ref="CRD2" pin="B5"/>
+    </net>
+    <net code="70" name="Net-(CRD2-PadA6)">
+      <node ref="CRD2" pin="B6"/>
+      <node ref="U2" pin="14"/>
+      <node ref="CRD2" pin="A6"/>
+    </net>
+    <net code="71" name="Net-(CRD2-PadA7)">
+      <node ref="CRD2" pin="A7"/>
+      <node ref="U2" pin="15"/>
+      <node ref="CRD2" pin="B7"/>
+    </net>
+    <net code="72" name="Net-(CRD2-PadA8)">
+      <node ref="CRD2" pin="A8"/>
+      <node ref="U2" pin="16"/>
+      <node ref="CRD2" pin="B8"/>
+    </net>
+    <net code="73" name="Net-(CRD2-PadA9)">
+      <node ref="CRD2" pin="A9"/>
+      <node ref="CRD2" pin="B9"/>
+      <node ref="U2" pin="17"/>
+    </net>
+    <net code="74" name="Net-(CRD2-PadA10)">
+      <node ref="CRD2" pin="B10"/>
+      <node ref="CRD2" pin="A10"/>
+      <node ref="U2" pin="18"/>
+    </net>
+    <net code="75" name="Net-(C16-Pad1)">
+      <node ref="U2" pin="11"/>
+      <node ref="PS2" pin="5"/>
+      <node ref="CRD2" pin="A16"/>
+      <node ref="C20" pin="2"/>
+      <node ref="CRD2" pin="B15"/>
+      <node ref="CRD2" pin="B16"/>
+      <node ref="CRD2" pin="B17"/>
+      <node ref="CRD2" pin="B18"/>
+      <node ref="CRD2" pin="A18"/>
+      <node ref="CRD2" pin="A17"/>
+      <node ref="CRD2" pin="A15"/>
+      <node ref="C16" pin="1"/>
+      <node ref="U2" pin="19"/>
+    </net>
+    <net code="76" name="Net-(J1-Pad40)">
+      <node ref="J1" pin="40"/>
+    </net>
+    <net code="77" name="Net-(J1-Pad5)">
+      <node ref="J1" pin="5"/>
+    </net>
+    <net code="78" name="Net-(J1-Pad7)">
+      <node ref="J1" pin="7"/>
+    </net>
+    <net code="79" name="Net-(C17-Pad2)">
+      <node ref="U3" pin="20"/>
+      <node ref="CRD3" pin="B11"/>
+      <node ref="C17" pin="2"/>
+      <node ref="CRD3" pin="A11"/>
+    </net>
+    <net code="80" name="Net-(J1-Pad24)">
+      <node ref="J1" pin="24"/>
+    </net>
+    <net code="81" name="Net-(J1-Pad11)">
+      <node ref="J1" pin="11"/>
+    </net>
+    <net code="82" name="Net-(J1-Pad12)">
+      <node ref="J1" pin="12"/>
+    </net>
+    <net code="83" name="Net-(J1-Pad13)">
+      <node ref="J1" pin="13"/>
+    </net>
+    <net code="84" name="Net-(J1-Pad15)">
+      <node ref="J1" pin="15"/>
+    </net>
+    <net code="85" name="Net-(J1-Pad16)">
+      <node ref="J1" pin="16"/>
+    </net>
+    <net code="86" name="Net-(J1-Pad18)">
+      <node ref="J1" pin="18"/>
+    </net>
+    <net code="87" name="Net-(J1-Pad19)">
+      <node ref="J1" pin="19"/>
+    </net>
+    <net code="88" name="Net-(J1-Pad21)">
+      <node ref="J1" pin="21"/>
+    </net>
+    <net code="89" name="Net-(J1-Pad22)">
+      <node ref="J1" pin="22"/>
+    </net>
+    <net code="90" name="Net-(J1-Pad23)">
+      <node ref="J1" pin="23"/>
+    </net>
+    <net code="91" name="Net-(J1-Pad26)">
+      <node ref="J1" pin="26"/>
+    </net>
+    <net code="92" name="Net-(J1-Pad27)">
+      <node ref="J1" pin="27"/>
+    </net>
+    <net code="93" name="Net-(J1-Pad28)">
+      <node ref="J1" pin="28"/>
+    </net>
+    <net code="94" name="Net-(J1-Pad3)">
+      <node ref="J1" pin="3"/>
+    </net>
+    <net code="95" name="Net-(J1-Pad32)">
+      <node ref="J1" pin="32"/>
+    </net>
+    <net code="96" name="Net-(J1-Pad33)">
+      <node ref="J1" pin="33"/>
+    </net>
+    <net code="97" name="Net-(J1-Pad35)">
+      <node ref="J1" pin="35"/>
+    </net>
+    <net code="98" name="Net-(J1-Pad36)">
+      <node ref="J1" pin="36"/>
+    </net>
+    <net code="99" name="Net-(J1-Pad37)">
+      <node ref="J1" pin="37"/>
+    </net>
+    <net code="100" name="Net-(J1-Pad38)">
+      <node ref="J1" pin="38"/>
+    </net>
+    <net code="101" name="Net-(CRD3-PadA6)">
+      <node ref="U3" pin="14"/>
+      <node ref="CRD3" pin="B6"/>
+      <node ref="CRD3" pin="A6"/>
+    </net>
+    <net code="102" name="Net-(CRD3-PadA10)">
+      <node ref="CRD3" pin="B10"/>
+      <node ref="U3" pin="18"/>
+      <node ref="CRD3" pin="A10"/>
+    </net>
+    <net code="103" name="Net-(CRD3-PadA9)">
+      <node ref="CRD3" pin="B9"/>
+      <node ref="CRD3" pin="A9"/>
+      <node ref="U3" pin="17"/>
+    </net>
+    <net code="104" name="Net-(CRD3-PadA8)">
+      <node ref="CRD3" pin="B8"/>
+      <node ref="CRD3" pin="A8"/>
+      <node ref="U3" pin="16"/>
+    </net>
+    <net code="105" name="Net-(CRD3-PadA7)">
+      <node ref="CRD3" pin="A7"/>
+      <node ref="CRD3" pin="B7"/>
+      <node ref="U3" pin="15"/>
+    </net>
+    <net code="106" name="Net-(CRD3-PadA5)">
+      <node ref="CRD3" pin="A5"/>
+      <node ref="CRD3" pin="B5"/>
+      <node ref="U3" pin="13"/>
+    </net>
+    <net code="107" name="Net-(CRD3-PadA4)">
+      <node ref="CRD3" pin="A4"/>
+      <node ref="CRD3" pin="B4"/>
+      <node ref="U3" pin="12"/>
+    </net>
+    <net code="108" name="Net-(C17-Pad1)">
+      <node ref="CRD3" pin="A15"/>
+      <node ref="C21" pin="2"/>
+      <node ref="CRD3" pin="A16"/>
+      <node ref="U3" pin="11"/>
+      <node ref="C17" pin="1"/>
+      <node ref="CRD3" pin="A17"/>
+      <node ref="PS3" pin="5"/>
+      <node ref="CRD3" pin="B15"/>
+      <node ref="CRD3" pin="B16"/>
+      <node ref="CRD3" pin="B17"/>
+      <node ref="CRD3" pin="B18"/>
+      <node ref="U3" pin="19"/>
+      <node ref="CRD3" pin="A18"/>
+    </net>
+    <net code="109" name="Net-(C21-Pad1)">
+      <node ref="CRD3" pin="A13"/>
+      <node ref="CRD3" pin="A12"/>
+      <node ref="CRD3" pin="A14"/>
+      <node ref="C21" pin="1"/>
+      <node ref="PS3" pin="8"/>
+      <node ref="CRD3" pin="B12"/>
+      <node ref="CRD3" pin="B13"/>
+      <node ref="CRD3" pin="B14"/>
+    </net>
+    <net code="110" name="Net-(U3-Pad9)">
+      <node ref="U3" pin="9"/>
+    </net>
+    <net code="111" name="Net-(U5-Pad23)">
+      <node ref="U5" pin="23"/>
+    </net>
+    <net code="112" name="Net-(U5-Pad24)">
+      <node ref="U5" pin="24"/>
+    </net>
+    <net code="113" name="Net-(U5-Pad70)">
+      <node ref="U5" pin="70"/>
+    </net>
+    <net code="114" name="Net-(U5-Pad71)">
+      <node ref="U5" pin="71"/>
+    </net>
+    <net code="115" name="Net-(U5-Pad77)">
+      <node ref="U5" pin="77"/>
+    </net>
+    <net code="116" name="/R3IO">
+      <node ref="U5" pin="62"/>
+      <node ref="R5" pin="2"/>
+    </net>
+    <net code="117" name="/B3IO">
+      <node ref="U5" pin="63"/>
+      <node ref="R13" pin="2"/>
+    </net>
+    <net code="118" name="/G4IO">
+      <node ref="R10" pin="2"/>
+      <node ref="U5" pin="64"/>
+    </net>
+    <net code="119" name="/R4IO">
+      <node ref="U5" pin="65"/>
+      <node ref="R6" pin="2"/>
+    </net>
+    <net code="120" name="/B4IO">
+      <node ref="U5" pin="66"/>
+      <node ref="R14" pin="2"/>
+    </net>
+    <net code="121" name="Net-(U5-Pad81)">
+      <node ref="U5" pin="81"/>
+    </net>
+    <net code="122" name="Net-(U5-Pad82)">
+      <node ref="U5" pin="82"/>
+    </net>
+    <net code="123" name="/B1IO">
+      <node ref="R11" pin="2"/>
+      <node ref="U5" pin="57"/>
+    </net>
+    <net code="124" name="/G2IO">
+      <node ref="U5" pin="58"/>
+      <node ref="R8" pin="2"/>
+    </net>
+    <net code="125" name="/R2IO">
+      <node ref="R4" pin="2"/>
+      <node ref="U5" pin="59"/>
+    </net>
+    <net code="126" name="/B2IO">
+      <node ref="R12" pin="2"/>
+      <node ref="U5" pin="60"/>
+    </net>
+    <net code="127" name="/G3IO">
+      <node ref="U5" pin="61"/>
+      <node ref="R9" pin="2"/>
+    </net>
+    <net code="128" name="Net-(U5-Pad83)">
+      <node ref="U5" pin="83"/>
+    </net>
+    <net code="129" name="Net-(U5-Pad84)">
+      <node ref="U5" pin="84"/>
+    </net>
+    <net code="130" name="Net-(U5-Pad85)">
+      <node ref="U5" pin="85"/>
+    </net>
+    <net code="131" name="Net-(U5-Pad86)">
+      <node ref="U5" pin="86"/>
+    </net>
+    <net code="132" name="Net-(U5-Pad87)">
+      <node ref="U5" pin="87"/>
+    </net>
+    <net code="133" name="Net-(U5-Pad88)">
+      <node ref="U5" pin="88"/>
+    </net>
+    <net code="134" name="/G1IO">
+      <node ref="U5" pin="55"/>
+      <node ref="R7" pin="2"/>
+    </net>
+    <net code="135" name="/R1IO">
+      <node ref="U5" pin="56"/>
+      <node ref="R3" pin="2"/>
+    </net>
+    <net code="136" name="Net-(U5-Pad97)">
+      <node ref="U5" pin="97"/>
+    </net>
+    <net code="137" name="Net-(U5-Pad98)">
+      <node ref="U5" pin="98"/>
+    </net>
+    <net code="138" name="Net-(U5-Pad41)">
+      <node ref="U5" pin="41"/>
+    </net>
+    <net code="139" name="Net-(U5-Pad42)">
+      <node ref="U5" pin="42"/>
+    </net>
+    <net code="140" name="Net-(U5-Pad43)">
+      <node ref="U5" pin="43"/>
+    </net>
+    <net code="141" name="Net-(U5-Pad44)">
+      <node ref="U5" pin="44"/>
+    </net>
+    <net code="142" name="Net-(U5-Pad45)">
+      <node ref="U5" pin="45"/>
+    </net>
+    <net code="143" name="Net-(U5-Pad26)">
+      <node ref="U5" pin="26"/>
+    </net>
+    <net code="144" name="Net-(U5-Pad29)">
+      <node ref="U5" pin="29"/>
+    </net>
+    <net code="145" name="Net-(U5-Pad67)">
+      <node ref="U5" pin="67"/>
+    </net>
+    <net code="146" name="Net-(U5-Pad89)">
+      <node ref="U5" pin="89"/>
+    </net>
+    <net code="147" name="Net-(U5-Pad90)">
+      <node ref="U5" pin="90"/>
+    </net>
+    <net code="148" name="Net-(U5-Pad91)">
+      <node ref="U5" pin="91"/>
+    </net>
+    <net code="149" name="Net-(U5-Pad92)">
+      <node ref="U5" pin="92"/>
+    </net>
+    <net code="150" name="Net-(U5-Pad93)">
+      <node ref="U5" pin="93"/>
+    </net>
+    <net code="151" name="Net-(U5-Pad95)">
+      <node ref="U5" pin="95"/>
+    </net>
+    <net code="152" name="Net-(U5-Pad96)">
+      <node ref="U5" pin="96"/>
+    </net>
+    <net code="153" name="Net-(U5-Pad15)">
+      <node ref="U5" pin="15"/>
+    </net>
+    <net code="154" name="Net-(U5-Pad16)">
+      <node ref="U5" pin="16"/>
+    </net>
+    <net code="155" name="Net-(U5-Pad78)">
+      <node ref="U5" pin="78"/>
+    </net>
+    <net code="156" name="Net-(C18-Pad2)">
+      <node ref="CRD4" pin="A11"/>
+      <node ref="CRD4" pin="B11"/>
+      <node ref="C18" pin="2"/>
+      <node ref="U4" pin="20"/>
+    </net>
+    <net code="157" name="Net-(C16-Pad2)">
+      <node ref="CRD2" pin="A11"/>
+      <node ref="CRD2" pin="B11"/>
+      <node ref="U2" pin="20"/>
+      <node ref="C16" pin="2"/>
+    </net>
+    <net code="158" name="/SSA2">
+      <node ref="U5" pin="38"/>
+      <node ref="U2" pin="6"/>
+    </net>
+    <net code="159" name="/SSB2">
+      <node ref="U2" pin="7"/>
+      <node ref="U5" pin="37"/>
+    </net>
+    <net code="160" name="/SSC2">
+      <node ref="U2" pin="8"/>
+      <node ref="U5" pin="36"/>
+    </net>
+    <net code="161" name="Net-(U2-Pad9)">
+      <node ref="U2" pin="9"/>
+    </net>
+    <net code="162" name="Net-(CRD4-PadA6)">
+      <node ref="U4" pin="14"/>
+      <node ref="CRD4" pin="B6"/>
+      <node ref="CRD4" pin="A6"/>
+    </net>
+    <net code="163" name="Net-(CRD4-PadA10)">
+      <node ref="CRD4" pin="A10"/>
+      <node ref="U4" pin="18"/>
+      <node ref="CRD4" pin="B10"/>
+    </net>
+    <net code="164" name="Net-(CRD4-PadA9)">
+      <node ref="U4" pin="17"/>
+      <node ref="CRD4" pin="A9"/>
+      <node ref="CRD4" pin="B9"/>
+    </net>
+    <net code="165" name="Net-(CRD4-PadA8)">
+      <node ref="U4" pin="16"/>
+      <node ref="CRD4" pin="B8"/>
+      <node ref="CRD4" pin="A8"/>
+    </net>
+    <net code="166" name="Net-(CRD4-PadA7)">
+      <node ref="U4" pin="15"/>
+      <node ref="CRD4" pin="B7"/>
+      <node ref="CRD4" pin="A7"/>
+    </net>
+    <net code="167" name="Net-(CRD4-PadA5)">
+      <node ref="CRD4" pin="B5"/>
+      <node ref="U4" pin="13"/>
+      <node ref="CRD4" pin="A5"/>
+    </net>
+    <net code="168" name="Net-(CRD4-PadA4)">
+      <node ref="CRD4" pin="A4"/>
+      <node ref="U4" pin="12"/>
+      <node ref="CRD4" pin="B4"/>
+    </net>
+    <net code="169" name="Net-(C18-Pad1)">
+      <node ref="C22" pin="2"/>
+      <node ref="CRD4" pin="B15"/>
+      <node ref="U4" pin="19"/>
+      <node ref="U4" pin="11"/>
+      <node ref="CRD4" pin="A18"/>
+      <node ref="CRD4" pin="B16"/>
+      <node ref="PS4" pin="5"/>
+      <node ref="C18" pin="1"/>
+      <node ref="CRD4" pin="A17"/>
+      <node ref="CRD4" pin="A16"/>
+      <node ref="CRD4" pin="A15"/>
+      <node ref="CRD4" pin="B17"/>
+      <node ref="CRD4" pin="B18"/>
+    </net>
+    <net code="170" name="Net-(C22-Pad1)">
+      <node ref="C22" pin="1"/>
+      <node ref="CRD4" pin="B14"/>
+      <node ref="CRD4" pin="B13"/>
+      <node ref="CRD4" pin="B12"/>
+      <node ref="PS4" pin="8"/>
+      <node ref="CRD4" pin="A14"/>
+      <node ref="CRD4" pin="A13"/>
+      <node ref="CRD4" pin="A12"/>
+    </net>
+    <net code="171" name="Net-(U4-Pad9)">
+      <node ref="U4" pin="9"/>
+    </net>
+  </nets>
+</export>
