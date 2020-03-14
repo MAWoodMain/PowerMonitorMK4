@@ -2,7 +2,7 @@
 <export version="D">
   <design>
     <source>C:\Users\Matthew Wood\Documents\PowerMonitorMK4\Hat\Hat.sch</source>
-    <date>14/03/2020 14:00:59</date>
+    <date>14/03/2020 19:08:00</date>
     <tool>Eeschema (5.1.5)-3</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -421,8 +421,8 @@
       <datasheet>~</datasheet>
       <fields>
         <field name="Supplier 1">LCSC</field>
-        <field name="Supplier 1 PN">C140214</field>
-        <field name="Supplier 1 Price">£0.000569</field>
+        <field name="Supplier 1 PN">C60490</field>
+        <field name="Supplier 1 Price">£0.000898</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -434,8 +434,8 @@
       <datasheet>~</datasheet>
       <fields>
         <field name="Supplier 1">LCSC</field>
-        <field name="Supplier 1 PN">C140214</field>
-        <field name="Supplier 1 Price">£0.000569</field>
+        <field name="Supplier 1 PN">C60490</field>
+        <field name="Supplier 1 Price">£0.000898</field>
       </fields>
       <libsource lib="Device" part="R" description="Resistor"/>
       <sheetpath names="/" tstamps="/"/>
@@ -774,9 +774,12 @@
       <footprint>Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical</footprint>
       <datasheet>~</datasheet>
       <fields>
-        <field name="Supplier 1">Toby</field>
-        <field name="Supplier 1 PN">THS-05-R</field>
-        <field name="Supplier 1 Price">£0.05</field>
+        <field name="Supplier 1">LCSC</field>
+        <field name="Supplier 1 PN">C358684</field>
+        <field name="Supplier 1 Price">£0.005751</field>
+        <field name="Supplier 2">Toby</field>
+        <field name="Supplier 2 PN">THS-05-R</field>
+        <field name="Supplier 2 Price">£0.05</field>
       </fields>
       <libsource lib="Connector" part="Conn_01x05_Male" description="Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <sheetpath names="/" tstamps="/"/>
@@ -894,7 +897,7 @@
       <tstamp>5E71530A</tstamp>
     </comp>
     <comp ref="TH1">
-      <value>10K</value>
+      <value>10K NTC</value>
       <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
       <datasheet>~</datasheet>
       <fields>
