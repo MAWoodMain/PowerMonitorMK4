@@ -52,8 +52,7 @@ void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, SSA4_Pin|SSB4_Pin|SSC4_Pin|SSA1_Pin 
-                          |SSB1_Pin|B3_Pin|G4_Pin|R4_Pin 
-                          |B4_Pin, GPIO_PIN_SET);
+                          |SSB1_Pin|B3_Pin|G4_Pin|B4_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, SSC1_Pin|SSC2_Pin|SSB2_Pin|SSA3_Pin 
@@ -63,8 +62,14 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(SSA2_GPIO_Port, SSA2_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, G1_Pin|R1_Pin|B1_Pin|G2_Pin 
-                          |R2_Pin|B2_Pin|G3_Pin|R3_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOD, G1_Pin|B1_Pin|G2_Pin|B2_Pin 
+                          |G3_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOD, R1_Pin|R2_Pin|R3_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(R4_GPIO_Port, R4_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PCPin PCPin PCPin PCPin 
                            PCPin */
