@@ -27,10 +27,11 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */     
 #include <stdbool.h>
-#include <stdio.h>
+#include "debug.h"
 #include <string.h>
 #include "cards.h"
 #include "usart.h"
+#include "serialInterface.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -59,12 +60,20 @@ const osThreadAttr_t defaultTask_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
   .stack_size = 512 * 4
 };
+/* Definitions for SI_task */
+osThreadId_t SI_taskHandle;
+const osThreadAttr_t SI_task_attributes = {
+  .name = "SI_task",
+  .priority = (osPriority_t) osPriorityLow,
+  .stack_size = 128 * 4
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
+extern void serialInterface_task(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -98,6 +107,9 @@ void MX_FREERTOS_Init(void) {
   /* creation of defaultTask */
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
+  /* creation of SI_task */
+  SI_taskHandle = osThreadNew(serialInterface_task, NULL, &SI_task_attributes);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -114,7 +126,7 @@ void MX_FREERTOS_Init(void) {
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
-
+    serialInterface_init();
     cards_init();
     uint8_t* msg = "Hi\n\r";
   /* Infinite loop */
@@ -126,7 +138,6 @@ void StartDefaultTask(void *argument)
       HAL_GPIO_WritePin(R4_GPIO_Port, R4_Pin, GPIO_PIN_RESET);
       osDelay(100);
       HAL_GPIO_WritePin(R4_GPIO_Port, R4_Pin, GPIO_PIN_SET);
-      //printf("Hi\n\r");
   }
 #pragma clang diagnostic pop
   /* USER CODE END StartDefaultTask */

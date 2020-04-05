@@ -72,7 +72,6 @@ bool card1_init(void)
     }
     card1_vAdcConfig.spi_handle = spi_handle;
     card1_vAdcConfig.csFunction = selectCS0;
-    printf("Voltage\n\r");
     if(false == ads868x_init(&card1_vAdcConfig))
     {
         retVal = false;
@@ -80,7 +79,6 @@ bool card1_init(void)
 
     card1_iAdcConfig.spi_handle = spi_handle;
     card1_iAdcConfig.csFunction = selectCS1;
-    printf("Current\n\r");
     if(false == ads868x_init(&card1_iAdcConfig))
     {
         retVal = false;

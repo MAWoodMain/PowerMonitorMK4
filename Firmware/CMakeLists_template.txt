@@ -36,6 +36,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 #add_definitions(-DARM_MATH_CM4 -DARM_MATH_MATRIX_CHECK -DARM_MATH_ROUNDING -D__FPU_PRESENT=1)
 add_definitions(${defines})
+add_definitions(-DUSE_HAL_UART_REGISTER_CALLBACKS)
 
 file(GLOB_RECURSE SOURCES ${sources})
 
