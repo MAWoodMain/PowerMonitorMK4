@@ -6,7 +6,10 @@
   */
 
 /**************************** LIB INCLUDES ******************************/
+#include <stdio.h>
 /**************************** USER INCLUDES *****************************/
+#include <ads868x.h>
+#include "cmsis_os.h"
 #include "card1.h"
 #include "main.h"
 #include "gpio.h"
@@ -21,6 +24,9 @@ static void setGreenLed(bool on);
 static void setBlueLed(bool on);
 
 static void selectSerialFlash(bool select);
+static void selectCS0(bool select);
+static void selectCS1(bool select);
+static void resetPeripherals();
 /******************************* CONSTANTS ******************************/
 /* Slot specific mappings */
 /* LED CONFIG START*/
@@ -44,20 +50,42 @@ static GPIO_TypeDef* cs1_port = SSA1_GPIO_Port;
 static GPIO_TypeDef* cs2_port = SSB1_GPIO_Port;
 static GPIO_TypeDef* cs3_port = SSC1_GPIO_Port;
 /* SPI CONFIG END */
-serialflash_flashConfig card1_flashConfig;
+serialflash_flashConfig_t card1_flashConfig;
+ads868x_config_t card1_vAdcConfig;
+ads868x_config_t card1_iAdcConfig;
 
 /******************************* VARIABLES ******************************/
 /*************************** PUBLIC FUNCTIONS ***************************/
 bool card1_init(void)
 {
+    bool retVal = true;
     spi_handle = hspi1;
     setRedLed(false);
     setGreenLed(false);
     setBlueLed(false);
-
     card1_flashConfig.csFunction = selectSerialFlash;
     card1_flashConfig.spi_handle = spi_handle;
     serialflash_init(&card1_flashConfig);
+    if(false == serialflash_is_ok(card1_flashConfig))
+    {
+        retVal = false;
+    }
+    card1_vAdcConfig.spi_handle = spi_handle;
+    card1_vAdcConfig.csFunction = selectCS0;
+    printf("Voltage\n\r");
+    if(false == ads868x_init(&card1_vAdcConfig))
+    {
+        retVal = false;
+    }
+
+    card1_iAdcConfig.spi_handle = spi_handle;
+    card1_iAdcConfig.csFunction = selectCS1;
+    printf("Current\n\r");
+    if(false == ads868x_init(&card1_iAdcConfig))
+    {
+        retVal = false;
+    }
+    return retVal;
 }
 /*************************** PRIVATE FUNCTIONS **************************/
 
@@ -81,5 +109,31 @@ static void selectSerialFlash(bool select)
     HAL_GPIO_WritePin(SSB1_GPIO_Port, SSB1_Pin, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(SSC1_GPIO_Port, SSC1_Pin, GPIO_PIN_SET);
     HAL_GPIO_WritePin(SSA1_GPIO_Port, SSA1_Pin, select?GPIO_PIN_RESET:GPIO_PIN_SET);
+
+}
+
+static void selectCS0(bool select)
+{
+    HAL_GPIO_WritePin(SSB1_GPIO_Port, SSB1_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(SSC1_GPIO_Port, SSC1_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(SSA1_GPIO_Port, SSA1_Pin, select?GPIO_PIN_RESET:GPIO_PIN_SET);
+
+}
+
+static void selectCS1(bool select)
+{
+    HAL_GPIO_WritePin(SSB1_GPIO_Port, SSB1_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(SSC1_GPIO_Port, SSC1_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(SSA1_GPIO_Port, SSA1_Pin, select?GPIO_PIN_RESET:GPIO_PIN_SET);
+
+}
+
+static void resetPeripherals()
+{
+    HAL_GPIO_WritePin(SSB1_GPIO_Port, SSB1_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(SSC1_GPIO_Port, SSC1_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(SSA1_GPIO_Port, SSA1_Pin, GPIO_PIN_RESET);
+    osDelay(1);
+    HAL_GPIO_WritePin(SSA1_GPIO_Port, SSA1_Pin, GPIO_PIN_SET);
 
 }

@@ -46,14 +46,13 @@ typedef struct
     void(*csFunction)(bool);
     /* Flash type and info */
     serialflash_chipid_t const* device;
-
-} serialflash_flashConfig;
+} serialflash_flashConfig_t;
 /************************** FUNCTION PROTOTYPES *************************/
-bool serialflash_init (serialflash_flashConfig* flashConfig);
-bool serialflash_is_ok(serialflash_flashConfig flashConfig);
+bool serialflash_init (serialflash_flashConfig_t* flashConfig);
+bool serialflash_is_ok(serialflash_flashConfig_t flashConfig);
 bool serialflash_device_ready(void);
 bool serialflash_check_unprotected(void);
-void serialflash_power_down(serialflash_flashConfig flashConfig, bool poweroff);
+void serialflash_power_down(serialflash_flashConfig_t flashConfig, bool poweroff);
 bool serialflash_write_stream(uint32_t addr, uint32_t len, uint8_t* pbuf);
 bool serialflash_read_stream(uint32_t addr, uint32_t len, uint8_t* pbuf);
 bool serialflash_erase_4kblock(uint32_t addr);

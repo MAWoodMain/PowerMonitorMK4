@@ -70,9 +70,9 @@
 
 /***************************** STRUCTURES *******************************/
 /************************** FUNCTION PROTOTYPES *************************/
-static uint32_t serialflash_read_id(serialflash_flashConfig flashConfig);
-static uint8_t serialflash_read_status(serialflash_flashConfig flashConfig);
-static bool serialflash_wait_busy (serialflash_flashConfig flashConfig, uint32_t maxtime);
+static uint32_t serialflash_read_id(serialflash_flashConfig_t flashConfig);
+static uint8_t serialflash_read_status(serialflash_flashConfig_t flashConfig);
+static bool serialflash_wait_busy (serialflash_flashConfig_t flashConfig, uint32_t maxtime);
 /******************************* CONSTANTS ******************************/
 /**
 * This table holds all the serial flash devices that can be fitted or accepted
@@ -108,7 +108,7 @@ static const serialflash_chipid_t serialflash_chipId[]={
  * @note         
  *
  */
-bool serialflash_init (serialflash_flashConfig* flashConfig)
+bool serialflash_init (serialflash_flashConfig_t* flashConfig)
 {
     uint8_t manId;
     uint16_t prodId;
@@ -153,7 +153,7 @@ bool serialflash_init (serialflash_flashConfig* flashConfig)
  * @note         
  *
  */
-bool serialflash_is_ok (serialflash_flashConfig flashConfig)
+bool serialflash_is_ok (serialflash_flashConfig_t flashConfig)
 {
     bool retVal = false;
   
@@ -371,7 +371,7 @@ bool serialflash_write_stream (uint32_t addr, uint32_t len, uint8_t* pbuf)
  * @note         if powering up ignores safeguards 
  *
  */ 
-void serialflash_power_down(serialflash_flashConfig flashConfig, bool poweroff)
+void serialflash_power_down(serialflash_flashConfig_t flashConfig, bool poweroff)
 {
     bool okToAction = true;
     uint8_t txBuff[1];
@@ -630,7 +630,7 @@ bool serialflash_blank_check_block (uint32_t addr)
  *               returns 0 if nothing 
  *
  */ 
-static uint32_t serialflash_read_id (serialflash_flashConfig flashConfig)
+static uint32_t serialflash_read_id (serialflash_flashConfig_t flashConfig)
 {
     uint32_t retVal = 0U;
     uint8_t rxBuff[3];
@@ -661,7 +661,7 @@ static uint32_t serialflash_read_id (serialflash_flashConfig flashConfig)
  * @note         
  *
  */
-static uint8_t serialflash_read_status (serialflash_flashConfig flashConfig)
+static uint8_t serialflash_read_status (serialflash_flashConfig_t flashConfig)
 {
     uint8_t txBuff[1];
     uint8_t rxBuff[1];
@@ -686,7 +686,7 @@ static uint8_t serialflash_read_status (serialflash_flashConfig flashConfig)
  * @note         
  *
  */ 
-static bool serialflash_wait_busy (serialflash_flashConfig flashConfig, uint32_t maxtime)
+static bool serialflash_wait_busy (serialflash_flashConfig_t flashConfig, uint32_t maxtime)
 {
     uint32_t targtick;
     bool retVal = false;
