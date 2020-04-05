@@ -10,19 +10,28 @@
 #include <stdarg.h>
 /**************************** USER INCLUDES *****************************/
 #include "debug.h"
+#include "serialInterface.h"
 /******************************* DEFINES ********************************/
 /******************************** ENUMS *********************************/
 /***************************** STRUCTURES *******************************/
 /************************** FUNCTION PROTOTYPES *************************/
-void debug_sendf(const char *format, ...)
+/******************************* CONSTANTS ******************************/
+/******************************* VARIABLES ******************************/
+static const uint8_t debug_level_signifiers[] = {
+        [LEVEL_DEBUG]='D',
+        [LEVEL_INFO]='I',
+        [LEVEL_WARNING]='W',
+        [LEVEL_ERROR]='E',
+        [LEVEL_CRITICAL]='C'
+};
+/*************************** PUBLIC FUNCTIONS ***************************/
+void debug_sendf(debug_level_e level, const char *format, ...)
 {
-    printf("%%D=");
+    printf("%cM%c=",SERIAL_INTERFACE_UNSOLICITED_SYMBOL, debug_level_signifiers[level]);
     va_list argptr;
     va_start(argptr,format);
     vprintf(format,argptr);
     va_end(argptr);
+    printf("\n\r");
 }
-/******************************* CONSTANTS ******************************/
-/******************************* VARIABLES ******************************/
-/*************************** PUBLIC FUNCTIONS ***************************/
 /*************************** PRIVATE FUNCTIONS **************************/ 

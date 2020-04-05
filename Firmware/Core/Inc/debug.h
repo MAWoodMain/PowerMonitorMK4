@@ -12,10 +12,18 @@
 /**************************** USER INCLUDES *****************************/
 /******************************* DEFINES ********************************/
 /******************************** ENUMS *********************************/
+typedef enum
+{
+    LEVEL_DEBUG = 0U,
+    LEVEL_INFO = 1U,
+    LEVEL_WARNING = 2U,
+    LEVEL_ERROR = 3U,
+    LEVEL_CRITICAL = 4U
+} debug_level_e;
 /****************************** TYPEDEFS ********************************/
 /***************************** STRUCTURES *******************************/
 /************************** FUNCTION PROTOTYPES *************************/
-void debug_sendf(const char *format, ...);
+void debug_sendf(debug_level_e level, const char *format, ...);
 /******************************* GLOBALS ********************************/
 /*        Globals are to be avoided unless justified and documented */
 /************************************************************************/

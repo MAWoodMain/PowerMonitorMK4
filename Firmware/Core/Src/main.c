@@ -112,7 +112,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   printf("\n\r");
-  debug_sendf("System Starting\n\r");
+  debug_sendf(LEVEL_INFO, "System Starting");
   /* USER CODE END 2 */
 
   /* Init scheduler */

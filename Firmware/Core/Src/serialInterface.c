@@ -14,11 +14,14 @@
 #include "usart.h"
 #include "cmsis_os2.h"
 #include "debug.h"
+#include "FreeRTOS.h"
+#include "queue.h"
 /* command function modules */
 /******************************* DEFINES ********************************/
 #define NO_OPERATIONS 3U
 #define MAX_SIGNIFIER_LEN 2U
 #define START_SYMBOL '#'
+#define RX_BUFFER_SIZE 50U
 /******************************** ENUMS *********************************/
 /***************************** STRUCTURES *******************************/
 typedef struct
@@ -26,11 +29,16 @@ typedef struct
     uint8_t* signifier;
     void(*operationImplementations[NO_OPERATIONS])(uint8_t* signifier, serialInterface_operation_e operation, uint8_t* args);
 } serialInterface_commandFunction_t;
+
+typedef struct
+{
+    uint8_t msg[RX_BUFFER_SIZE];
+} serialInterface_message_t;
 /************************** FUNCTION PROTOTYPES *************************/
 /* Internal operations */
 bool serialInterface_processCommand(uint8_t* rawCommand);
+serialInterface_message_t* getFreeMessageBuffer(void);
 /* ISR handlers*/
-void serialInterface_txComplete(UART_HandleTypeDef *huart);
 void serialInterface_rxComplete(UART_HandleTypeDef *huart);
 /* Command implementations */
 void serialInterface_versionHandler(uint8_t* signifier, serialInterface_operation_e operation, uint8_t* args);
@@ -53,18 +61,22 @@ static const serialInterface_commandFunction_t serialInterface_commands[] = {
 };
 
 /******************************* VARIABLES ******************************/
-volatile uint32_t cnt = 0U;
 volatile bool serialInterface_started = false;
+uint8_t serialInterface_rxBuffer[RX_BUFFER_SIZE];
+serialInterface_message_t serialInterface_message;
+volatile uint16_t serialInterface_rxIdx = 0U;
+QueueHandle_t serialInterface_msgQueue;
 /*************************** PUBLIC FUNCTIONS ***************************/
 bool serialInterface_init(void)
 {
     bool retVal = true;
 
-    HAL_UART_RegisterCallback(&huart1,HAL_UART_TX_COMPLETE_CB_ID, serialInterface_txComplete);
+    serialInterface_msgQueue = xQueueCreate( 1, sizeof( serialInterface_message_t ) );
+
     HAL_UART_RegisterCallback(&huart1,HAL_UART_RX_COMPLETE_CB_ID, serialInterface_rxComplete);
 
-    serialInterface_processCommand("#v=5");
-    serialInterface_processCommand("#v?5");
+    /* kickoff reception */
+    HAL_UART_Receive_IT(&huart1, &serialInterface_rxBuffer[serialInterface_rxIdx], 1U);
 
     return retVal;
 }
@@ -146,24 +158,93 @@ bool serialInterface_processCommand(uint8_t* rawCommand)
 
     return retVal;
 }
-
-
-void serialInterface_txComplete(UART_HandleTypeDef *huart)
+serialInterface_message_t* getFreeMessageBuffer(void)
 {
-    cnt++;
+    /* TODO: support multiple message buffers */
+    /* blank buffer, then return it*/
+    memset(serialInterface_message.msg, 0U, sizeof(serialInterface_message.msg));
+    return &serialInterface_message;
 }
 
 void serialInterface_rxComplete(UART_HandleTypeDef *huart)
 {
+    serialInterface_message_t* msgBuffer = NULL;
+    BaseType_t xHigherPriorityTaskWoken;
+    if(true == serialInterface_started)
+    {
+        if(serialInterface_rxBuffer[serialInterface_rxIdx] == '\r')
+        {
+            /* END OF MESSAGE */
+            /* Check if message is too short */
+            if(serialInterface_rxIdx > 1)
+            {
+                msgBuffer = getFreeMessageBuffer();
+                if(msgBuffer != NULL)
+                {
+                    if(serialInterface_rxBuffer[serialInterface_rxIdx-1U] == '\n')
+                    {
+                        memcpy(msgBuffer->msg, serialInterface_rxBuffer, serialInterface_rxIdx-1U);
+                    }
+                    else
+                    {
+                        memcpy(msgBuffer->msg, serialInterface_rxBuffer, serialInterface_rxIdx);
+                    }
+                    xQueueSendFromISR( serialInterface_msgQueue, ( void * ) &msgBuffer, &xHigherPriorityTaskWoken );
+                }
+            }
+            serialInterface_rxIdx = 0U;
+            memset(serialInterface_rxBuffer, 0U, sizeof(serialInterface_rxBuffer));
+        }
+        else
+        {
+            serialInterface_rxIdx++;
+        }
+    }
+    else
+    {
+        if(serialInterface_rxBuffer[serialInterface_rxIdx] == '\r')
+        {
+            serialInterface_rxIdx = 0U;
+            serialInterface_started = true;
+        }
+    }
+
+    if(serialInterface_rxIdx >= RX_BUFFER_SIZE)
+    {
+        /* Overflow, wait for this oversize command to finish then re-enable reception */
+        serialInterface_rxIdx = 0U;
+        memset(serialInterface_rxBuffer, 0U, sizeof(serialInterface_rxBuffer));
+        serialInterface_started = false;
+    }
+
+    /* start next receive */
+    HAL_UART_Receive_IT(huart, &serialInterface_rxBuffer[serialInterface_rxIdx], 1U);
 
 }
 
 void serialInterface_task(void *argument)
 {
+    serialInterface_message_t* incommingMessage;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
     while(true)
     {
-        osDelay(1000U);
+        if( serialInterface_msgQueue != NULL )
+        {
+            /* Receive a message from the created queue to hold pointers.  Block for 10
+            ticks if a message is not immediately available.  The value is read into a
+            pointer variable, and as the value received is the address of the xMessage
+            variable, after this call pxRxedPointer will point to xMessage. */
+            if(xQueueReceive( serialInterface_msgQueue, &incommingMessage, portMAX_DELAY  ) == pdPASS )
+            {
+                if(NULL != incommingMessage)
+                {
+                    serialInterface_processCommand( incommingMessage->msg);
+                }
+            }
+        }
     }
+#pragma clang diagnostic pop
 }
 
 void serialInterface_versionHandler(uint8_t* signifier, serialInterface_operation_e operation, uint8_t* args)
@@ -173,5 +254,5 @@ void serialInterface_versionHandler(uint8_t* signifier, serialInterface_operatio
 
 void serialInterface_unsupportedHandler(uint8_t* signifier, serialInterface_operation_e operation, uint8_t* args)
 {
-    debug_sendf("Unsupported command %c%s%c\n\r", START_SYMBOL, signifier, serialInterface_operationSignifiers[operation]);
+    debug_sendf(LEVEL_WARNING, "Unsupported command %c%s%c", START_SYMBOL, signifier, serialInterface_operationSignifiers[operation]);
 }
