@@ -32,8 +32,7 @@ bool ads868x_init(ads868x_config_t* config)
     return retVal;
 }
 
-/*************************** PRIVATE FUNCTIONS **************************/
-uint16_t readData(ads868x_config_t config)
+uint16_t ads868x_readData(ads868x_config_t config)
 {
     uint8_t dataIn[4] = {0};
     uint8_t command[4] = {0};
@@ -56,6 +55,8 @@ uint16_t readData(ads868x_config_t config)
 
     return (uint16_t) (value >> 16U);
 }
+
+/*************************** PRIVATE FUNCTIONS **************************/
 
 uint16_t readRegister(ads868x_config_t config, uint16_t address)
 {

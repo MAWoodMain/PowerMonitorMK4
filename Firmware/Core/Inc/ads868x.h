@@ -25,7 +25,7 @@ typedef struct
 /***************************** STRUCTURES *******************************/
 /************************** FUNCTION PROTOTYPES *************************/
 bool ads868x_init(ads868x_config_t* config);
-uint16_t readData(ads868x_config_t config);
+uint16_t ads868x_readData(ads868x_config_t config);
 /******************************* GLOBALS ********************************/
 /*        Globals are to be avoided unless justified and documented */
 /************************************************************************/

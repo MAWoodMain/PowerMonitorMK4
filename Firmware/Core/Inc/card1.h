@@ -1,12 +1,12 @@
 /**
-  * @file    cards.h 
+  * @file    card1.h 
   * @brief    
   * @version 1.00   
   * @date    04/04/2020
   */
 
-#ifndef CARDS_H
-#define CARDS_H
+#ifndef CARD1_H
+#define CARD1_H
 
 /**************************** LIB INCLUDES ******************************/
 #include <stdbool.h>
@@ -16,9 +16,10 @@
 /****************************** TYPEDEFS ********************************/
 /***************************** STRUCTURES *******************************/
 /************************** FUNCTION PROTOTYPES *************************/
-bool cards_init(void);
+bool card1_init(void);
+uint16_t card1_readRaw(uint8_t channelId);
 /******************************* GLOBALS ********************************/
 /*        Globals are to be avoided unless justified and documented */
 /************************************************************************/
 
-#endif //CARDS_H
+#endif //CARD1_H

@@ -16,6 +16,7 @@
 #include "debug.h"
 #include "FreeRTOS.h"
 #include "queue.h"
+#include "cards.h"
 /* command function modules */
 /******************************* DEFINES ********************************/
 #define NO_OPERATIONS 3U
@@ -57,6 +58,11 @@ static const serialInterface_commandFunction_t serialInterface_commands[] = {
                                   [OPERATION_SET]=serialInterface_unsupportedHandler,
                                   [OPERATION_RESET]=serialInterface_unsupportedHandler,
                                   }},
+        { (uint8_t*) "RR", {
+                                  [OPERATION_QUERY]=cards_commandReadRawHandler,
+                                  [OPERATION_SET]=serialInterface_unsupportedHandler,
+                                  [OPERATION_RESET]=serialInterface_unsupportedHandler,
+                          }},
         {NULL}
 };
 
@@ -71,7 +77,7 @@ bool serialInterface_init(void)
 {
     bool retVal = true;
 
-    serialInterface_msgQueue = xQueueCreate( 1, sizeof( serialInterface_message_t ) );
+    serialInterface_msgQueue = xQueueCreate( 2, sizeof( serialInterface_message_t ) );
 
     HAL_UART_RegisterCallback(&huart1,HAL_UART_RX_COMPLETE_CB_ID, serialInterface_rxComplete);
 
@@ -114,7 +120,7 @@ bool serialInterface_processCommand(uint8_t* rawCommand)
             break;
         }
         /* Search for an operation signifier, if one is not found by pos=MAX_SIGNIFIER_LEN+1  (+1 for START_SYMBOL) then it is not valid */
-        while(operation == OPERATION_UNRECOGNISED && operationPosition <= (MAX_SIGNIFIER_LEN + 1))
+        while(operation == OPERATION_UNRECOGNISED && operationPosition <= (MAX_SIGNIFIER_LEN + 1) && operationPosition < strlen((char*)rawCommand))
         {
             operationPosition++;
             operation = serialInterface_recogniseOperation(rawCommand[operationPosition]);
@@ -132,7 +138,7 @@ bool serialInterface_processCommand(uint8_t* rawCommand)
             signifier[pos] = toupper(rawCommand[1U + pos]);
         }
 
-        while(command->signifier != NULL && 0U != memcmp(signifier, command->signifier, operationPosition))
+        while(command->signifier != NULL && 0U != memcmp(signifier, command->signifier, strlen((char*)command->signifier)))
         {
             command++;
         }
@@ -189,7 +195,12 @@ void serialInterface_rxComplete(UART_HandleTypeDef *huart)
                     {
                         memcpy(msgBuffer->msg, serialInterface_rxBuffer, serialInterface_rxIdx);
                     }
-                    xQueueSendFromISR( serialInterface_msgQueue, ( void * ) &msgBuffer, &xHigherPriorityTaskWoken );
+                    xQueueSendFromISR( serialInterface_msgQueue, msgBuffer, &xHigherPriorityTaskWoken );
+                    if( xHigherPriorityTaskWoken )
+                    {
+                        /* Actual macro used here is port specific. */
+                        portYIELD_FROM_ISR (xHigherPriorityTaskWoken);
+                    }
                 }
             }
             serialInterface_rxIdx = 0U;
@@ -224,25 +235,20 @@ void serialInterface_rxComplete(UART_HandleTypeDef *huart)
 
 void serialInterface_task(void *argument)
 {
-    serialInterface_message_t* incommingMessage;
+    serialInterface_message_t incommingMessage;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
     while(true)
     {
         if( serialInterface_msgQueue != NULL )
         {
-            /* Receive a message from the created queue to hold pointers.  Block for 10
-            ticks if a message is not immediately available.  The value is read into a
-            pointer variable, and as the value received is the address of the xMessage
-            variable, after this call pxRxedPointer will point to xMessage. */
             if(xQueueReceive( serialInterface_msgQueue, &incommingMessage, portMAX_DELAY  ) == pdPASS )
             {
-                if(NULL != incommingMessage)
-                {
-                    serialInterface_processCommand( incommingMessage->msg);
-                }
+                //printf("d\n\r");
+                serialInterface_processCommand( incommingMessage.msg);
             }
         }
+        osDelay(100U);
     }
 #pragma clang diagnostic pop
 }

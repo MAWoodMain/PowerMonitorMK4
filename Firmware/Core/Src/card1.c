@@ -85,6 +85,22 @@ bool card1_init(void)
     }
     return retVal;
 }
+
+uint16_t card1_readRaw(uint8_t channelId)
+{
+    uint16_t retVal = 0U;
+    switch(channelId)
+    {
+        case 0:
+            retVal = ads868x_readData(card1_vAdcConfig);
+            break;
+        case 1:
+            retVal = ads868x_readData(card1_iAdcConfig);
+            break;
+    }
+    return retVal;
+}
+
 /*************************** PRIVATE FUNCTIONS **************************/
 
 static void setRedLed(bool on)

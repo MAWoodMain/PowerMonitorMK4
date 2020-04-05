@@ -65,7 +65,7 @@ osThreadId_t SI_taskHandle;
 const osThreadAttr_t SI_task_attributes = {
   .name = "SI_task",
   .priority = (osPriority_t) osPriorityLow,
-  .stack_size = 128 * 4
+  .stack_size = 256 * 4
 };
 
 /* Private function prototypes -----------------------------------------------*/

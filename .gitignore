@@ -3,3 +3,5 @@
 *-cache.lib
 /Firmware/*.bak
 /Firmware/cmake-build-debug
+/Firmware/.idea/dictionaries/*
+/Firmware/.idea/serialmonitor_settings.xml
