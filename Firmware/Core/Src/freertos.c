@@ -25,13 +25,10 @@
 #include "cmsis_os.h"
 
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */     
-#include <stdbool.h>
-#include "debug.h"
-#include <string.h>
+/* USER CODE BEGIN Includes */
 #include "cards.h"
-#include "usart.h"
 #include "serialInterface.h"
+#include "printf.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -128,7 +125,6 @@ void StartDefaultTask(void *argument)
   /* USER CODE BEGIN StartDefaultTask */
     serialInterface_init();
     cards_init();
-    uint8_t* msg = "Hi\n\r";
   /* Infinite loop */
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-noreturn"

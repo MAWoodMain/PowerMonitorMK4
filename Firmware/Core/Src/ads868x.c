@@ -7,8 +7,6 @@
 
 /**************************** LIB INCLUDES ******************************/
 #include <stdint.h>
-#include <string.h>
-#include <stdio.h>
 /**************************** USER INCLUDES *****************************/
 #include "ads868x.h"
 #include "cmsis_os.h"

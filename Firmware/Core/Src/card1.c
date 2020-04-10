@@ -6,13 +6,11 @@
   */
 
 /**************************** LIB INCLUDES ******************************/
-#include <stdio.h>
 /**************************** USER INCLUDES *****************************/
 #include <ads868x.h>
 #include "cmsis_os.h"
 #include "card1.h"
 #include "main.h"
-#include "gpio.h"
 #include "spi.h"
 #include "serialflash.h"
 /******************************* DEFINES ********************************/

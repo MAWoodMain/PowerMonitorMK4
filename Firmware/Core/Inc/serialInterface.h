@@ -10,9 +10,11 @@
 
 /**************************** LIB INCLUDES ******************************/
 #include <stdbool.h>
+#include <stdint.h>
 /**************************** USER INCLUDES *****************************/
 /******************************* DEFINES ********************************/
 #define SERIAL_INTERFACE_UNSOLICITED_SYMBOL '%'
+#define REPLY_BUFFER_SIZE 200U
 /******************************** ENUMS *********************************/
 typedef enum
 {
@@ -26,6 +28,10 @@ typedef enum
 /***************************** STRUCTURES *******************************/
 /************************** FUNCTION PROTOTYPES *************************/
 bool serialInterface_init(void);
+bool serialInterface_extractStrArg(uint8_t* argsString, uint8_t argIdx, uint8_t** value);
+bool serialInterface_extractUintArg(uint8_t* argsString, uint8_t argIdx, uint32_t* value, uint8_t radix);
+bool serialInterface_extractIntArg(uint8_t* argsString, uint8_t argIdx, int32_t* value, uint8_t radix);
+bool serialInterface_extractLongDoubleArg(uint8_t* argsString, uint8_t argIdx, long double* value);
 /******************************* GLOBALS ********************************/
 /*        Globals are to be avoided unless justified and documented */
 /************************************************************************/

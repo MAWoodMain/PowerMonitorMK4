@@ -6,11 +6,8 @@
  */ 
 
 /**************************** LIB INCLUDES ******************************/
-#include <stdlib.h>
-#include <string.h>
 #include <cmsis_os2.h>
 /**************************** USER INCLUDES *****************************/
-#include "spi.h"
 #include "serialflash.h"
 #include "main.h"
 /***************************** GROUP START ******************************/

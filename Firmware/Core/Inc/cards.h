@@ -19,7 +19,8 @@
 /***************************** STRUCTURES *******************************/
 /************************** FUNCTION PROTOTYPES *************************/
 bool cards_init(void);
-void cards_commandReadRawHandler(uint8_t* signifier, serialInterface_operation_e operation, uint8_t* args);
+bool cards_commandReadRawHandler(uint8_t* signifier, serialInterface_operation_e operation, uint8_t* args, uint8_t* replyPtr);
+bool cards_commandReadWaveformHandler(uint8_t* signifier, serialInterface_operation_e operation, uint8_t* args, uint8_t* replyPtr);
 /******************************* GLOBALS ********************************/
 /*        Globals are to be avoided unless justified and documented */
 /************************************************************************/

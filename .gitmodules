@@ -1,0 +1,3 @@
+[submodule "Firmware/Middlewares/Third_Party/printf"]
+	path = Firmware/Middlewares/Third_Party/printf
+	url = https://github.com/mpaland/printf.git
