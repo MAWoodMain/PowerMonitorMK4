@@ -10,6 +10,7 @@
 /**************************** USER INCLUDES *****************************/
 #include "serialflash.h"
 #include "main.h"
+#include "cardSpi.h"
 /***************************** GROUP START ******************************/
 //@{
 /******************************* DEFINES ********************************/
@@ -57,9 +58,6 @@
 
 /* macro to recover Features Settings easily */
 /* Note: serialflash_Device is always + 1 to avoid using 0 index */
-//#define SERIALFLASH_FEATURE         (serialflash_device->features)
-//#define SERIALFLASH_CAPACITY        (serialflash_device->capacity)
-//#define SERIALFLASH_ERASE4KTIME     (serialflash_device->erase4KTime)
 #define SERIALFLASH_ERASE32KTIME    (SERIALFLASH_ERASE4KTIME * 3U)
 #define SERIALFLASH_ERASE64KTIME    (SERIALFLASH_ERASE4KTIME * 5U)
 #define SERIALFLASH_ERASECHIPTIME   ((SERIALFLASH_CAPACITY / 0x00100000U) * 15000U)       /* Approx worst case is 15S/MB */
@@ -67,9 +65,9 @@
 
 /***************************** STRUCTURES *******************************/
 /************************** FUNCTION PROTOTYPES *************************/
-static uint32_t serialflash_read_id(serialflash_flashConfig_t flashConfig);
-static uint8_t serialflash_read_status(serialflash_flashConfig_t flashConfig);
-static bool serialflash_wait_busy (serialflash_flashConfig_t flashConfig, uint32_t maxtime);
+static uint32_t serialflash_read_id(cardSpi_t spi, cardSpi_channels_e channel);
+static uint8_t serialflash_read_status(cardSpi_t spi, cardSpi_channels_e channel);
+static bool serialflash_wait_busy (cardSpi_t spi, cardSpi_channels_e channel, uint32_t maxtime);
 /******************************* CONSTANTS ******************************/
 /**
 * This table holds all the serial flash devices that can be fitted or accepted
@@ -105,37 +103,35 @@ static const serialflash_chipid_t serialflash_chipId[]={
  * @note         
  *
  */
-bool serialflash_init (serialflash_flashConfig_t* flashConfig)
+bool serialflash_init (cardFilesystem_t* cardFs, cardSpi_t spi, cardSpi_channels_e channel)
 {
     uint8_t manId;
     uint16_t prodId;
     bool retVal=false;
-
-    flashConfig->csFunction(false);
     
     /* Try and wake up a sleeping device */
-    serialflash_read_status(*flashConfig);
-    serialflash_power_down(*flashConfig, false);           /* power on the device */
+    serialflash_read_status(spi, channel);
+    serialflash_power_down(*cardFs, spi, channel, false);           /* power on the device */
       
     /* Read the device type and find a match */
-    uint32_t chipId = serialflash_read_id(*flashConfig);
-      
-    flashConfig->device = serialflash_chipId;
+    uint32_t chipId = serialflash_read_id(spi, channel);
+
+    cardFs->flashDevice = serialflash_chipId;
     
     /* Search the device table for matching manufacture and productID */
-    while (flashConfig->device->capacity != 0)
+    while (cardFs->flashDevice->capacity != 0)
     {
         manId = (uint8_t)(chipId >> 16U);             /* retrieve manufacturer's id */
         prodId = (uint16_t)(chipId & 0x0000FFFFU);    /* retrieve product id and mask off unwanted bits */
         
-        if ((flashConfig->device->manuId == manId) &&             /* match manufacturer's id */
-           (flashConfig->device->prodId == prodId))             /* match product id */
+        if ((cardFs->flashDevice->manuId == manId) &&             /* match manufacturer's id */
+           (cardFs->flashDevice->prodId == prodId))             /* match product id */
         {
           retVal = true;
           break;
         }
 
-        flashConfig->device++;
+        cardFs->flashDevice++;
     }
     return (retVal);
 }
@@ -150,11 +146,11 @@ bool serialflash_init (serialflash_flashConfig_t* flashConfig)
  * @note         
  *
  */
-bool serialflash_is_ok (serialflash_flashConfig_t flashConfig)
+bool serialflash_is_ok (cardFilesystem_t cardFs)
 {
     bool retVal = false;
   
-    if (flashConfig.device->capacity != 0)
+    if (cardFs.flashDevice->capacity != 0)
     {
         retVal = true;
     }
@@ -162,7 +158,6 @@ bool serialflash_is_ok (serialflash_flashConfig_t flashConfig)
     return (retVal);
 }
 
-#if 0
 /*!
  *
  * @brief        checks to see if device is ready
@@ -174,11 +169,11 @@ bool serialflash_is_ok (serialflash_flashConfig_t flashConfig)
  * @note         
  *
  */ 
-bool serialflash_device_ready (void)
+bool serialflash_device_ready (cardSpi_t spi, cardSpi_channels_e channel)
 {
     bool retVal = false;
   
-    if ((serialflash_read_status() & SERIALFLASH_STATUS_BSY ) == 0U)
+    if ((serialflash_read_status(spi, channel) & SERIALFLASH_STATUS_BSY ) == 0U)
     {
         retVal = true;
     }
@@ -197,12 +192,12 @@ bool serialflash_device_ready (void)
  * @note         
  *
  */ 
-bool serialflash_check_unprotected (void)
+bool serialflash_check_unprotected (cardSpi_t spi, cardSpi_channels_e channel)
 {
     bool retVal = false;
     uint8_t statusReg;
   
-    statusReg = serialflash_read_status();
+    statusReg = serialflash_read_status(spi, channel);
     if ((statusReg & SERIALFLASH_STATUS_SWP_ALL) == 0U)
     {
       retVal = true;
@@ -230,33 +225,31 @@ bool serialflash_check_unprotected (void)
  * @note         
  *
  */ 
-bool serialflash_read_stream (uint32_t addr, uint32_t len, uint8_t* pbuf)
+bool serialflash_read_stream (cardFilesystem_t cardFs, cardSpi_t spi, cardSpi_channels_e channel, uint32_t addr, uint32_t len, uint8_t* pbuf)
 {
     bool retVal = false;
     uint8_t txBuff[5];
     
     /* check device is found */
-    if ((SERIALFLASH_CAPACITY != 0U) &&
+    if ((cardFs.flashDevice->capacity != 0U) &&
        (len != 0U)                          &&
        (pbuf != NULL))
     {
       /* check all address's are in range */
-        if ((addr + len - 1U) < (serialflash_device->capacity))
+        if ((addr + len - 1U) < (cardFs.flashDevice->capacity))
         {
-            if (serialflash_wait_busy(SERIALFLASH_PAGE_WRITE_TIME) == true)
+            if (serialflash_wait_busy(spi, channel, SERIALFLASH_PAGE_WRITE_TIME) == true)
             {
-                /* ok start reading */
-                serialflash_spiTxfr.noOfTxBytes = 5U;          /* opcode + address + dummy */
-                serialflash_spiTxfr.noOfRxBytes = (uint16_t)len;
-                serialflash_spiTxfr.rxPtr = pbuf;             /* read directly into buffer */
-                serialflash_spiTxfr.txPtr = txBuff;           
                 txBuff[0] = SERIALFLASH_OPCODE_READ_ARRAY;
                 txBuff[1] = (uint8_t)(addr>>16);
                 txBuff[2] = (uint8_t)(addr>>8);
                 txBuff[3] = (uint8_t)addr;
-                txBuff[4] = 0U;                               /* dummy read byte */
-                
-                spi_transfer(SERIALFLASH_SPI_PORT, &serialflash_spiTxfr);
+                txBuff[4] = 0U;
+
+                cardSpi_selectDevice(spi, channel);
+                HAL_SPI_Transmit(&spi.spi_handle, txBuff, 5U, 100U);
+                HAL_SPI_Receive(&spi.spi_handle, pbuf, len, 100U);
+                cardSpi_deselectDevice(spi);
                 
                 /* need to reset the read buffer */
                 retVal = true;
@@ -283,64 +276,53 @@ bool serialflash_read_stream (uint32_t addr, uint32_t len, uint8_t* pbuf)
  *               The sector must not be protected  
  *
  */
-bool serialflash_write_stream (uint32_t addr, uint32_t len, uint8_t* pbuf)
+bool serialflash_write_stream (cardFilesystem_t cardFs, cardSpi_t spi, cardSpi_channels_e channel, uint32_t addr, uint32_t len, uint8_t* pbuf)
 {
   
     bool retVal = false;
     uint8_t txBuff[4];
     
     /* basic sanity checks first */
-    if ((serialflash_check_unprotected() == true)    &&
-       (SERIALFLASH_CAPACITY != 0U)                 &&
+    if ((serialflash_check_unprotected(spi, channel) == true)    &&
+       (cardFs.flashDevice->capacity != 0U)                 &&
        (len <= SERIALFLASH_PAGE_SIZE)               &&
        (len != 0U)                                  &&
        (pbuf != NULL)                               &&
-       ((addr + len - 1U) < SERIALFLASH_CAPACITY))  
+       ((addr + len - 1U) < cardFs.flashDevice->capacity))
        
     {
         /* now check that all the bytes written fit in a single page */
         if((addr / SERIALFLASH_PAGE_SIZE) == ( (addr + len - 1U) / SERIALFLASH_PAGE_SIZE))
         {
             /* wait for ready */
-            if(serialflash_wait_busy(SERIALFLASH_PAGE_WRITE_TIME) == true)
+            if(serialflash_wait_busy(spi, channel, SERIALFLASH_PAGE_WRITE_TIME) == true)
             {
-                /* now set write latch */
-                serialflash_spiTxfr.noOfTxBytes = 1U;
-                serialflash_spiTxfr.noOfRxBytes = 0U;
-                serialflash_spiTxfr.txPtr = txBuff;
+
                 txBuff[0] = SERIALFLASH_OPCODE_WRITE_ENABLE;
-                
-                spi_transfer(SERIALFLASH_SPI_PORT, &serialflash_spiTxfr);
-                
-                /* now the data can be written */
-                serialflash_spiTxfr.noOfTxBytes = 4U;
-                serialflash_spiTxfr.noOfRxBytes = 0U;
-                
+                cardSpi_selectDevice(spi, channel);
+
+                HAL_SPI_Transmit(&spi.spi_handle, txBuff, 1U, 100U);
+
+                cardSpi_deselectDevice(spi);
+
                 txBuff[0] = SERIALFLASH_OPCODE_BYTE_PROGRAM;
                 txBuff[1] = (uint8_t)(addr>>16);
                 txBuff[2] = (uint8_t)(addr>>8);
                 txBuff[3] = (uint8_t)addr;
+
+                cardSpi_selectDevice(spi, channel);
+
+                HAL_SPI_Transmit(&spi.spi_handle, txBuff, 4U, 100U);
+                HAL_SPI_Transmit(&spi.spi_handle, pbuf, len, 100U);
+
+                cardSpi_deselectDevice(spi);
                 
-                /* write just the command and address and leave CS set */
-                serialflash_spiTxfr.csControl = spi_cs_set_only;
-                spi_transfer(SERIALFLASH_SPI_PORT, &serialflash_spiTxfr);
-                
-                /* now write the data and clear CS */
-                serialflash_spiTxfr.txPtr = pbuf;              /* set the tx buffer */
-                serialflash_spiTxfr.noOfTxBytes = (uint16_t)len;
-                serialflash_spiTxfr.csControl = spi_cs_clr_only;
-                spi_transfer(SERIALFLASH_SPI_PORT, &serialflash_spiTxfr);
-                
-                
-                /* restore the SPI settings */
-                serialflash_spiTxfr.csControl = spi_cs_normal;
-                
-                if(serialflash_wait_busy(SERIALFLASH_PAGE_WRITE_TIME) == true)
+                if(serialflash_wait_busy(spi, channel, SERIALFLASH_PAGE_WRITE_TIME) == true)
                 {
-                    if((SERIALFLASH_FEATURE & SERIALFLASH_FEATURE_EPE) != 0U)
+                    if((cardFs.flashDevice->features & SERIALFLASH_FEATURE_EPE) != 0U)
                     {
                         /* check EPE to make sure everything is ok */
-                        if((serialflash_read_status() & SERIALFLASH_STATUS_EPE) == 0U)
+                        if((serialflash_read_status(spi, channel) & SERIALFLASH_STATUS_EPE) == 0U)
                         {
                             retVal = true;                    
                         }
@@ -356,7 +338,6 @@ bool serialflash_write_stream (uint32_t addr, uint32_t len, uint8_t* pbuf)
     
     return (retVal);
 }
-#endif
 /*!
  *
  * @brief        Places or release device from deep sleep
@@ -368,23 +349,23 @@ bool serialflash_write_stream (uint32_t addr, uint32_t len, uint8_t* pbuf)
  * @note         if powering up ignores safeguards 
  *
  */ 
-void serialflash_power_down(serialflash_flashConfig_t flashConfig, bool poweroff)
+void serialflash_power_down(cardFilesystem_t cardFs, cardSpi_t spi, cardSpi_channels_e channel, bool poweroff)
 {
     bool okToAction = true;
     uint8_t txBuff[1];
     
     
     /* trying to power off an unknown device */
-    if ((poweroff == true) && (flashConfig.device->capacity == 0))
+    if ((poweroff == true) && (cardFs.flashDevice->capacity == 0))
     {
         okToAction = false;
     }
     
     /* trying to power off a device which has no low power mode */
-    if ((poweroff == true) && (flashConfig.device->features & SERIALFLASH_FEATURE_POWERDOWN) )
+    if ((poweroff == true) && (cardFs.flashDevice->features & SERIALFLASH_FEATURE_POWERDOWN) )
     {
         /* tried to power off after writing a page but failed */
-        if ((serialflash_wait_busy(flashConfig, SERIALFLASH_PAGE_WRITE_TIME) == false) && (poweroff == true))
+        if ((serialflash_wait_busy(spi, channel, SERIALFLASH_PAGE_WRITE_TIME) == false) && (poweroff == true))
         {
             okToAction = false;
         }
@@ -405,9 +386,9 @@ void serialflash_power_down(serialflash_flashConfig_t flashConfig, bool poweroff
         }
 
 
-        flashConfig.csFunction(true);
-        HAL_SPI_Transmit(&flashConfig.spi_handle, txBuff, 1U, 100U);
-        flashConfig.csFunction(false);
+        cardSpi_selectDevice(spi, channel);
+        HAL_SPI_Transmit(&spi.spi_handle, txBuff, 1U, 100U);
+        cardSpi_deselectDevice(spi);
     }
     
     if (poweroff == false)
@@ -421,7 +402,7 @@ void serialflash_power_down(serialflash_flashConfig_t flashConfig, bool poweroff
     }
     
 }
-#if 0
+
 /*!
  *
  * @brief        Erases an entrire 4K Sector
@@ -436,43 +417,45 @@ void serialflash_power_down(serialflash_flashConfig_t flashConfig, bool poweroff
  *
  */
 
-bool serialflash_erase_4kblock (uint32_t addr)
+bool serialflash_erase_4kblock (cardFilesystem_t cardFs, cardSpi_t spi, cardSpi_channels_e channel, uint32_t addr)
 {
     bool retVal=false;
     uint8_t txBuff[4];
     
     /* basic sanity checks first */
-    if ((serialflash_check_unprotected() == true)  && 
-        (SERIALFLASH_CAPACITY != 0U)               &&
-        (addr < SERIALFLASH_CAPACITY))      
+    if ((serialflash_check_unprotected(spi, channel) == true)  &&
+        (cardFs.flashDevice->capacity != 0U)               &&
+        (addr < cardFs.flashDevice->capacity))
     { 
         /* wait for ready */
-        if(serialflash_wait_busy(SERIALFLASH_PAGE_WRITE_TIME) == true)
+        if(serialflash_wait_busy(spi, channel, SERIALFLASH_PAGE_WRITE_TIME) == true)
         {
-            /* now set write latch */
-            serialflash_spiTxfr.noOfTxBytes = 1U;
-            serialflash_spiTxfr.noOfRxBytes = 0U;
-            serialflash_spiTxfr.txPtr = txBuff;
+
             txBuff[0] = SERIALFLASH_OPCODE_WRITE_ENABLE;
-            spi_transfer(SERIALFLASH_SPI_PORT, &serialflash_spiTxfr);
-              
-            /* now send erase */
-            serialflash_spiTxfr.noOfTxBytes = 4U;
-            serialflash_spiTxfr.noOfRxBytes = 0U;
-            
+            cardSpi_selectDevice(spi, channel);
+
+            HAL_SPI_Transmit(&spi.spi_handle, txBuff, 1U, 100U);
+
+            cardSpi_deselectDevice(spi);
+
             txBuff[0] = SERIALFLASH_OPCODE_ERASE_4KBLOCK;
             txBuff[1] = (uint8_t)(addr>>16);
             txBuff[2] = (uint8_t)(addr>>8);
             txBuff[3] = (uint8_t)addr;
-            spi_transfer(SERIALFLASH_SPI_PORT, &serialflash_spiTxfr);
+
+            cardSpi_selectDevice(spi, channel);
+
+            HAL_SPI_Transmit(&spi.spi_handle, txBuff, 4U, 100U);
+
+            cardSpi_deselectDevice(spi);
               
             /* wait while block erases */
-            if(serialflash_wait_busy(SERIALFLASH_ERASE4KTIME) == true)
+            if(serialflash_wait_busy(spi, channel, cardFs.flashDevice->erase4KTime) == true)
             {
-                if((SERIALFLASH_FEATURE & SERIALFLASH_FEATURE_EPE) != 0U)
+                if((cardFs.flashDevice->features & SERIALFLASH_FEATURE_EPE) != 0U)
                 {
                     /* check EPE to make sure everything is ok */
-                    if((serialflash_read_status() & SERIALFLASH_STATUS_EPE) == 0U)
+                    if((serialflash_read_status(spi, channel) & SERIALFLASH_STATUS_EPE) == 0U)
                     {
                         retVal = true;                  
                     }
@@ -502,49 +485,50 @@ bool serialflash_erase_4kblock (uint32_t addr)
 *                   if not using wait.
 *
 *****************************************************************************/
-bool serialflash_EraseChip(bool wait)
+bool serialflash_EraseChip(cardFilesystem_t cardFs, cardSpi_t spi, cardSpi_channels_e channel, bool wait)
 {
     bool retVal = false;
     uint8_t txBuff[1];
     
     /* basic sanity checks first */
-    if ((serialflash_check_unprotected() == true) &&
-        (SERIALFLASH_CAPACITY != 0U))
+    if ((serialflash_check_unprotected(spi, channel) == true) &&
+        (cardFs.flashDevice->capacity != 0U))
     { 
         /* wait for ready */
-        if(serialflash_wait_busy(SERIALFLASH_PAGE_WRITE_TIME) == true)
+        if(serialflash_wait_busy(spi, channel, SERIALFLASH_PAGE_WRITE_TIME) == true)
         {
-            /* now set write latch */
-            serialflash_spiTxfr.noOfTxBytes = 1U;
-            serialflash_spiTxfr.noOfRxBytes = 0U;
-            serialflash_spiTxfr.txPtr = txBuff;
-            
+
             txBuff[0] = SERIALFLASH_OPCODE_WRITE_ENABLE;
-            spi_transfer(SERIALFLASH_SPI_PORT, &serialflash_spiTxfr);
-              
-            /* now send erase */
-            serialflash_spiTxfr.noOfTxBytes = 1U;
-            serialflash_spiTxfr.noOfRxBytes = 0U;
-            if(SERIALFLASH_FEATURE & SERIALFLASH_FEATURE_C7ERASE)
-            { 
+            cardSpi_selectDevice(spi, channel);
+
+            HAL_SPI_Transmit(&spi.spi_handle, txBuff, 1U, 100U);
+
+            cardSpi_deselectDevice(spi);
+
+            if(cardFs.flashDevice->features & SERIALFLASH_FEATURE_C7ERASE)
+            {
                 txBuff[0] = SERIALFLASH_OPCODE_ERASE_C7;
             }
             else
             {
                 txBuff[0] = SERIALFLASH_OPCODE_ERASE_CHIP;
             }
-            
-            spi_transfer(SERIALFLASH_SPI_PORT, &serialflash_spiTxfr);
+
+            cardSpi_selectDevice(spi, channel);
+
+            HAL_SPI_Transmit(&spi.spi_handle, txBuff, 1U, 100U);
+
+            cardSpi_deselectDevice(spi);
               
             /* wait while chip erases */
             if (true == wait)
             {
-                if (serialflash_wait_busy(SERIALFLASH_ERASECHIPTIME) == true)
+                if (serialflash_wait_busy(spi, channel, (cardFs.flashDevice->capacity / 0x00100000U) * 15000U) == true)
                 {
-                    if ((SERIALFLASH_FEATURE & SERIALFLASH_FEATURE_EPE) != 0U)
+                    if ((cardFs.flashDevice->features & SERIALFLASH_FEATURE_EPE) != 0U)
                     {
                         /* check EPE to make sure everything is ok */
-                        if((serialflash_read_status() & SERIALFLASH_STATUS_EPE) == 0U)
+                        if((serialflash_read_status(spi, channel) & SERIALFLASH_STATUS_EPE) == 0U)
                         {
                             retVal = true;                    
                         }
@@ -576,7 +560,7 @@ bool serialflash_EraseChip(bool wait)
  * @note         blank is all bytes in block are 0xFF
  *
  */
-bool serialflash_blank_check_block (uint32_t addr)
+bool serialflash_blank_check_block (cardFilesystem_t cardFs, cardSpi_t spi, cardSpi_channels_e channel, uint32_t addr)
 {
     #define  BYTES_TO_BLANK_CHECK   16U
     
@@ -588,7 +572,7 @@ bool serialflash_blank_check_block (uint32_t addr)
     
     for (bytesread = 0U; ((bytesread < SERIALFLASH_MIN_BLOCK_SIZE) && (retVal == true)); bytesread += BYTES_TO_BLANK_CHECK)
     {
-        if (serialflash_read_stream(addr, BYTES_TO_BLANK_CHECK, (uint8_t*)buff) == false)
+        if (serialflash_read_stream(cardFs, spi, channel, addr, BYTES_TO_BLANK_CHECK, (uint8_t*)buff) == false)
         {
             retVal = false;
             break;
@@ -612,7 +596,6 @@ bool serialflash_blank_check_block (uint32_t addr)
 
 
 /*************************** PRIVATE FUNCTIONS **************************/
-#endif
 
 /*!
  *
@@ -627,17 +610,17 @@ bool serialflash_blank_check_block (uint32_t addr)
  *               returns 0 if nothing 
  *
  */ 
-static uint32_t serialflash_read_id (serialflash_flashConfig_t flashConfig)
+static uint32_t serialflash_read_id (cardSpi_t spi, cardSpi_channels_e channel)
 {
     uint32_t retVal = 0U;
     uint8_t rxBuff[3];
     uint8_t txBuff[1];
 
     txBuff[0] = SERIALFLASH_OPCODE_READ_ID;
-    flashConfig.csFunction(true);
-    HAL_SPI_Transmit(&flashConfig.spi_handle, txBuff, 1U, 100U);
-    HAL_SPI_Receive(&flashConfig.spi_handle, rxBuff, 3U, 100U);
-    flashConfig.csFunction(false);
+    cardSpi_selectDevice(spi, channel);
+    HAL_SPI_Transmit(&spi.spi_handle, txBuff, 1U, 100U);
+    HAL_SPI_Receive(&spi.spi_handle, rxBuff, 3U, 100U);
+    cardSpi_deselectDevice(spi);
         
     retVal = rxBuff[0];
     retVal <<= 8;
@@ -658,16 +641,16 @@ static uint32_t serialflash_read_id (serialflash_flashConfig_t flashConfig)
  * @note         
  *
  */
-static uint8_t serialflash_read_status (serialflash_flashConfig_t flashConfig)
+static uint8_t serialflash_read_status (cardSpi_t spi, cardSpi_channels_e channel)
 {
     uint8_t txBuff[1];
     uint8_t rxBuff[1];
 
     txBuff[0] = SERIALFLASH_OPCODE_READ_STATUS;
-    flashConfig.csFunction(true);
-    HAL_SPI_Transmit(&flashConfig.spi_handle, txBuff, 1U, 100U);
-    HAL_SPI_Receive(&flashConfig.spi_handle, rxBuff, 1U, 100U);
-    flashConfig.csFunction(false);
+    cardSpi_selectDevice(spi, channel);
+    HAL_SPI_Transmit(&spi.spi_handle, txBuff, 1U, 100U);
+    HAL_SPI_Receive(&spi.spi_handle, rxBuff, 1U, 100U);
+    cardSpi_deselectDevice(spi);
     
     return (rxBuff[0]);
 }
@@ -683,7 +666,7 @@ static uint8_t serialflash_read_status (serialflash_flashConfig_t flashConfig)
  * @note         
  *
  */ 
-static bool serialflash_wait_busy (serialflash_flashConfig_t flashConfig, uint32_t maxtime)
+static bool serialflash_wait_busy (cardSpi_t spi, cardSpi_channels_e channel, uint32_t maxtime)
 {
     uint32_t targtick;
     bool retVal = false;
@@ -697,7 +680,7 @@ static bool serialflash_wait_busy (serialflash_flashConfig_t flashConfig, uint32
     
     while (targtick > osKernelGetTickCount())
     {
-        if((serialflash_read_status(flashConfig) & SERIALFLASH_STATUS_BSY) == 0U)
+        if((serialflash_read_status(spi, channel) & SERIALFLASH_STATUS_BSY) == 0U)
         {
             retVal = true;
             break;

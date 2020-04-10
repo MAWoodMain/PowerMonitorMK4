@@ -17,7 +17,6 @@
 #include "debug.h"
 #include "FreeRTOS.h"
 #include "queue.h"
-#include "cards.h"
 #include "printf.h"
 /* command function modules */
 /******************************* DEFINES ********************************/
@@ -62,16 +61,6 @@ static const serialInterface_commandFunction_t serialInterface_commands[] = {
                                   [OPERATION_SET]=serialInterface_unsupportedHandler,
                                   [OPERATION_RESET]=serialInterface_unsupportedHandler,
                                   }},
-        { (uint8_t*) "RR", {
-                                  [OPERATION_QUERY]=cards_commandReadRawHandler,
-                                  [OPERATION_SET]=serialInterface_unsupportedHandler,
-                                  [OPERATION_RESET]=serialInterface_unsupportedHandler,
-                          }},
-        { (uint8_t*) "RW", {
-                                   [OPERATION_QUERY]=cards_commandReadWaveformHandler,
-                                   [OPERATION_SET]=serialInterface_unsupportedHandler,
-                                   [OPERATION_RESET]=serialInterface_unsupportedHandler,
-                           }},
         {NULL}
 };
 

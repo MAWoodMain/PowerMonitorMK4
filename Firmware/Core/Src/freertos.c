@@ -26,8 +26,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "cards.h"
 #include "serialInterface.h"
+#include "card.h"
 #include "printf.h"
 /* USER CODE END Includes */
 
@@ -124,7 +124,7 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
     serialInterface_init();
-    cards_init();
+    card_init(0);
   /* Infinite loop */
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-noreturn"

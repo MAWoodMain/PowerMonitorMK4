@@ -38,10 +38,11 @@ set(CMAKE_CXX_STANDARD 11)
 add_definitions(${defines})
 add_definitions(-DUSE_HAL_UART_REGISTER_CALLBACKS)
 
-file(GLOB_RECURSE SOURCES ${sources} "Lib/printf/printf.c")
+file(GLOB_RECURSE SOURCES ${sources} "Lib/printf/printf.c" "Lib/spiffs/*")
 
 include_directories(${includes})
 include_directories(Lib/printf)
+include_directories(Lib/spiffs)
 
 add_executable($${PROJECT_NAME}.elf $${SOURCES} $${LINKER_SCRIPT})
 
