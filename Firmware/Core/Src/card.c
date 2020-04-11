@@ -26,21 +26,93 @@ card_t card_cards[] =
         {
                 [0] = {
                         .spi = {
-                                .spi_base = SPI1,
-                                .cs1_pin = SSA1_Pin,
-                                .cs2_pin = SSB1_Pin,
-                                .cs3_pin = SSC1_Pin,
-                                .cs1_port = SSA1_GPIO_Port,
-                                .cs2_port = SSB1_GPIO_Port,
-                                .cs3_port = SSC1_GPIO_Port,
+                                .spi_base   = SPI1,
+                                .cs1_pin    = SSA1_Pin,
+                                .cs2_pin    = SSB1_Pin,
+                                .cs3_pin    = SSC1_Pin,
+                                .cs1_port   = SSA1_GPIO_Port,
+                                .cs2_port   = SSB1_GPIO_Port,
+                                .cs3_port   = SSC1_GPIO_Port,
                         },
                         .indicator = {
-                                .red_pin = R1_Pin,
-                                .green_pin = G1_Pin,
-                                .blue_pin = B1_Pin,
-                                .red_port = R1_GPIO_Port,
+                                .red_pin    = R1_Pin,
+                                .green_pin  = G1_Pin,
+                                .blue_pin   = B1_Pin,
+                                .red_port   = R1_GPIO_Port,
                                 .green_port = G1_GPIO_Port,
-                                .blue_port = B1_GPIO_Port,
+                                .blue_port  = B1_GPIO_Port,
+                        },
+                        .state = CARD_STATE_UNKNOWN,
+                        .config = {
+                                .type = CARD_TYPE_UNKNOWN,
+                                .crc = 0U
+                        }
+                },
+                [1] = {
+                        .spi = {
+                                .spi_base   = SPI2,
+                                .cs1_pin    = SSA2_Pin,
+                                .cs2_pin    = SSB2_Pin,
+                                .cs3_pin    = SSC2_Pin,
+                                .cs1_port   = SSA2_GPIO_Port,
+                                .cs2_port   = SSB2_GPIO_Port,
+                                .cs3_port   = SSC2_GPIO_Port,
+                        },
+                        .indicator = {
+                                .red_pin    = R2_Pin,
+                                .green_pin  = G2_Pin,
+                                .blue_pin   = B2_Pin,
+                                .red_port   = R2_GPIO_Port,
+                                .green_port = G2_GPIO_Port,
+                                .blue_port  = B2_GPIO_Port,
+                        },
+                        .state = CARD_STATE_UNKNOWN,
+                        .config = {
+                                .type = CARD_TYPE_UNKNOWN,
+                                .crc = 0U
+                        }
+                },
+                [2] = {
+                        .spi = {
+                                .spi_base   = SPI3,
+                                .cs1_pin    = SSA3_Pin,
+                                .cs2_pin    = SSB3_Pin,
+                                .cs3_pin    = SSC3_Pin,
+                                .cs1_port   = SSA3_GPIO_Port,
+                                .cs2_port   = SSB3_GPIO_Port,
+                                .cs3_port   = SSC3_GPIO_Port,
+                        },
+                        .indicator = {
+                                .red_pin    = R3_Pin,
+                                .green_pin  = G3_Pin,
+                                .blue_pin   = B3_Pin,
+                                .red_port   = R3_GPIO_Port,
+                                .green_port = G3_GPIO_Port,
+                                .blue_port  = B3_GPIO_Port,
+                        },
+                        .state = CARD_STATE_UNKNOWN,
+                        .config = {
+                                .type = CARD_TYPE_UNKNOWN,
+                                .crc = 0U
+                        }
+                },
+                [3] = {
+                        .spi = {
+                                .spi_base   = SPI4,
+                                .cs1_pin    = SSA4_Pin,
+                                .cs2_pin    = SSB4_Pin,
+                                .cs3_pin    = SSC4_Pin,
+                                .cs1_port   = SSA4_GPIO_Port,
+                                .cs2_port   = SSB4_GPIO_Port,
+                                .cs3_port   = SSC4_GPIO_Port,
+                        },
+                        .indicator = {
+                                .red_pin    = R4_Pin,
+                                .green_pin  = G4_Pin,
+                                .blue_pin   = B4_Pin,
+                                .red_port   = R4_GPIO_Port,
+                                .green_port = G4_GPIO_Port,
+                                .blue_port  = B4_GPIO_Port,
                         },
                         .state = CARD_STATE_UNKNOWN,
                         .config = {
@@ -61,16 +133,19 @@ bool card_init(uint8_t cardId)
         if(false == cardIndicator_init(&(card.indicator)))
         {
             retVal = false;
+            break;
         }
 
         if(false == cardSpi_init(&(card.spi)))
         {
             retVal = false;
+            break;
         }
 
         if(false == cardFilesystem_init(&card.fs, &card.spi, CARD_SPI_FLASH))
         {
             retVal = false;
+            break;
         }
 
         if(true == card_readConfig( &card ))
@@ -92,7 +167,7 @@ bool card_init(uint8_t cardId)
             if(true == card_writeInitialConfig(&card))
             {
                 debug_sendf(LEVEL_INFO, "card[%d]: Generated initial config file", cardId);
-                card.state = CARD_STATE_UNCONFIGURED;
+                card.state = CARD_STATE_CONFIGURED;
             }
             else
             {

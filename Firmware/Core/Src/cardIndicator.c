@@ -28,13 +28,13 @@ bool cardIndicator_init(cardIndicator_t* cardIndicator)
 
 void cardIndicator_updateFromState(cardIndicator_t cardIndicator, card_state_e state)
 {
-    if(state > CARD_STATE_UNCONFIGURED)
+    if(state > CARD_STATE_CONFIGURED)
     {
         cardIndicator_setRedLed( cardIndicator, false );
         cardIndicator_setGreenLed( cardIndicator, true );
         cardIndicator_setBlueLed( cardIndicator, false );
     }
-    else if( state < CARD_STATE_UNCONFIGURED)
+    else if( state < CARD_STATE_CONFIGURED)
     {
         cardIndicator_setRedLed( cardIndicator, true );
         cardIndicator_setGreenLed( cardIndicator, false );
