@@ -32,6 +32,7 @@
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
+typedef StaticTask_t osStaticThreadDef_t;
 /* USER CODE BEGIN PTD */
 
 /* USER CODE END PTD */
@@ -50,12 +51,17 @@
 /* USER CODE BEGIN Variables */
 
 /* USER CODE END Variables */
-/* Definitions for defaultTask */
-osThreadId_t defaultTaskHandle;
-const osThreadAttr_t defaultTask_attributes = {
-  .name = "defaultTask",
+/* Definitions for PROC_task */
+osThreadId_t PROC_taskHandle;
+uint32_t PROC_taskBuffer[ 4096 ];
+osStaticThreadDef_t PROC_taskControlBlock;
+const osThreadAttr_t PROC_task_attributes = {
+  .name = "PROC_task",
+  .stack_mem = &PROC_taskBuffer[0],
+  .stack_size = sizeof(PROC_taskBuffer),
+  .cb_mem = &PROC_taskControlBlock,
+  .cb_size = sizeof(PROC_taskControlBlock),
   .priority = (osPriority_t) osPriorityNormal,
-  .stack_size = 1024 * 4
 };
 /* Definitions for SI_task */
 osThreadId_t SI_taskHandle;
@@ -69,7 +75,7 @@ const osThreadAttr_t SI_task_attributes = {
 /* USER CODE BEGIN FunctionPrototypes */
 /* USER CODE END FunctionPrototypes */
 
-void StartDefaultTask(void *argument);
+void proc_task(void *argument);
 extern void serialInterface_task(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -101,8 +107,8 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* creation of defaultTask */
-  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+  /* creation of PROC_task */
+  PROC_taskHandle = osThreadNew(proc_task, NULL, &PROC_task_attributes);
 
   /* creation of SI_task */
   SI_taskHandle = osThreadNew(serialInterface_task, NULL, &SI_task_attributes);
@@ -113,35 +119,36 @@ void MX_FREERTOS_Init(void) {
 
 }
 
-/* USER CODE BEGIN Header_StartDefaultTask */
+/* USER CODE BEGIN Header_proc_task */
 /**
-  * @brief  Function implementing the defaultTask thread.
+  * @brief  Function implementing the PROC_task thread.
   * @param  argument: Not used 
   * @retval None
   */
-/* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void *argument)
+/* USER CODE END Header_proc_task */
+void proc_task(void *argument)
 {
-  /* USER CODE BEGIN StartDefaultTask */
+  /* USER CODE BEGIN proc_task */
     serialInterface_init();
     card_init(0);
-  /* Infinite loop */
+    /* Infinite loop */
+    vTaskDelay(1000);
+    osDelay(1000);
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
-  for(;;)
-  {
-      osDelay(1000);
-      HAL_GPIO_WritePin(R4_GPIO_Port, R4_Pin, GPIO_PIN_RESET);
-      osDelay(100);
-      HAL_GPIO_WritePin(R4_GPIO_Port, R4_Pin, GPIO_PIN_SET);
-  }
+    for(;;)
+    {
+        osDelay(1000);
+        HAL_GPIO_WritePin(R4_GPIO_Port, R4_Pin, GPIO_PIN_RESET);
+        osDelay(100);
+        HAL_GPIO_WritePin(R4_GPIO_Port, R4_Pin, GPIO_PIN_SET);
+    }
 #pragma clang diagnostic pop
-  /* USER CODE END StartDefaultTask */
+  /* USER CODE END proc_task */
 }
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
-     
 /* USER CODE END Application */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
