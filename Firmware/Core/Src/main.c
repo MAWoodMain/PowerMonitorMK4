@@ -22,6 +22,7 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "adc.h"
+#include "crc.h"
 #include "spi.h"
 #include "usart.h"
 #include "gpio.h"
@@ -105,6 +106,7 @@ int main(void)
   MX_SPI3_Init();
   MX_SPI4_Init();
   MX_USART1_UART_Init();
+  MX_CRC_Init();
   /* USER CODE BEGIN 2 */
 
   printf("\n\r");

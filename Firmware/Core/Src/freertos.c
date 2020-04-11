@@ -129,19 +129,23 @@ void MX_FREERTOS_Init(void) {
 void proc_task(void *argument)
 {
   /* USER CODE BEGIN proc_task */
+
+    HAL_GPIO_WritePin(R1_GPIO_Port, R1_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(R2_GPIO_Port, R2_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(R3_GPIO_Port, R3_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(R4_GPIO_Port, R4_Pin, GPIO_PIN_SET);
+
     serialInterface_init();
     card_init(0);
     /* Infinite loop */
-    vTaskDelay(1000);
-    osDelay(1000);
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
     for(;;)
     {
         osDelay(1000);
-        HAL_GPIO_WritePin(R4_GPIO_Port, R4_Pin, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(G4_GPIO_Port, G4_Pin, GPIO_PIN_RESET);
         osDelay(100);
-        HAL_GPIO_WritePin(R4_GPIO_Port, R4_Pin, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(G4_GPIO_Port, G4_Pin, GPIO_PIN_SET);
     }
 #pragma clang diagnostic pop
   /* USER CODE END proc_task */
