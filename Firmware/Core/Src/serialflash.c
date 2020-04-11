@@ -643,16 +643,16 @@ static uint32_t serialflash_read_id (cardSpi_t spi, cardSpi_channels_e channel)
  */
 static uint8_t serialflash_read_status (cardSpi_t spi, cardSpi_channels_e channel)
 {
-    uint8_t txBuff[1];
-    uint8_t rxBuff[1];
+    uint8_t txBuff[2];
+    uint8_t rxBuff[2];
 
     txBuff[0] = SERIALFLASH_OPCODE_READ_STATUS;
+    txBuff[1] = 0x00;
     cardSpi_selectDevice(spi, channel);
-    HAL_SPI_Transmit(&spi.spi_handle, txBuff, 1U, 100U);
-    HAL_SPI_Receive(&spi.spi_handle, rxBuff, 1U, 100U);
+    HAL_SPI_TransmitReceive(&spi.spi_handle, txBuff, rxBuff, 2U, 100U);
     cardSpi_deselectDevice(spi);
     
-    return (rxBuff[0]);
+    return (rxBuff[1]);
 }
 
 /*!

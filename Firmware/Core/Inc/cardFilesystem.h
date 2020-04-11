@@ -16,7 +16,7 @@
 /****************************** TYPEDEFS ********************************/
 /***************************** STRUCTURES *******************************/
 /************************** FUNCTION PROTOTYPES *************************/
-bool cardFilesystem_init(cardFilesystem_t* cardFs, cardSpi_t spi);
+bool cardFilesystem_init(cardFilesystem_t* cardFs, cardSpi_t spi, cardSpi_channels_e channel);
 /******************************* GLOBALS ********************************/
 /*        Globals are to be avoided unless justified and documented */
 /************************************************************************/

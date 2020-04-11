@@ -59,7 +59,7 @@ bool card_init(uint8_t cardId)
             retVal = false;
         }
 
-        if(false == cardFilesystem_init(&(card.fs), card.spi))
+        if(false == cardFilesystem_init(&(card.fs), card.spi, CARD_SPI_FLASH))
         {
             retVal = false;
         }

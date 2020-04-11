@@ -368,9 +368,9 @@
 #else // SPIFFS_HAL_CALLBACK_EXTRA
 
 #define SPIFFS_HAL_WRITE(_fs, _paddr, _len, _src, _cardFs, _spi, _channel) \
-  (_fs)->cfg.hal_write_f((_paddr), (_len), (_cardFs), (_src), (_spi), (_channel))
+  (_fs)->cfg.hal_write_f((_paddr), (_len), (_src), (_cardFs), (_spi), (_channel))
 #define SPIFFS_HAL_READ(_fs, _paddr, _len, _dst, _cardFs, _spi, _channel) \
-  (_fs)->cfg.hal_read_f((_paddr), (_len), (_cardFs), (_dst), (_spi), (_channel))
+  (_fs)->cfg.hal_read_f((_paddr), (_len), (_dst), (_cardFs), (_spi), (_channel))
 #define SPIFFS_HAL_ERASE(_fs, _paddr, _len, _cardFs, _spi, _channel) \
   (_fs)->cfg.hal_erase_f((_paddr), (_len), (_cardFs), (_spi), (_channel))
 

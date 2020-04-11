@@ -1,5 +1,6 @@
 #include "spiffs.h"
 #include "spiffs_nucleus.h"
+#include "debug.h"
 
 static s32_t spiffs_page_data_check(spiffs *fs, spiffs_fd *fd, spiffs_page_ix pix, spiffs_span_ix spix) {
   s32_t res = SPIFFS_OK;
@@ -367,9 +368,9 @@ s32_t spiffs_obj_lu_scan(
         SPIFFS_OP_T_OBJ_LU2 | SPIFFS_OP_C_READ,
         0, SPIFFS_MAGIC_PADDR(fs, bix) ,
         sizeof(spiffs_obj_id), (u8_t *)&magic);
-
     SPIFFS_CHECK_RES(res);
     if (magic != SPIFFS_MAGIC(fs, bix)) {
+        debug_sendf(LEVEL_DEBUG, "MAGIC ERR READ 0x%.4X EXPECTED 0x%.4X", magic, SPIFFS_MAGIC(fs, bix));
       if (unerased_bix == (spiffs_block_ix)-1) {
         // allow one unerased block as it might be powered down during an erase
         unerased_bix = bix;

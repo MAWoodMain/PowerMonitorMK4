@@ -38,11 +38,11 @@ typedef enum
 
 typedef enum
 {
+    CARD_SPI_NONE = 0U,
     CARD_SPI_ONE,
     CARD_SPI_TWO,
     CARD_SPI_FLASH,
     CARD_SPI_RST,
-    CARD_SPI_NONE,
 } cardSpi_channels_e;
 /****************************** TYPEDEFS ********************************/
 /***************************** STRUCTURES *******************************/
@@ -71,6 +71,8 @@ typedef struct
     GPIO_TypeDef* cs1_port;
     GPIO_TypeDef* cs2_port;
     GPIO_TypeDef* cs3_port;
+
+    cardSpi_channels_e selected;
 } cardSpi_t;
 
 typedef struct
