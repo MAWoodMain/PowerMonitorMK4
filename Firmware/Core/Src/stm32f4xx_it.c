@@ -25,6 +25,8 @@
 #include "task.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdbool.h>
+#include "debug.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -62,6 +64,7 @@ volatile uint32_t psr;/* Program status register. */
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN PFP */
 void prvGetRegistersFromStack( uint32_t *pulFaultStackAddress );
+void showFaultIndicator(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -210,6 +213,14 @@ void USART1_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+
+void vApplicationStackOverflowHook( TaskHandle_t xTask,
+                                    signed char *pcTaskName )
+{
+    debug_sendf(LEVEL_CRITICAL, "OVERFLOW ON TASK: %s", pcTaskName);
+    showFaultIndicator(R2_GPIO_Port, R2_Pin);
+}
+
 void prvGetRegistersFromStack( uint32_t *pulFaultStackAddress )
 {
 
@@ -224,7 +235,34 @@ void prvGetRegistersFromStack( uint32_t *pulFaultStackAddress )
     psr = pulFaultStackAddress[ 7 ];
 
     /* When the following line is hit, the variables contain the register values. */
-    for( ;; );
+    /* Flash red light one to indicate hard fault */
+    debug_sendf(LEVEL_CRITICAL, "HARDFAULT");
+    showFaultIndicator(R1_GPIO_Port, R1_Pin);
+}
+
+
+void showFaultIndicator(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+{
+    HAL_GPIO_WritePin(R1_GPIO_Port, R1_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(R2_GPIO_Port, R2_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(R3_GPIO_Port, R3_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(R4_GPIO_Port, R4_Pin, GPIO_PIN_SET);
+    for(;;)
+    {
+        volatile uint32_t i;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
+        while(true)
+        {
+            HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_RESET);
+            i = 1000000;
+            while(i > 0) i--;
+            HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_SET);
+            i = 1000000;
+            while(i > 0) i--;
+        }
+#pragma clang diagnostic pop
+    }
 }
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
