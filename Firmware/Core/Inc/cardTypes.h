@@ -87,11 +87,17 @@ typedef struct
 
 typedef struct
 {
+    card_type_e type;
+    uint32_t crc;
+} card_config_t;
+
+typedef struct
+{
     cardSpi_t spi;
     cardIndicator_t indicator;
     cardFilesystem_t fs;
     card_state_e state;
-    card_type_e type;
+    card_config_t config;
 } card_t;
 
 typedef struct
