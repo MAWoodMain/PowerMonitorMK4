@@ -28,6 +28,7 @@
 /************************** FUNCTION PROTOTYPES *************************/
 bool serialflash_init (cardFilesystem_t* cardFs, cardSpi_t spi, cardSpi_channels_e channel);
 bool serialflash_is_ok(cardFilesystem_t cardFs);
+bool serialflash_isPresent(cardSpi_t spi, cardSpi_channels_e channel);
 bool serialflash_device_ready(cardSpi_t spi, cardSpi_channels_e channel);
 bool serialflash_check_unprotected(cardSpi_t spi, cardSpi_channels_e channel);
 void serialflash_power_down(cardFilesystem_t cardFs, cardSpi_t spi, cardSpi_channels_e channel, bool poweroff);

@@ -28,7 +28,7 @@ static const uint8_t debug_level_signifiers[] = {
 /*************************** PUBLIC FUNCTIONS ***************************/
 void debug_sendf(debug_level_e level, const char *format, ...)
 {
-    printf("%cM%c=",SERIAL_INTERFACE_UNSOLICITED_SYMBOL, debug_level_signifiers[level]);
+    printf("%cD%c=",SERIAL_INTERFACE_UNSOLICITED_SYMBOL, debug_level_signifiers[level]);
     va_list argptr;
     va_start(argptr,format);
     vprintf(format,argptr);

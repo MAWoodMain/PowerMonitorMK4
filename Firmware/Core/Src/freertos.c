@@ -129,7 +129,7 @@ void MX_FREERTOS_Init(void) {
 void proc_task(void *argument)
 {
   /* USER CODE BEGIN proc_task */
-
+    uint8_t i;
     serialInterface_init();
     card_init(0);
     card_init(1);
@@ -142,7 +142,7 @@ void proc_task(void *argument)
     {
         osDelay(1000);
         HAL_GPIO_WritePin(G4_GPIO_Port, G4_Pin, GPIO_PIN_RESET);
-        osDelay(100);
+        for(i = 0; i<4; i++) card_isPresent(i);
         HAL_GPIO_WritePin(G4_GPIO_Port, G4_Pin, GPIO_PIN_SET);
     }
 #pragma clang diagnostic pop

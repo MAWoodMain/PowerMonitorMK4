@@ -21,6 +21,7 @@
 /***************************** STRUCTURES *******************************/
 /************************** FUNCTION PROTOTYPES *************************/
 bool card_init(uint8_t cardId);
+bool card_isPresent(uint8_t cardId);
 /******************************* GLOBALS ********************************/
 /*        Globals are to be avoided unless justified and documented */
 /************************************************************************/

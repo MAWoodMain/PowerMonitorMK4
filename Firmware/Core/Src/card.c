@@ -10,6 +10,8 @@
 #include "card.h"
 #include "debug.h"
 #include "crc.h"
+#include "serialflash.h"
+#include "serialInterface.h"
 /******************************* DEFINES ********************************/
 /******************************** ENUMS *********************************/
 /***************************** STRUCTURES *******************************/
@@ -18,6 +20,7 @@ bool card_readConfig(card_t* card);
 bool card_configValid(card_t card);
 bool card_writeInitialConfig(card_t* card);
 bool card_writeConfig(card_t* card);
+void card_detect(uint8_t cardId);
 /******************************* CONSTANTS ******************************/
 static uint8_t* card_configFilename = (uint8_t*) "config.struct";
 /******************************* VARIABLES ******************************/
@@ -42,7 +45,7 @@ card_t card_cards[] =
                                 .green_port = G1_GPIO_Port,
                                 .blue_port  = B1_GPIO_Port,
                         },
-                        .state = CARD_STATE_UNKNOWN,
+                        .state = CARD_STATE_DISCONNECTED,
                         .config = {
                                 .type = CARD_TYPE_UNKNOWN,
                                 .crc = 0U
@@ -66,7 +69,7 @@ card_t card_cards[] =
                                 .green_port = G2_GPIO_Port,
                                 .blue_port  = B2_GPIO_Port,
                         },
-                        .state = CARD_STATE_UNKNOWN,
+                        .state = CARD_STATE_DISCONNECTED,
                         .config = {
                                 .type = CARD_TYPE_UNKNOWN,
                                 .crc = 0U
@@ -90,7 +93,7 @@ card_t card_cards[] =
                                 .green_port = G3_GPIO_Port,
                                 .blue_port  = B3_GPIO_Port,
                         },
-                        .state = CARD_STATE_UNKNOWN,
+                        .state = CARD_STATE_DISCONNECTED,
                         .config = {
                                 .type = CARD_TYPE_UNKNOWN,
                                 .crc = 0U
@@ -114,7 +117,7 @@ card_t card_cards[] =
                                 .green_port = G4_GPIO_Port,
                                 .blue_port  = B4_GPIO_Port,
                         },
-                        .state = CARD_STATE_UNKNOWN,
+                        .state = CARD_STATE_DISCONNECTED,
                         .config = {
                                 .type = CARD_TYPE_UNKNOWN,
                                 .crc = 0U
@@ -126,58 +129,28 @@ card_t card_cards[] =
 
 bool card_init(uint8_t cardId)
 {
-    card_t card = card_cards[cardId];
+    card_t* card = &card_cards[cardId];
     bool retVal = true;
     do
     {
-        if(false == cardIndicator_init(&(card.indicator)))
+        /* Slot side initialisation */
+        if(false == cardIndicator_init(&card->indicator))
         {
             retVal = false;
             break;
         }
 
-        if(false == cardSpi_init(&(card.spi)))
+        if(false == cardSpi_init(&card->spi))
         {
             retVal = false;
             break;
         }
 
-        if(false == cardFilesystem_init(&card.fs, &card.spi, CARD_SPI_FLASH))
+        if(false == card_isPresent(cardId))
         {
             retVal = false;
             break;
         }
-
-        if(true == card_readConfig( &card ))
-        {
-            if(true == card_configValid( card ))
-            {
-                debug_sendf(LEVEL_INFO, "card[%d]: Found config, device recognised", cardId);
-                card.state = CARD_STATE_CONFIGURED;
-            }
-            else
-            {
-                debug_sendf(LEVEL_INFO, "card[%d]: Found config, config invalid", cardId);
-                card.state = CARD_STATE_UNIDENTIFIED;
-            }
-        }
-        else
-        {
-            debug_sendf(LEVEL_INFO, "card[%d]: Missing a config file", cardId);
-            if(true == card_writeInitialConfig(&card))
-            {
-                debug_sendf(LEVEL_INFO, "card[%d]: Generated initial config file", cardId);
-                card.state = CARD_STATE_CONFIGURED;
-            }
-            else
-            {
-                debug_sendf(LEVEL_INFO, "card[%d]: Failed to save config file", cardId);
-                card.state = CARD_STATE_ERROR;
-            }
-        }
-
-        cardIndicator_updateFromState(card.indicator, card.state);
-
     } while(false);
     return retVal;
 }
@@ -235,6 +208,74 @@ bool card_writeConfig(card_t* card)
         cardFilesystem_fclose( card->fs, file );
     }
     return retVal;
+}
 
+bool card_isPresent(uint8_t cardId)
+{
+    card_t* card = &card_cards[cardId];
+    card_detect(cardId);
+    cardIndicator_updateFromState(card->indicator, card->state);
+    return card->state == CARD_STATE_DISCONNECTED;
+}
+
+void card_detect(uint8_t cardId)
+{
+    card_t* card = &card_cards[cardId];
+    if(false == serialflash_isPresent(card->spi, CARD_SPI_FLASH))
+    {
+        if(card->state != CARD_STATE_DISCONNECTED)
+        {
+            serialInterface_Unsolicitedf(SERIAL_INTERFACE_UNSOLICITED_CARD_CHANGE_TAG, "%d,REMOVED", cardId);
+            card->state = CARD_STATE_DISCONNECTED;
+            /* blank out config */
+            memset(&card->config, 0U, sizeof(card_config_t));
+        }
+    }
+    else
+    {
+        do
+        {
+            if(card->state != CARD_STATE_DISCONNECTED)
+            {
+                /* card was already initialised */
+                break;
+            }
+            serialInterface_Unsolicitedf(SERIAL_INTERFACE_UNSOLICITED_CARD_CHANGE_TAG, "%d,INSERTED", cardId);
+            /* On card initialisation */
+            if(false == cardFilesystem_init(&card->fs, &card->spi, CARD_SPI_FLASH))
+            {
+                debug_sendf(LEVEL_WARNING, "card[%d]: Could not initialise filesystem", cardId);
+                break;
+            }
+
+            if(true == card_readConfig( card ))
+            {
+                if(true == card_configValid( *card ))
+                {
+                    debug_sendf(LEVEL_INFO, "card[%d]: Found config, device recognised", cardId);
+                    card->state = CARD_STATE_CONFIGURED;
+                }
+                else
+                {
+                    debug_sendf(LEVEL_INFO, "card[%d]: Found config, config invalid", cardId);
+                    card->state = CARD_STATE_UNIDENTIFIED;
+                }
+            }
+            else
+            {
+                debug_sendf(LEVEL_INFO, "card[%d]: Missing a config file", cardId);
+                if(true == card_writeInitialConfig(card))
+                {
+                    debug_sendf(LEVEL_INFO, "card[%d]: Generated initial config file", cardId);
+                    card->state = CARD_STATE_CONFIGURED;
+                }
+                else
+                {
+                    debug_sendf(LEVEL_INFO, "card[%d]: Failed to save config file", cardId);
+                    card->state = CARD_STATE_ERROR;
+                }
+            }
+        } while(false);
+    }
 }
 /*************************** PRIVATE FUNCTIONS **************************/

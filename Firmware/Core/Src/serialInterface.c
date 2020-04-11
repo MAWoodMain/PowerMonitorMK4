@@ -195,6 +195,16 @@ bool serialInterface_extractLongDoubleArg(uint8_t* argsString, uint8_t argIdx, l
     return retVal;
 }
 
+void serialInterface_Unsolicitedf(uint8_t* tag, const char *format, ...)
+{
+    printf("%c%s=", SERIAL_INTERFACE_UNSOLICITED_SYMBOL, tag);
+    va_list argptr;
+    va_start(argptr,format);
+    vprintf(format,argptr);
+    va_end(argptr);
+    printf("\n\r");
+}
+
 /*************************** PRIVATE FUNCTIONS **************************/
 
 serialInterface_operation_e serialInterface_recogniseOperation(uint8_t possibleSignifier)

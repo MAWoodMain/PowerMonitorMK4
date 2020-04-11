@@ -158,6 +158,36 @@ bool serialflash_is_ok (cardFilesystem_t cardFs)
     return (retVal);
 }
 
+bool serialflash_isPresent(cardSpi_t spi, cardSpi_channels_e channel)
+{
+    bool retVal = false;
+    uint8_t manId;
+    uint16_t prodId;
+    uint32_t id;
+    serialflash_chipid_t const* flashDevice;
+
+    flashDevice = serialflash_chipId;
+    id = serialflash_read_id(spi, channel);
+    manId = (uint8_t)(id >> 16U);             /* retrieve manufacturer's id */
+    prodId = (uint16_t)(id & 0x0000FFFFU);    /* retrieve product id and mask off unwanted bits */
+
+
+    while (flashDevice->capacity != 0)
+    {
+
+        if ((flashDevice->manuId == manId) &&             /* match manufacturer's id */
+            (flashDevice->prodId == prodId))             /* match product id */
+        {
+            retVal = true;
+            break;
+        }
+
+        flashDevice++;
+    }
+
+    return retVal;
+}
+
 /*!
  *
  * @brief        checks to see if device is ready
