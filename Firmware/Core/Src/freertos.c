@@ -49,7 +49,6 @@ typedef StaticTask_t osStaticThreadDef_t;
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-
 /* USER CODE END Variables */
 /* Definitions for PROC_task */
 osThreadId_t PROC_taskHandle;
@@ -79,6 +78,12 @@ void proc_task(void *argument);
 extern void serialInterface_task(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
+
+/* Hook prototypes */
+void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName);
+
+/* USER CODE BEGIN 4 */
+/* USER CODE END 4 */
 
 /**
   * @brief  FreeRTOS initialization
@@ -140,7 +145,7 @@ void proc_task(void *argument)
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
     for(;;)
     {
-        osDelay(1000);
+        osDelay(4000);
         HAL_GPIO_WritePin(G4_GPIO_Port, G4_Pin, GPIO_PIN_RESET);
         for(i = 0; i<4; i++) card_isPresent(i);
         HAL_GPIO_WritePin(G4_GPIO_Port, G4_Pin, GPIO_PIN_SET);
