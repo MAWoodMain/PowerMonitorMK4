@@ -38,9 +38,16 @@ set(CMAKE_CXX_STANDARD 11)
 add_definitions(-DUSE_HAL_DRIVER -DSTM32F411xE)
 add_definitions(-DUSE_HAL_UART_REGISTER_CALLBACKS)
 
-file(GLOB_RECURSE SOURCES "Core/*.*" "startup/*.*" "Middlewares/*.*" "Drivers/*.*" "Src/*.*" "Lib/printf/printf.c" "Lib/spiffs/*")
+file(GLOB_RECURSE SOURCES "Core/*.*" "startup/*.*" "Middlewares/*.*" "Drivers/*.*" "Src/*.*" "App/*.*" "Lib/printf/printf.c" "Lib/spiffs/*")
 
 include_directories(Core/Inc Drivers/STM32F4xx_HAL_Driver/Inc Drivers/STM32F4xx_HAL_Driver/Inc/Legacy Middlewares/Third_Party/FreeRTOS/Source/include Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F Drivers/CMSIS/Device/ST/STM32F4xx/Include Drivers/CMSIS/Include)
+
+include_directories(Drivers/Custom/inc)
+include_directories(App/Management/inc)
+include_directories(App/Cards/inc)
+include_directories(App/Channels/inc)
+include_directories(App/Slots/inc)
+
 include_directories(Lib/printf)
 include_directories(Lib/spiffs)
 

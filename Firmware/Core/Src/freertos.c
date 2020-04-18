@@ -1,4 +1,3 @@
-#include <limits.h>
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -28,26 +27,16 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */     
 #include "serialInterface.h"
-#include "card.h"
 #include "printf.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 typedef StaticTask_t osStaticThreadDef_t;
 /* USER CODE BEGIN PTD */
-typedef enum
-{
-    CARD_0 = (uint8_t)0U,
-    CARD_1 = (uint8_t)1U,
-    CARD_2 = (uint8_t)2U,
-    CARD_3 = (uint8_t)3U,
-} cardId_e;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define NO_CARDS 4U
-#define CARD_PROC_PERIOD 1000U
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -62,91 +51,107 @@ typedef enum
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-cardId_e cardIds[] = {CARD_0, CARD_1, CARD_2, CARD_3};
 /* USER CODE END Variables */
-/* Definitions for PROC_task */
-osThreadId_t PROC_taskHandle;
-uint32_t PROC_taskBuffer[ 4096 ];
-osStaticThreadDef_t PROC_taskControlBlock;
-const osThreadAttr_t PROC_task_attributes = {
-  .name = "PROC_task",
-  .stack_mem = &PROC_taskBuffer[0],
-  .stack_size = sizeof(PROC_taskBuffer),
-  .cb_mem = &PROC_taskControlBlock,
-  .cb_size = sizeof(PROC_taskControlBlock),
+/* Definitions for MNMT_task */
+osThreadId_t MNMT_taskHandle;
+uint32_t MNMT_taskBuffer[ 4096 ];
+osStaticThreadDef_t MNMT_taskControlBlock;
+const osThreadAttr_t MNMT_task_attributes = {
+  .name = "MNMT_task",
+  .stack_mem = &MNMT_taskBuffer[0],
+  .stack_size = sizeof(MNMT_taskBuffer),
+  .cb_mem = &MNMT_taskControlBlock,
+  .cb_size = sizeof(MNMT_taskControlBlock),
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for SI_task */
 osThreadId_t SI_taskHandle;
+uint32_t SI_taskBuffer[ 512 ];
+osStaticThreadDef_t SI_taskControlBlock;
 const osThreadAttr_t SI_task_attributes = {
   .name = "SI_task",
+  .stack_mem = &SI_taskBuffer[0],
+  .stack_size = sizeof(SI_taskBuffer),
+  .cb_mem = &SI_taskControlBlock,
+  .cb_size = sizeof(SI_taskControlBlock),
   .priority = (osPriority_t) osPriorityLow,
-  .stack_size = 256 * 4
 };
-/* Definitions for card0 */
-osThreadId_t card0Handle;
-uint32_t card0Buffer[ 2048 ];
-osStaticThreadDef_t card0ControlBlock;
-const osThreadAttr_t card0_attributes = {
-  .name = "card0",
-  .stack_mem = &card0Buffer[0],
-  .stack_size = sizeof(card0Buffer),
-  .cb_mem = &card0ControlBlock,
-  .cb_size = sizeof(card0ControlBlock),
+/* Definitions for S1_task */
+osThreadId_t S1_taskHandle;
+uint32_t S1_taskBuffer[ 2048 ];
+osStaticThreadDef_t S1_taskControlBlock;
+const osThreadAttr_t S1_task_attributes = {
+  .name = "S1_task",
+  .stack_mem = &S1_taskBuffer[0],
+  .stack_size = sizeof(S1_taskBuffer),
+  .cb_mem = &S1_taskControlBlock,
+  .cb_size = sizeof(S1_taskControlBlock),
   .priority = (osPriority_t) osPriorityHigh,
 };
-/* Definitions for card1 */
-osThreadId_t card1Handle;
-uint32_t card1Buffer[ 2048 ];
-osStaticThreadDef_t card1ControlBlock;
-const osThreadAttr_t card1_attributes = {
-  .name = "card1",
-  .stack_mem = &card1Buffer[0],
-  .stack_size = sizeof(card1Buffer),
-  .cb_mem = &card1ControlBlock,
-  .cb_size = sizeof(card1ControlBlock),
+/* Definitions for S2_task */
+osThreadId_t S2_taskHandle;
+uint32_t S2_taskBuffer[ 2048 ];
+osStaticThreadDef_t S2_taskControlBlock;
+const osThreadAttr_t S2_task_attributes = {
+  .name = "S2_task",
+  .stack_mem = &S2_taskBuffer[0],
+  .stack_size = sizeof(S2_taskBuffer),
+  .cb_mem = &S2_taskControlBlock,
+  .cb_size = sizeof(S2_taskControlBlock),
   .priority = (osPriority_t) osPriorityHigh,
 };
-/* Definitions for card2 */
-osThreadId_t card2Handle;
-uint32_t card2Buffer[ 2048 ];
-osStaticThreadDef_t card2ControlBlock;
-const osThreadAttr_t card2_attributes = {
-  .name = "card2",
-  .stack_mem = &card2Buffer[0],
-  .stack_size = sizeof(card2Buffer),
-  .cb_mem = &card2ControlBlock,
-  .cb_size = sizeof(card2ControlBlock),
+/* Definitions for S3_task */
+osThreadId_t S3_taskHandle;
+uint32_t S3_taskBuffer[ 2048 ];
+osStaticThreadDef_t S3_taskControlBlock;
+const osThreadAttr_t S3_task_attributes = {
+  .name = "S3_task",
+  .stack_mem = &S3_taskBuffer[0],
+  .stack_size = sizeof(S3_taskBuffer),
+  .cb_mem = &S3_taskControlBlock,
+  .cb_size = sizeof(S3_taskControlBlock),
   .priority = (osPriority_t) osPriorityHigh,
 };
-/* Definitions for card3 */
-osThreadId_t card3Handle;
-uint32_t card3Buffer[ 2048 ];
-osStaticThreadDef_t card3ControlBlock;
-const osThreadAttr_t card3_attributes = {
-  .name = "card3",
-  .stack_mem = &card3Buffer[0],
-  .stack_size = sizeof(card3Buffer),
-  .cb_mem = &card3ControlBlock,
-  .cb_size = sizeof(card3ControlBlock),
+/* Definitions for S4_task */
+osThreadId_t S4_taskHandle;
+uint32_t S4_taskBuffer[ 2048 ];
+osStaticThreadDef_t S4_taskControlBlock;
+const osThreadAttr_t S4_task_attributes = {
+  .name = "S4_task",
+  .stack_mem = &S4_taskBuffer[0],
+  .stack_size = sizeof(S4_taskBuffer),
+  .cb_mem = &S4_taskControlBlock,
+  .cb_size = sizeof(S4_taskControlBlock),
   .priority = (osPriority_t) osPriorityHigh,
 };
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-_Noreturn /* USER CODE END FunctionPrototypes */
+/* USER CODE END FunctionPrototypes */
 
-void proc_task(void *argument);
+extern void management_task(void *argument);
 extern void serialInterface_task(void *argument);
-_Noreturn void card0_task(void *argument);
-_Noreturn void card1_task(void *argument);
-_Noreturn void card2_task(void *argument);
-_Noreturn void card3_task(void *argument);
+extern void slot1_task(void *argument);
+extern void slot2_task(void *argument);
+extern void slot3_task(void *argument);
+extern void slot4_task(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /* Hook prototypes */
+void vApplicationTickHook(void);
 void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName);
+
+/* USER CODE BEGIN 3 */
+__weak void vApplicationTickHook( void )
+{
+   /* This function will be called by each tick interrupt if
+   configUSE_TICK_HOOK is set to 1 in FreeRTOSConfig.h. User code can be
+   added here, but the tick hook is called from an interrupt context, so
+   code must not attempt to block, and only the interrupt safe FreeRTOS API
+   functions can be used (those that end in FromISR()). */
+}
+/* USER CODE END 3 */
 
 /* USER CODE BEGIN 4 */
 /* USER CODE END 4 */
@@ -178,23 +183,23 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* creation of PROC_task */
-  PROC_taskHandle = osThreadNew(proc_task, NULL, &PROC_task_attributes);
+  /* creation of MNMT_task */
+  MNMT_taskHandle = osThreadNew(management_task, NULL, &MNMT_task_attributes);
 
   /* creation of SI_task */
   SI_taskHandle = osThreadNew(serialInterface_task, NULL, &SI_task_attributes);
 
-  /* creation of card0 */
-  card0Handle = osThreadNew(card0_task, (void*) &cardIds[0], &card0_attributes);
+  /* creation of S1_task */
+  S1_taskHandle = osThreadNew(slot1_task, NULL, &S1_task_attributes);
 
-  /* creation of card1 */
-  card1Handle = osThreadNew(card1_task, (void*) &cardIds[1], &card1_attributes);
+  /* creation of S2_task */
+  S2_taskHandle = osThreadNew(slot2_task, NULL, &S2_task_attributes);
 
-  /* creation of card2 */
-  card2Handle = osThreadNew(card2_task, (void*) &cardIds[2], &card2_attributes);
+  /* creation of S3_task */
+  S3_taskHandle = osThreadNew(slot3_task, NULL, &S3_task_attributes);
 
-  /* creation of card3 */
-  card3Handle = osThreadNew(card3_task, (void*) &cardIds[3], &card3_attributes);
+  /* creation of S4_task */
+  S4_taskHandle = osThreadNew(slot4_task, NULL, &S4_task_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -202,143 +207,22 @@ void MX_FREERTOS_Init(void) {
 
 }
 
-/* USER CODE BEGIN Header_proc_task */
+/* USER CODE BEGIN Header_management_task */
 /**
-  * @brief  Function implementing the PROC_task thread.
+  * @brief  Function implementing the MNMT_task thread.
   * @param  argument: Not used 
   * @retval None
   */
-_Noreturn /* USER CODE END Header_proc_task */
-void proc_task(void *argument)
+/* USER CODE END Header_management_task */
+__weak void management_task(void *argument)
 {
-  /* USER CODE BEGIN proc_task */
-    uint8_t i;
-
-    serialInterface_init();
-
-    /* Infinite loop */
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wmissing-noreturn"
-    for(;;)
-    {
-        osDelay(1000);
-        HAL_GPIO_WritePin(G4_GPIO_Port, G4_Pin, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(G4_GPIO_Port, G4_Pin, GPIO_PIN_SET);
-    }
-#pragma clang diagnostic pop
-  /* USER CODE END proc_task */
-}
-
-/* USER CODE BEGIN Header_card0_task */
-/**
-* @brief Function implementing the card0 thread.
-* @param argument: Not used
-* @retval None
-*/
-_Noreturn /* USER CODE END Header_card0_task */
-void card0_task(void *argument)
-{
-  /* USER CODE BEGIN card0_task */
-  cardId_e cardId = *((cardId_e*)argument);
-
-  uint32_t nextOp = osKernelGetTickCount() + CARD_PROC_PERIOD;
-  nextOp += (CARD_PROC_PERIOD * (uint8_t) cardId)/CARD_PROC_PERIOD;
-  card_init( (uint8_t) cardId );
+  /* USER CODE BEGIN management_task */
   /* Infinite loop */
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wmissing-noreturn"
   for(;;)
   {
-      osDelayUntil(nextOp);
-      nextOp+=CARD_PROC_PERIOD;
-      card_process((uint8_t) cardId);
+    osDelay(1);
   }
-#pragma clang diagnostic pop
-  /* USER CODE END card0_task */
-}
-
-/* USER CODE BEGIN Header_card1_task */
-/**
-* @brief Function implementing the card1 thread.
-* @param argument: Not used
-* @retval None
-*/
-_Noreturn /* USER CODE END Header_card1_task */
-void card1_task(void *argument)
-{
-  /* USER CODE BEGIN card1_task */
-    cardId_e cardId = *((cardId_e*)argument);
-
-    uint32_t nextOp = osKernelGetTickCount() + CARD_PROC_PERIOD;
-    nextOp += (CARD_PROC_PERIOD * (uint8_t) cardId)/CARD_PROC_PERIOD;
-    card_init( (uint8_t) cardId );
-    /* Infinite loop */
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wmissing-noreturn"
-    for(;;)
-    {
-        osDelayUntil(nextOp);
-        nextOp+=CARD_PROC_PERIOD;
-        card_process((uint8_t) cardId);
-    }
-#pragma clang diagnostic pop
-  /* USER CODE END card1_task */
-}
-
-/* USER CODE BEGIN Header_card2_task */
-/**
-* @brief Function implementing the card2 thread.
-* @param argument: Not used
-* @retval None
-*/
-_Noreturn /* USER CODE END Header_card2_task */
-void card2_task(void *argument)
-{
-  /* USER CODE BEGIN card2_task */
-    cardId_e cardId = *((cardId_e*)argument);
-
-    uint32_t nextOp = osKernelGetTickCount() + CARD_PROC_PERIOD;
-    nextOp += (CARD_PROC_PERIOD * (uint8_t) cardId)/CARD_PROC_PERIOD;
-    card_init( (uint8_t) cardId );
-    /* Infinite loop */
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wmissing-noreturn"
-    for(;;)
-    {
-        osDelayUntil(nextOp);
-        nextOp+=CARD_PROC_PERIOD;
-        card_process((uint8_t) cardId);
-    }
-#pragma clang diagnostic pop
-  /* USER CODE END card2_task */
-}
-
-/* USER CODE BEGIN Header_card3_task */
-/**
-* @brief Function implementing the card3 thread.
-* @param argument: Not used
-* @retval None
-*/
-_Noreturn /* USER CODE END Header_card3_task */
-void card3_task(void *argument)
-{
-  /* USER CODE BEGIN card3_task */
-    cardId_e cardId = *((cardId_e*)argument);
-
-    uint32_t nextOp = osKernelGetTickCount() + CARD_PROC_PERIOD;
-    nextOp += (CARD_PROC_PERIOD * (uint8_t) cardId)/CARD_PROC_PERIOD;
-    card_init( (uint8_t) cardId );
-    /* Infinite loop */
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wmissing-noreturn"
-    for(;;)
-    {
-        osDelayUntil(nextOp);
-        nextOp+=CARD_PROC_PERIOD;
-        card_process((uint8_t) cardId);
-    }
-#pragma clang diagnostic pop
-  /* USER CODE END card3_task */
+  /* USER CODE END management_task */
 }
 
 /* Private application code --------------------------------------------------*/
