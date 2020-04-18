@@ -12,6 +12,7 @@
 #include "crc.h"
 #include "serialflash.h"
 #include "serialInterface.h"
+#include "ads868x.h"
 /******************************* DEFINES ********************************/
 /******************************** ENUMS *********************************/
 /***************************** STRUCTURES *******************************/
@@ -23,6 +24,15 @@ bool card_writeConfig(card_t* card);
 void card_detect(uint8_t cardId);
 /******************************* CONSTANTS ******************************/
 static uint8_t* card_configFilename = (uint8_t*) "config.struct";
+
+static uint8_t* card_stateNames[] =
+        {
+                [CARD_STATE_ERROR]=(uint8_t*) "ERROR",
+                [CARD_STATE_UNIDENTIFIED]=(uint8_t*) "UNIDENTIFIED",
+                [CARD_STATE_DISCONNECTED]=(uint8_t*) "DISCONNECTED",
+                [CARD_STATE_CONFIGURED]=(uint8_t*) "CONFIGURED",
+                [CARD_STATE_RUNNING]=(uint8_t*) "RUNNING"
+        };
 /******************************* VARIABLES ******************************/
 
 card_t card_cards[] =
@@ -155,6 +165,53 @@ bool card_init(uint8_t cardId)
     return retVal;
 }
 
+void card_process(uint8_t cardId)
+{
+    do
+    {
+        if(false == card_isPresent(cardId))
+        {
+            break;
+        }
+        card_t card = card_cards[cardId];
+        uint16_t value;
+        value = ads868x_readData(card.spi, CARD_SPI_ONE);
+        debug_sendf(LEVEL_DEBUG, "card[%d]:CHANNEL1:%d", cardId, value);
+        value = ads868x_readData(card.spi, CARD_SPI_TWO);
+        debug_sendf(LEVEL_DEBUG, "card[%d]:CHANNEL2:%d", cardId, value);
+    } while(false);
+}
+
+bool card_isPresent(uint8_t cardId)
+{
+    card_t* card = &card_cards[cardId];
+    card_detect(cardId);
+    cardIndicator_updateFromState(card->indicator, card->state);
+    return card->state != CARD_STATE_DISCONNECTED;
+}
+
+bool card_queryHandler(uint8_t* signifier, serialInterface_operation_e operation, uint8_t* args, uint8_t* replyPtr)
+{
+    bool retVal = false;
+    uint32_t cardId = 0U;
+    do
+    {
+        if(false == serialInterface_extractUintArg(args, 0, &cardId, 10U))
+        {
+            break;
+        }
+
+        if(cardId >= NO_OF_CARDS)
+        {
+            break;
+        }
+        strcpy((char*)replyPtr, (char*)card_stateNames[card_cards[cardId].state]);
+    } while (false);
+
+    return retVal;
+}
+
+/*************************** PRIVATE FUNCTIONS **************************/
 bool card_readConfig(card_t* card)
 {
     bool retVal = false;
@@ -208,14 +265,6 @@ bool card_writeConfig(card_t* card)
         cardFilesystem_fclose( card->fs, file );
     }
     return retVal;
-}
-
-bool card_isPresent(uint8_t cardId)
-{
-    card_t* card = &card_cards[cardId];
-    card_detect(cardId);
-    cardIndicator_updateFromState(card->indicator, card->state);
-    return card->state == CARD_STATE_DISCONNECTED;
 }
 
 void card_detect(uint8_t cardId)
@@ -278,4 +327,3 @@ void card_detect(uint8_t cardId)
         } while(false);
     }
 }
-/*************************** PRIVATE FUNCTIONS **************************/

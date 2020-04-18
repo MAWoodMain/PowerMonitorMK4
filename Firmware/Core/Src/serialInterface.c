@@ -18,6 +18,7 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 #include "printf.h"
+#include "card.h"
 /* command function modules */
 /******************************* DEFINES ********************************/
 #define NO_OPERATIONS 3U
@@ -61,6 +62,11 @@ static const serialInterface_commandFunction_t serialInterface_commands[] = {
                                   [OPERATION_SET]=serialInterface_unsupportedHandler,
                                   [OPERATION_RESET]=serialInterface_unsupportedHandler,
                                   }},
+        { (uint8_t*) "C", {
+                                  [OPERATION_QUERY]=card_queryHandler,
+                                  [OPERATION_SET]=serialInterface_unsupportedHandler,
+                                  [OPERATION_RESET]=serialInterface_unsupportedHandler,
+                          }},
         {NULL}
 };
 

@@ -26,6 +26,12 @@ static const uint8_t debug_level_signifiers[] = {
         [LEVEL_CRITICAL]='C'
 };
 /*************************** PUBLIC FUNCTIONS ***************************/
+void debug_init(void)
+{
+    /* Clear output buffer and start fresh on a new line */
+    printf("\n\r");
+}
+
 void debug_sendf(debug_level_e level, const char *format, ...)
 {
     printf("%cD%c=",SERIAL_INTERFACE_UNSOLICITED_SYMBOL, debug_level_signifiers[level]);

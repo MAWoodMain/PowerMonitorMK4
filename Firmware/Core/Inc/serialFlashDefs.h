@@ -5,8 +5,8 @@
   * @date    10/04/2020
   */
 
-#ifndef SERIALFLASHTYPES_H
-#define SERIALFLASHTYPES_H
+#ifndef SERIALFLASHDEFS_H
+#define SERIALFLASHDEFS_H
 
 /**************************** LIB INCLUDES ******************************/
 #include <stdint.h>
@@ -34,4 +34,4 @@ typedef struct
 /*        Globals are to be avoided unless justified and documented */
 /************************************************************************/
 
-#endif //SERIALFLASHTYPES_H
+#endif //SERIALFLASHDEFS_H

@@ -2,8 +2,8 @@
   * @file    cardTypes.h
   */
 
-#ifndef CARDTYPES_H
-#define CARDTYPES_H
+#ifndef CARDDEFS_H
+#define CARDDEFS_H
 
 /**************************** LIB INCLUDES ******************************/
 #include <stdint.h>
@@ -14,19 +14,18 @@
 #include "FreeRTOS.h"
 #include "semphr.h"
 #include "spiffs.h"
-#include "serialFlashTypes.h"
+#include "serialFlashDefs.h"
 /******************************* DEFINES ********************************/
 #define FS_LOG_PAGE_SIZE       128
 #define FS_MAX_FILES           4
 /******************************** ENUMS *********************************/
 typedef enum
 {
-    CARD_STATE_ERROR = -99,
-    CARD_STATE_DISABLED = -2,
-    CARD_STATE_UNIDENTIFIED = -1,
-    CARD_STATE_DISCONNECTED = 0,
-    CARD_STATE_CONFIGURED = 1,
-    CARD_STATE_RUNNING = 2
+    CARD_STATE_ERROR,
+    CARD_STATE_UNIDENTIFIED,
+    CARD_STATE_DISCONNECTED,
+    CARD_STATE_CONFIGURED,
+    CARD_STATE_RUNNING
 } card_state_e;
 
 typedef enum
@@ -109,4 +108,4 @@ typedef struct
 /*        Globals are to be avoided unless justified and documented */
 /************************************************************************/
 
-#endif //CARDTYPES_H
+#endif //CARDDEFS_H

@@ -23,6 +23,7 @@ typedef enum
 /****************************** TYPEDEFS ********************************/
 /***************************** STRUCTURES *******************************/
 /************************** FUNCTION PROTOTYPES *************************/
+void debug_init(void);
 void debug_sendf(debug_level_e level, const char *format, ...);
 /******************************* GLOBALS ********************************/
 /*        Globals are to be avoided unless justified and documented */

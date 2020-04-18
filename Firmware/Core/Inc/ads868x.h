@@ -12,20 +12,14 @@
 #include <stdbool.h>
 /**************************** USER INCLUDES *****************************/
 #include "stm32f4xx_hal.h"
+#include "cardDefs.h"
 /******************************* DEFINES ********************************/
 /******************************** ENUMS *********************************/
 /****************************** TYPEDEFS ********************************/
-typedef struct
-{
-    /* ST HAL spi handle for SPI comms */
-    SPI_HandleTypeDef spi_handle;
-    /* A function to select/deselect the IC on SPI */
-    void(*csFunction)(bool);
-} ads868x_config_t;
 /***************************** STRUCTURES *******************************/
 /************************** FUNCTION PROTOTYPES *************************/
-bool ads868x_init(ads868x_config_t* config);
-uint16_t ads868x_readData(ads868x_config_t config);
+bool ads868x_init(cardSpi_t spi, cardSpi_channels_e channel);
+uint16_t ads868x_readData(cardSpi_t spi, cardSpi_channels_e channel);
 /******************************* GLOBALS ********************************/
 /*        Globals are to be avoided unless justified and documented */
 /************************************************************************/

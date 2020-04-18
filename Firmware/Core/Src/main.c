@@ -107,9 +107,10 @@ int main(void)
   MX_USART1_UART_Init();
   MX_CRC_Init();
   /* USER CODE BEGIN 2 */
-
-  printf("\n\r");
+  debug_init();
   debug_sendf(LEVEL_INFO, "System Starting");
+  /* MAIN OPERATIONAL CODE CAN BE FOUND IN freertos.c */
+
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -121,12 +122,15 @@ int main(void)
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "EndlessLoop"
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
+#pragma clang diagnostic pop
   /* USER CODE END 3 */
 }
 

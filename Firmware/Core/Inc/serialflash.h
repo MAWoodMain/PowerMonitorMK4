@@ -15,7 +15,7 @@
 #include <stdint.h>
 /**************************** USER INCLUDES *****************************/
 #include "stm32f4xx_hal.h"
-#include "cardTypes.h"
+#include "cardDefs.h"
 /******************************* DEFINES ********************************/
 #define SERIALFLASH_PAGE_SIZE           256U
 #define SERIALFLASH_MIN_BLOCK_SIZE      4096U
