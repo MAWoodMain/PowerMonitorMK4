@@ -61,14 +61,6 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-/**
-  * @brief  Override putchar to redirect printf to uart
-  * @retval int
-  */
-void _putchar(char ch)
-{
-    HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
-}
 /* USER CODE END 0 */
 
 /**

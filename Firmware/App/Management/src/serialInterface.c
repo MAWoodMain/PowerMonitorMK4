@@ -361,7 +361,7 @@ void serialInterface_rxComplete(UART_HandleTypeDef *huart)
 
 }
 
-void serialInterface_task(void *argument)
+_Noreturn void serialInterface_task(void *argument)
 {
     serialInterface_message_t incommingMessage;
 #pragma clang diagnostic push
@@ -372,7 +372,6 @@ void serialInterface_task(void *argument)
         {
             if(xQueueReceive( serialInterface_msgQueue, &incommingMessage, portMAX_DELAY  ) == pdPASS )
             {
-                //printf("d\n\r");
                 serialInterface_processCommand( incommingMessage.msg);
             }
         }
@@ -389,4 +388,9 @@ bool serialInterface_versionHandler(uint8_t* signifier, serialInterface_operatio
 bool serialInterface_unsupportedHandler(uint8_t* signifier, serialInterface_operation_e operation, uint8_t* args, uint8_t* replyPtr)
 {
     return false;
+}
+
+void _putchar(char ch)
+{
+    HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
 }
