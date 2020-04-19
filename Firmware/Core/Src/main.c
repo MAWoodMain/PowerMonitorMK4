@@ -101,7 +101,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   debug_init();
   debug_sendf(LEVEL_INFO, "System Starting");
-  /* MAIN OPERATIONAL CODE CAN BE FOUND IN freertos.c */
+  /* MAIN OPERATIONAL CODE CAN BE FOUND IN /App, through RTOS tasks in Slots and Management */
 
   /* USER CODE END 2 */
 

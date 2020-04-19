@@ -28,7 +28,6 @@ typedef enum
 /****************************** TYPEDEFS ********************************/
 /***************************** STRUCTURES *******************************/
 /************************** FUNCTION PROTOTYPES *************************/
-bool serialInterface_init(void);
 bool serialInterface_extractStrArg(uint8_t* argsString, uint8_t argIdx, uint8_t** value);
 bool serialInterface_extractUintArg(uint8_t* argsString, uint8_t argIdx, uint32_t* value, uint8_t radix);
 bool serialInterface_extractIntArg(uint8_t* argsString, uint8_t argIdx, int32_t* value, uint8_t radix);

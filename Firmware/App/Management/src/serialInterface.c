@@ -40,6 +40,7 @@ typedef struct
     uint8_t msg[RX_BUFFER_SIZE];
 } serialInterface_message_t;
 /************************** FUNCTION PROTOTYPES *************************/
+bool serialInterface_init(void);
 /* Internal operations */
 bool serialInterface_processCommand(uint8_t* rawCommand);
 serialInterface_message_t* getFreeMessageBuffer(void);
@@ -78,19 +79,6 @@ volatile uint16_t serialInterface_rxIdx = 0U;
 QueueHandle_t serialInterface_msgQueue;
 uint8_t serialInterface_replyBuffer[REPLY_BUFFER_SIZE];
 /*************************** PUBLIC FUNCTIONS ***************************/
-bool serialInterface_init(void)
-{
-    bool retVal = true;
-
-    serialInterface_msgQueue = xQueueCreate( 2, sizeof( serialInterface_message_t ) );
-
-    HAL_UART_RegisterCallback(&huart1,HAL_UART_RX_COMPLETE_CB_ID, serialInterface_rxComplete);
-
-    /* kickoff reception */
-    HAL_UART_Receive_IT(&huart1, &serialInterface_rxBuffer[serialInterface_rxIdx], 1U);
-
-    return retVal;
-}
 
 bool serialInterface_extractStrArg(uint8_t* argsString, uint8_t argIdx, uint8_t** value)
 {
@@ -212,6 +200,20 @@ void serialInterface_Unsolicitedf(uint8_t* tag, const char *format, ...)
 }
 
 /*************************** PRIVATE FUNCTIONS **************************/
+
+bool serialInterface_init(void)
+{
+    bool retVal = true;
+
+    serialInterface_msgQueue = xQueueCreate( 2, sizeof( serialInterface_message_t ) );
+
+    HAL_UART_RegisterCallback(&huart1,HAL_UART_RX_COMPLETE_CB_ID, serialInterface_rxComplete);
+
+    /* kickoff reception */
+    HAL_UART_Receive_IT(&huart1, &serialInterface_rxBuffer[serialInterface_rxIdx], 1U);
+
+    return retVal;
+}
 
 serialInterface_operation_e serialInterface_recogniseOperation(uint8_t possibleSignifier)
 {
@@ -364,6 +366,9 @@ void serialInterface_rxComplete(UART_HandleTypeDef *huart)
 _Noreturn void serialInterface_task(void *argument)
 {
     serialInterface_message_t incommingMessage;
+
+    serialInterface_init();
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
     while(true)
