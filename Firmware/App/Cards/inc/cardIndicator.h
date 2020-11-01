@@ -19,6 +19,7 @@
 /************************** FUNCTION PROTOTYPES *************************/
 bool cardIndicator_init(cardIndicator_t* cardIndicator);
 void cardIndicator_updateFromState(cardIndicator_t cardIndicator, card_state_e state);
+void cardIndicator_ledTest(cardIndicator_t cardIndicator);
 /******************************* GLOBALS ********************************/
 /*        Globals are to be avoided unless justified and documented */
 /************************************************************************/

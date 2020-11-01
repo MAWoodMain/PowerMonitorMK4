@@ -52,6 +52,22 @@ void cardIndicator_updateFromState(cardIndicator_t cardIndicator, card_state_e s
         cardIndicator_setBlueLed( cardIndicator, true );
     }
 }
+
+void cardIndicator_ledTest(cardIndicator_t cardIndicator)
+{
+    cardIndicator_setRedLed( cardIndicator, true );
+    cardIndicator_setGreenLed( cardIndicator, false );
+    cardIndicator_setBlueLed( cardIndicator, false );
+    vTaskDelay(pdMS_TO_TICKS(500));
+    cardIndicator_setRedLed( cardIndicator, false );
+    cardIndicator_setGreenLed( cardIndicator, true );
+    vTaskDelay(pdMS_TO_TICKS(500));
+    cardIndicator_setGreenLed( cardIndicator, false );
+    cardIndicator_setBlueLed( cardIndicator, true );
+    vTaskDelay(pdMS_TO_TICKS(500));
+    cardIndicator_setGreenLed( cardIndicator, false );
+    cardIndicator_setBlueLed( cardIndicator, false );
+}
 /*************************** PRIVATE FUNCTIONS **************************/
 
 static void cardIndicator_setRedLed(cardIndicator_t cardIndicator, bool on)

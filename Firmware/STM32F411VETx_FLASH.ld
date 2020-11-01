@@ -100,6 +100,8 @@ SECTIONS
     *(.rodata)         /* .rodata sections (constants, strings, etc.) */
     *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
     . = ALIGN(4);
+
+    FILL(0xDEADBEEF)
   } >FLASH
 
   .ARM.extab   : { *(.ARM.extab* .gnu.linkonce.armextab.*) } >FLASH
@@ -145,7 +147,17 @@ SECTIONS
     _edata = .;        /* define a global symbol at data end */
   } >RAM AT> FLASH
 
-  
+
+  .fill :
+  {
+    FILL(0xFFFF);
+    . = ORIGIN(FLASH) + LENGTH(FLASH) - 5;
+    ___ROM_AT = .;
+    BYTE(0xFF)
+  } > FLASH
+
+  .versionInfo ORIGIN(FLASH) + LENGTH(FLASH) - 4 : {KEEP(*(.versionInfo))}
+
   /* Uninitialized data section */
   . = ALIGN(4);
   .bss :

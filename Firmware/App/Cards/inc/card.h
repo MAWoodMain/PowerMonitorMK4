@@ -23,6 +23,7 @@
 /***************************** STRUCTURES *******************************/
 /************************** FUNCTION PROTOTYPES *************************/
 bool card_init(uint8_t cardId);
+void card_ledTest(uint8_t cardId);
 void card_process(uint8_t cardId);
 bool card_isPresent(uint8_t cardId);
 bool card_queryHandler(uint8_t* signifier, serialInterface_operation_e operation, uint8_t* args, uint8_t* replyPtr);

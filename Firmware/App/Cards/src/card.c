@@ -165,6 +165,12 @@ bool card_init(uint8_t cardId)
     return retVal;
 }
 
+void card_ledTest(uint8_t cardId)
+{
+    card_t* card = &card_cards[cardId];
+    cardIndicator_ledTest(card->indicator);
+}
+
 void card_process(uint8_t cardId)
 {
     do

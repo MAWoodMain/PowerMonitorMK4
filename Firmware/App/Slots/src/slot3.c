@@ -29,6 +29,7 @@ _Noreturn void slot3_task(void* argument)
     uint32_t nextOp = osKernelGetTickCount() + SLOT_PROC_PERIOD;
     nextOp += ( SLOT_PROC_PERIOD * cardId ) / SLOT_PROC_PERIOD;
     card_init( cardId );
+    card_ledTest( cardId );
     /* Infinite loop */
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
