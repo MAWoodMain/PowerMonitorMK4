@@ -182,9 +182,9 @@ void card_process(uint8_t cardId)
         card_t card = card_cards[cardId];
         uint16_t value;
         value = ads868x_readData(card.spi, CARD_SPI_ONE);
-        debug_sendf(LEVEL_DEBUG, "card[%d]:CHANNEL1:%d", cardId, value);
+        serialInterface_Unsolicitedf(SERIAL_INTERFACE_UNSOLICITED_CARD_DATA_TAG, "%d:%d:%d", cardId, 1U, value);
         value = ads868x_readData(card.spi, CARD_SPI_TWO);
-        debug_sendf(LEVEL_DEBUG, "card[%d]:CHANNEL2:%d", cardId, value);
+        serialInterface_Unsolicitedf(SERIAL_INTERFACE_UNSOLICITED_CARD_DATA_TAG, "%d:%d:%d", cardId, 2U, value);
     } while(false);
 }
 

@@ -14,6 +14,7 @@
 /**************************** USER INCLUDES *****************************/
 /******************************* DEFINES ********************************/
 #define SERIAL_INTERFACE_UNSOLICITED_CARD_CHANGE_TAG (uint8_t*)"CC"
+#define SERIAL_INTERFACE_UNSOLICITED_CARD_DATA_TAG (uint8_t*)"CD"
 #define SERIAL_INTERFACE_UNSOLICITED_SYMBOL '%'
 #define REPLY_BUFFER_SIZE 200U
 /******************************** ENUMS *********************************/
