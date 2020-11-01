@@ -19,6 +19,7 @@
 #include "queue.h"
 #include "printf.h"
 #include "card.h"
+#include "version.h"
 /* command function modules */
 /******************************* DEFINES ********************************/
 #define NO_OPERATIONS 3U
@@ -386,7 +387,7 @@ _Noreturn void serialInterface_task(void *argument)
 
 bool serialInterface_versionHandler(uint8_t* signifier, serialInterface_operation_e operation, uint8_t* args, uint8_t* replyPtr)
 {
-    strcpy((char*)replyPtr, "\"A00.10\"");
+    sprintf((char*)replyPtr, "%c.%02X.%02X.%02X", VERSION.letter, VERSION.major, VERSION.minor, VERSION.subMinor);
     return true;
 }
 
